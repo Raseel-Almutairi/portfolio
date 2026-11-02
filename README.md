@@ -8,6 +8,8 @@
 
 - [عرض الأداة](https://raseel-almutairi.github.io/portfolio/nca-tool/)
 - [تنزيل قالب الإكسل](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Blank.xlsx)
+- [تحميل تقرير Power BI (PBIX)](https://raseel-almutairi.github.io/portfolio/nca-powerbi/NCA_Compliance_Report.pbix)
+- [عرض التقرير بصيغة PDF](https://raseel-almutairi.github.io/portfolio/nca-powerbi/NCA_Compliance_Report.pdf)
 
 **توضيح:** هذه الأعمال اجتهاد شخصي، وليست وثائق رسمية من الهيئة الوطنية للأمن السيبراني. والمرجع المعتمد هو الوثائق المنشورة على موقع الهيئة.
 
