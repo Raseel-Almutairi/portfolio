@@ -77,7 +77,8 @@
 .gx-req-k { margin: 0 0 var(--cds-gap-xs); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
 .gx-req-v { margin: 0; font-size: var(--cds-font-size-body); }
 .gx-req-v.is-none { color: var(--color-fg-muted); }
-.gx-req .gx-req-v.is-none::after { content: 'غير مطلوب لهذا الضابط'; }
+.gx-req .gx-req-v.is-none::after { content: 'لم يذكره الدليل لهذا الضابط'; }
+.gx-req-v[data-field="req_other"]:empty::after { content: 'لم يذكر الدليل نماذج أخرى لهذا الضابط'; color: var(--color-fg-muted); }
 .gx-req-v.is-need::before { content: '✓ '; color: var(--color-ok); font-weight: 600; }
 .gx-sec { font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); margin: var(--cds-gap-md) 0 var(--cds-gap-sm); }
 .gx-link { color: var(--cds-text-link, var(--color-fg)); text-decoration: underline; cursor: pointer; }
