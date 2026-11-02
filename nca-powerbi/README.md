@@ -3,5 +3,5 @@
 تقرير تفاعلي لمتابعة وتحليل مستوى الامتثال لضوابط الأمن السيبراني.
 
 ## الملفات
-- NCA_Compliance_Report.pbix
-- NCA_Compliance_Report.pdf
+- [تحميل تقرير Power BI (PBIX)](NCA_Compliance_Report.pbix)
+- [عرض التقرير بصيغة PDF](NCA_Compliance_Report.pdf)
