@@ -31,6 +31,10 @@
 .gx-intro { margin: var(--cds-gap-sm) 0 0; max-width: 60rem; font-size: var(--cds-font-size-body); line-height: 1.7; }
 .gx-note { margin: var(--cds-gap-xs) 0 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
 .gx-ctl { display: flex; flex-direction: column; gap: var(--cds-gap-xs); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.gx-ctl { max-width: 100%; min-width: 0; }
+.gx-ctl select { max-width: 100%; min-width: 0; }
+.gx-excl { margin: 0 0 var(--cds-gap-sm); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); line-height: 1.7; }
+.gx-excl b { color: var(--color-fg); }
 .gx select, .gx input { font: inherit; font-size: var(--cds-font-size-body); color: var(--color-fg); background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-xs) var(--cds-pad-sm); min-width: 12rem; }
 .gx-tabs { display: flex; gap: var(--cds-gap-xs); border-bottom: 1px solid var(--color-border-line); margin-bottom: var(--cds-gap-md); flex-wrap: wrap; }
 .gx-tab { font: inherit; font-size: var(--cds-font-size-body); background: none; border: none; border-bottom: 2px solid transparent; padding: var(--cds-pad-sm) var(--cds-pad-md); color: var(--color-fg-muted); cursor: pointer; }
@@ -106,7 +110,7 @@
       <h1 class="gx-title">أداة متابعة الامتثال لضوابط الهيئة الوطنية للأمن السيبراني</h1>
       <p class="gx-take">نسبة امتثال <span data-draw="fwname">—</span>: <b data-draw="kpi" data-source="by_fw" data-field="compliance">—</b>، مع <b data-draw="kpi" data-source="by_fw" data-field="open">—</b> ملاحظة مفتوحة، منها <b data-draw="kpi" data-source="by_fw" data-field="overdue">—</b> متأخرة عن مواعيد الخطة التصحيحية المرفوعة إلى الهيئة الوطنية للأمن السيبراني.</p>
       <p class="gx-intro">تجمع هذه الأداة في مكان واحد: حالة الامتثال لكل ضابط، والملاحظات والخطة التصحيحية المرفوعة إلى الهيئة الوطنية للأمن السيبراني، والوثائق والأدلة المطلوبة لتغطية كل ضابط وفق الأدلة الإرشادية الرسمية، مع ربط مجموعات الضوابط المتخصصة بالضوابط الأساسية (ECC).</p>
-      <p class="gx-note">البيانات نموذجية لأغراض العرض. نسبة الامتثال = الضوابط الرئيسية المطبّقة ÷ (الضوابط الرئيسية − لا ينطبق)، ولا يُعدّ الضابط الرئيسي مطبّقاً إلا بتطبيق جميع ضوابطه الفرعية. <a class="gx-link gx-go-method" href="#method">مصادر البيانات وطريقة الاحتساب (المنهجية)</a></p>
+      <p class="gx-note">البيانات نموذجية لأغراض العرض. نسبة الامتثال = الضوابط الرئيسية المطبّقة ÷ (الضوابط الرئيسية − «لا ينطبق» المعتمد)، ولا يُعدّ الضابط الرئيسي مطبّقاً إلا بتطبيق جميع ضوابطه الفرعية. <a class="gx-link gx-go-method" href="#method">مصادر البيانات وطريقة الاحتساب (المنهجية)</a></p>
     </div>
     <label class="gx-ctl">مجموعة الضوابط
       <select data-draw="fwsel" data-source="by_fw" aria-label="مجموعة الضوابط"></select>
@@ -123,6 +127,7 @@
   </div>
 
   <section id="overview" class="gx-page">
+    <p class="gx-excl" data-draw="excl" data-source="by_fw">—</p>
     <div class="gx-kpis">
       <div class="gx-kpi" id="kpi-compliance">
         <p class="gx-kpi-label">نسبة الامتثال</p>
@@ -154,6 +159,10 @@
       <div><p>غير مطبّق</p><b class="s-bad" data-draw="kpi" data-source="by_fw" data-field="not_implemented">—</b></div>
       <div><p>لا ينطبق</p><b class="s-muted" data-draw="kpi" data-source="by_fw" data-field="not_applicable">—</b></div>
       <div><p>مستهدفة خلال 30 يومًا</p><b data-draw="kpi" data-source="by_fw" data-field="due30">—</b></div>
+      <div><p>اكتمال التقييم</p><b data-draw="kpi" data-source="by_fw" data-field="assessed_pct">—</b></div>
+      <div><p>لم يُقيّم</p><b class="s-muted" data-draw="kpi" data-source="by_fw" data-field="not_assessed">—</b></div>
+      <div><p>تقييم غير مكتمل</p><b class="s-muted" data-draw="kpi" data-source="by_fw" data-field="incomplete">—</b></div>
+      <div><p>لا ينطبق بانتظار الاعتماد</p><b data-draw="kpi" data-source="by_fw" data-field="na_pending">—</b></div>
     </div>
 
     <div class="gx-grid">
@@ -297,7 +306,7 @@
 
   <section id="refs" class="gx-page" hidden>
     <p class="gx-take">تُعرض أدناه الأدلة الإرشادية الصادرة عن الهيئة الوطنية للأمن السيبراني التي اعتُمد عليها في تحديد الوثائق المطلوبة والمخرجات المتوقعة لكل ضابط. ويمكن فتح أي دليل بالنقر على اسمه، كما يتضمن عرض تفاصيل كل ضابط رابطاً مباشراً إلى صفحته في الدليل.</p>
-    <p class="gx-note">توضيح: هذه هي النسخ المرجعية المستخدمة في إعداد الأداة. ونظراً لأن الهيئة الوطنية للأمن السيبراني تُحدّث وثائقها، يُرجى الاعتماد دائماً على النسخ المنشورة في الموقع الرسمي لـالهيئة الوطنية للأمن السيبراني <a class="gx-link" href="https://nca.gov.sa" target="_blank" rel="noopener">nca.gov.sa</a>.</p>
+    <p class="gx-note">توضيح: هذه هي النسخ المرجعية المستخدمة في إعداد الأداة. ونظراً لأن الهيئة الوطنية للأمن السيبراني تُحدّث وثائقها، يُرجى الاعتماد دائماً على النسخ المنشورة في الموقع الرسمي للهيئة الوطنية للأمن السيبراني <a class="gx-link" href="https://nca.gov.sa" target="_blank" rel="noopener">nca.gov.sa</a>.</p>
     <div class="gx-tbox" style="margin-top: var(--cds-gap-md)">
       <table data-source="guides" data-row-key="code">
         <thead><tr><th data-field="framework">مجموعة الضوابط</th><th data-field="name">الدليل الإرشادي</th><th data-field="code">الإصدار</th><th data-field="pages">عدد الصفحات</th></tr></thead>
@@ -307,166 +316,118 @@
   </section>
 
   <section id="method" class="gx-page" hidden>
-    <p class="gx-take">تشرح هذه الصفحة هدف الأداة، ومصادر بياناتها، ونطاق الضوابط المشمولة، وطريقة تقييم الامتثال واحتساب المؤشرات، وآلية استخدام ملفات التقييم، والأسس المرجعية للوثائق والربط بين الضوابط.</p>
+    <p class="gx-take">توضّح هذه الصفحة الغرض من الأداة، ومصادر بياناتها، وطريقة احتساب مؤشراتها، والأساس الذي حُددت به متطلبات كل ضابط.</p>
     <div class="gx-method" style="margin-top: var(--cds-gap-md)">
       <div class="gx-card">
         <h2>الغرض من الأداة</h2>
-        <p>توفير وسيلة موحّدة لمتابعة امتثال الجهة لمجموعات ضوابط الهيئة الوطنية للأمن السيبراني، من خلال:</p>
+        <p>متابعة مستوى امتثال الجهة لضوابط الهيئة الوطنية للأمن السيبراني في أداة واحدة تجمع ما يلي:</p>
         <ul>
-          <li>متابعة حالة كل ضابط والضوابط الفرعية التابعة له، وما يتوفر له من أدلة.</li>
-          <li>تسجيل الملاحظات الناتجة عن التقييم، وتحديد أولوياتها وحالاتها والمسؤولين عنها.</li>
-          <li>متابعة الإجراءات التصحيحية والتواريخ المستهدفة للمعالجة.</li>
-          <li>عرض الوثائق المطلوبة والمخرجات المتوقعة التي تساعد على تغطية الضوابط والاستعداد للتدقيق.</li>
-          <li>إظهار مؤشرات وملخصات تساعد على تحديد جوانب النقص وترتيب أعمال المعالجة.</li>
+          <li>حالة الامتثال لكل ضابط وأدلته.</li>
+          <li>الملاحظات الناتجة عن التقييم والخطة التصحيحية المرفوعة إلى الهيئة الوطنية للأمن السيبراني.</li>
+          <li>الوثائق المطلوبة لتغطية كل ضابط والمخرجات المتوقعة عند التدقيق.</li>
         </ul>
       </div>
-
       <div class="gx-card">
-        <h2>مصادر البيانات وبنية الملفات</h2>
+        <h2>مصادر البيانات</h2>
         <ul>
-          <li><b>قالب سجل التقييم (Excel):</b> القالب المخصص لإدخال بيانات الجهة، ويحتوي على سجل الضوابط وحقول التقييم والملاحظات والإجراءات التصحيحية والمسؤولين والتواريخ.</li>
-          <li><b>بيانات الضوابط المرجعية:</b> معرّفات الضوابط ومجموعاتها ومجالاتها وأوصافها وعلاقاتها، وتُحفظ بوصفها بيانات مرجعية لا تُفرّغ عند إعداد نسخة تقييم جديدة.</li>
-          <li><b>الأدلة الإرشادية:</b> الأدلة الصادرة عن الهيئة الوطنية للأمن السيبراني، وتُستخدم لتحديد المتطلبات والوثائق والمخرجات المتوقعة وربطها بمراجعها.</li>
-          <li><b>بيانات التقييم:</b> الحالات والأدلة والملاحظات والإجراءات والتواريخ والأولويات والمسؤولون التي تدخلها الجهة عند إجراء التقييم.</li>
-          <li><b>الفصل بين العرض والاستخدام:</b> تُستخدم البيانات التجريبية للشرح والعرض فقط، بينما يُستخدم قالب Excel الفارغ لتسجيل تقييم الجهة الفعلي.</li>
+          <li><b>سجل الضوابط:</b> مستخرج من ملف التقييم (Excel)، ويتضمن لكل ضابط: الحالة، والأدلة، ووصف الملاحظة، والإجراء التصحيحي، والتاريخ المستهدف، والأولوية، والمسؤول.</li>
+          <li><b>الأدلة الإرشادية:</b> الأدلة الصادرة عن الهيئة الوطنية للأمن السيبراني لكل مجموعة ضوابط، والمرفقة في صفحة «المراجع».</li>
+          <li><b>طبيعة البيانات:</b> بيانات التقييم نموذجية لأغراض العرض، ولا تمثل جهة حقيقية.</li>
         </ul>
-        <p class="gx-note">يجب عدم اعتبار البيانات التجريبية تقييماً حقيقياً أو نسبتها إلى جهة بعينها.</p>
       </div>
-
       <div class="gx-card">
         <h2>مجموعات الضوابط المشمولة</h2>
-        <p>تُعرض الضوابط الأساسية للأمن السيبراني (ECC) أولاً، ثم مجموعات الضوابط المتخصصة المرتبطة بها:</p>
+        <p>تُعدّ الضوابط الأساسية للأمن السيبراني (ECC) الأساس الذي تبني عليه بقية مجموعات الضوابط، لذا تُعرض أولاً في جميع صفحات الأداة، تليها مجموعات الضوابط المتخصصة:</p>
         <ul>
           <li>ضوابط الأمن السيبراني للأنظمة الحساسة (CSCC).</li>
           <li>ضوابط الأمن السيبراني للحوسبة السحابية لمقدمي الخدمات والمشتركين (CCC-CSP وCCC-CST).</li>
           <li>ضوابط الأمن السيبراني للبيانات (DCC).</li>
           <li>ضوابط الأمن السيبراني للأنظمة التشغيلية (OTCC).</li>
-          <li>ضوابط الأمن السيبراني للعمل عن بُعد (TCC).</li>
+          <li>ضوابط الأمن السيبراني للعمل عن بعد (TCC).</li>
           <li>ضوابط الأمن السيبراني لحسابات التواصل الاجتماعي للجهات (OSMACC).</li>
         </ul>
-        <p class="gx-note">يُراعى ترتيب ECC قبل المجموعات المتخصصة في العرض، مع إتاحة اختيار مجموعة الضوابط لاستعراض بياناتها.</p>
       </div>
-
-      <div class="gx-card">
-        <h2>طريقة استخدام ملفات التقييم</h2>
-        <ol>
-          <li>تبدأ الجهة من قالب Excel الفارغ، وتُدخل بيانات التقييم في الحقول المخصصة دون تغيير معرّفات الضوابط أو بنية الأعمدة المرجعية.</li>
-          <li>يُستورد ملف التقييم إلى الأداة، وتُقرأ بياناته وتُربط بمعرّفات الضوابط المعتمدة.</li>
-          <li>تُراجع رسائل التحقق والتنبيهات لمعالجة القيم أو الصفوف التي لم تُفهم أو لا تطابق بنية القالب.</li>
-          <li>تُراجع النتائج في صفحات النظرة العامة وسجل الضوابط والخطة التصحيحية والوثائق المطلوبة والمراجع.</li>
-          <li>يُحفظ ملف التقييم الناتج للاحتفاظ بالعمل وإعادة استيراده لاحقاً، ولا يُعتمد على بقاء البيانات داخل جلسة المتصفح بعد إغلاقها.</li>
-        </ol>
-        <p class="gx-note">بحسب إصدار الأداة، تُقبل صيغ الاستيراد المدعومة الموضحة في واجهة الاستيراد أو تعليمات الإصدار. ويجب استخدام قالب Excel المعتمد أو ملف محفوظ من الأداة لتقليل أخطاء المطابقة.</p>
-      </div>
-
-      <div class="gx-card">
-        <h2>التحقق من البيانات وجودتها</h2>
-        <ul>
-          <li><b>مطابقة الأعمدة:</b> التحقق من وجود الحقول المطلوبة والتعرّف على عناوين الأعمدة قبل قراءة السجلات.</li>
-          <li><b>معرّفات الضوابط:</b> ربط السجل بمعرّف ضابط معروف، وعدم إسناد بيانات إلى معرّف غير موجود في المرجع.</li>
-          <li><b>القيم والحالات:</b> التحقق من أن حالة الامتثال والأدلة وحالة الملاحظة والأولوية ضمن القيم المعتمدة.</li>
-          <li><b>التواريخ:</b> قراءة التواريخ بصيغها المدعومة، مع التعامل مع تواريخ Excel عند الاستيراد.</li>
-          <li><b>القيم غير المفهومة:</b> إظهارها في تقرير التحقق أو التنبيهات بدلاً من احتسابها بصمت ضمن المؤشرات.</li>
-          <li><b>اكتمال التقييم:</b> التمييز بين الضابط الذي لم يُقيّم والضابط الذي بدأ تقييمه ولم تكتمل بياناته، متى كانت هذه الحالات مدعومة في إصدار الأداة.</li>
-        </ul>
-      </div>
-
       <div class="gx-card">
         <h2>طريقة احتساب المؤشرات</h2>
         <dl>
-          <dt>نسبة الامتثال</dt>
-          <dd><span class="gx-formula">عدد الضوابط الرئيسية المطبّقة ÷ (إجمالي الضوابط الرئيسية − الضوابط الرئيسية «لا ينطبق»)</span>. ويُستبعد ما لم يُقيّم من مقام النسبة، ولا يُعد الضابط الرئيسي مطبّقاً إلا إذا تحققت شروط تطبيق جميع ضوابطه الفرعية.</dd>
-          <dt>حالة الضابط الرئيسي</dt>
-          <dd>تُستنتج من حالات ضوابطه الفرعية وفق قواعد التقييم الموضحة أدناه، ولا تُعامل حالة الضابط الرئيسي على أنها تقييم مستقل عن ضوابطه الفرعية.</dd>
-          <dt>الملاحظة</dt>
-          <dd>تُسجّل عند وجود قصور يحتاج إلى معالجة، ويرتبط بها وصف الملاحظة والإجراء التصحيحي والأولوية وحالة المعالجة والتاريخ المستهدف والمسؤول.</dd>
-          <dt>ملاحظة مفتوحة</dt>
-          <dd>ملاحظة لم تصل إلى حالة «مغلقة»، وتشمل الحالات التي ما زالت مفتوحة أو قيد المعالجة أو بانتظار التحقق.</dd>
-          <dt>ملاحظة متأخرة</dt>
-          <dd>ملاحظة غير مغلقة تجاوز تاريخها المستهدف تاريخ يوم عرض الأداة.</dd>
-          <dt>مستهدفة خلال 30 يوماً</dt>
-          <dd>ملاحظة مفتوحة يقع تاريخها المستهدف ضمن الثلاثين يوماً التالية لتاريخ عرض الأداة.</dd>
-          <dt>حرجة / عالية</dt>
-          <dd>ملاحظة مفتوحة مصنفة بأولوية حرجة أو عالية.</dd>
+          <dt>نسبة الامتثال</dt><dd><span class="gx-formula">الضوابط الرئيسية المطبّقة ÷ (إجمالي الضوابط الرئيسية − «لا ينطبق» المعتمد)</span>. وتبقى الضوابط «لم يُقيّم» و«تقييم غير مكتمل» في المقام ولا تُحتسب مطبّقة، حتى لا ترتفع النسبة لمجرد نقص التقييم. وتُحتسب على مستوى الضابط الرئيسي وفق منهجية الهيئة الوطنية للأمن السيبراني: لا يُعدّ الضابط الرئيسي مطبّقاً إلا إذا طُبّقت جميع ضوابطه الفرعية، ويُعدّ «مطبّقاً جزئياً» إذا طُبّق بعضها، و«غير مطبّق» إذا لم يُطبّق أيٌّ منها، و«لا ينطبق» إذا كانت جميعها لا تنطبق.</dd>
+          <dt>الملاحظة</dt><dd>كل بند (ضابط أو ضابط فرعي) حالته «مطبّق جزئيًا» أو «غير مطبّق»، لأن كل بند منها يحتاج إجراءً تصحيحياً مستقلاً.</dd>
+          <dt>ملاحظة مفتوحة</dt><dd>ملاحظة لم تصل حالتها إلى «مغلقة»، وتشمل «قيد المعالجة» و«بانتظار التحقق».</dd>
+          <dt>ملاحظة متأخرة</dt><dd>ملاحظة مفتوحة تجاوز تاريخ اليوم تاريخها المستهدف في الخطة التصحيحية.</dd>
+          <dt>مستهدفة خلال 30 يومًا</dt><dd>ملاحظة مفتوحة يقع تاريخها المستهدف خلال الثلاثين يوماً القادمة.</dd>
+          <dt>حرجة / عالية</dt><dd>ملاحظة مفتوحة أولويتها «حرجة» أو «عالية».</dd>
+          <dt>اكتمال التقييم</dt><dd>نسبة الضوابط الرئيسية التي قُيّمت جميع بنودها الفرعية إلى إجمالي الضوابط الرئيسية، وتُقرأ بجانب نسبة الامتثال لبيان مدى شمول التقييم.</dd>
+          <dt>لا ينطبق بانتظار الاعتماد</dt><dd>بنود حالتها «لا ينطبق» دون اعتماد مبرر عدم الانطباق، وتبقى في المقام حتى تُعتمد.</dd>
         </dl>
-        <p class="gx-note" style="margin-top: var(--cds-gap-sm)">تُحتسب المؤشرات الزمنية وفق تاريخ يوم عرض الأداة، ولذلك قد تتغير حالة التأخير أو الاستحقاق مع مرور الوقت دون تغيير بيانات التقييم.</p>
+        <p class="gx-note" style="margin-top: var(--cds-gap-sm)">تُحتسب المؤشرات الزمنية وفق تاريخ يوم عرض الأداة، فتتحدث تلقائياً دون تعديل البيانات.</p>
       </div>
-
       <div class="gx-card">
         <h2>تعريف حالات الامتثال</h2>
         <dl>
           <dt>مطبّق</dt><dd>استُوفيت جميع متطلبات الضابط، وتتوفر الأدلة التي تثبت تطبيقها على كامل النطاق.</dd>
-          <dt>مطبّق جزئياً</dt><dd>استُوفي جزء من المتطلبات أو طُبّق الضابط على جزء من النطاق، أو كانت الوثائق متوفرة دون أدلة كافية على التطبيق.</dd>
-          <dt>غير مطبّق</dt><dd>لم تُستوفَ متطلبات الضابط أو لا تتوفر أدلة تثبت تطبيقه.</dd>
-          <dt>لا ينطبق</dt><dd>الضابط خارج نطاق أعمال الجهة بمبرر موثق ومعتمد، ويُستبعد من احتساب نسبة الامتثال.</dd>
-          <dt>لم يُقيّم</dt><dd>لم تبدأ الجهة تقييم الضابط أو لم تُدخل حالة تقييم له؛ ولا يُعامل على أنه «غير مطبّق».</dd>
-          <dt>تقييم غير مكتمل</dt><dd>بدأ إدخال بيانات التقييم، لكن توجد حقول أو معلومات لازمة لم تُستكمل؛ وتُراجع قبل اعتماد النتيجة.</dd>
+          <dt>مطبّق جزئيًا</dt><dd>استُوفي جزء من متطلبات الضابط، أو طُبّق على جزء من النطاق، أو تتوفر الوثائق دون أدلة كافية على التطبيق.</dd>
+          <dt>غير مطبّق</dt><dd>لم تُستوفَ متطلبات الضابط، أو لا تتوفر أي أدلة على تطبيقه.</dd>
+          <dt>لا ينطبق</dt><dd>الضابط خارج نطاق أعمال الجهة بمبرر موثق ومعتمد، ويُستبعد من احتساب النسبة بعد اعتماده.</dd>
+          <dt>لم يُقيّم</dt><dd>لم يُقيّم أي بند من بنود الضابط بعد، ويدخل في مقام النسبة ولا يُحتسب مطبّقاً.</dd>
+          <dt>تقييم غير مكتمل</dt><dd>قُيّم بعض بنود الضابط دون بعضها، ويدخل في مقام النسبة ولا يُحتسب مطبّقاً حتى يكتمل تقييمه.</dd>
         </dl>
         <p class="gx-sec">تحديد حالة الضابط الرئيسي من ضوابطه الفرعية</p>
         <div class="gx-tbox">
           <table>
-            <thead><tr><th>حالة الضوابط الفرعية</th><th>حالة الضابط الرئيسي</th><th>أثرها على النسبة</th></tr></thead>
+            <thead><tr><th>حالة الضوابط الفرعية</th><th>حالة الضابط الرئيسي</th><th>يُحتسب ضمن المطبّق؟</th></tr></thead>
             <tbody>
-              <tr><td>جميعها مطبّقة</td><td><span class="pill s-ok">مطبّق</span></td><td>يُحتسب ضمن المطبّق</td></tr>
-              <tr><td>بعضها مطبّق وبعضها مطبّق جزئياً أو غير مطبّق</td><td><span class="pill s-warn">مطبّق جزئياً</span></td><td>لا يُحتسب ضمن المطبّق</td></tr>
-              <tr><td>جميعها مطبّقة جزئياً</td><td><span class="pill s-warn">مطبّق جزئياً</span></td><td>لا يُحتسب ضمن المطبّق</td></tr>
-              <tr><td>جميعها غير مطبّقة</td><td><span class="pill s-bad">غير مطبّق</span></td><td>لا يُحتسب ضمن المطبّق</td></tr>
-              <tr><td>جميعها لا تنطبق</td><td><span class="pill s-muted">لا ينطبق</span></td><td>يُستبعد من المقام</td></tr>
-              <tr><td>لم تُقيّم أو لا توجد بيانات كافية للحسم</td><td>لم يُقيّم / تقييم غير مكتمل</td><td>لا يُحتسب حتى اكتمال التقييم</td></tr>
+              <tr><td>لم يُقيّم أيٌّ منها</td><td><span class="pill s-muted">لم يُقيّم</span></td><td>لا، ويبقى في المقام</td></tr>
+              <tr><td>قُيّم بعضها دون بعض</td><td><span class="pill s-muted">تقييم غير مكتمل</span></td><td>لا، ويبقى في المقام</td></tr>
+              <tr><td>جميعها مطبّقة</td><td><span class="pill s-ok">مطبّق</span></td><td>نعم</td></tr>
+              <tr><td>بعضها مطبّق وبعضها مطبّق جزئيًا أو غير مطبّق</td><td><span class="pill s-warn">مطبّق جزئيًا</span></td><td>لا</td></tr>
+              <tr><td>جميعها مطبّقة جزئيًا</td><td><span class="pill s-warn">مطبّق جزئيًا</span></td><td>لا</td></tr>
+              <tr><td>جميعها غير مطبّقة</td><td><span class="pill s-bad">غير مطبّق</span></td><td>لا</td></tr>
+              <tr><td>جميعها لا تنطبق</td><td><span class="pill s-muted">لا ينطبق</span></td><td>يُستبعد بعد الاعتماد</td></tr>
             </tbody>
           </table>
         </div>
-        <p class="gx-note" style="margin-top: var(--cds-gap-sm)">لا يُمنح الضابط الرئيسي احتساباً جزئياً ضمن عدد الضوابط المطبّقة. وتُراجع الحالات غير المكتملة قبل اعتماد المؤشرات.</p>
+        <p class="gx-note" style="margin-top: var(--cds-gap-sm)">تُستبعد الضوابط الفرعية «لا ينطبق» عند تحديد الحالة بعد اكتمال تقييم جميع البنود. وفي البيانات النموذجية تُعدّ حالات «لا ينطبق» معتمدة. ولا يُمنح الضابط الرئيسي أي احتساب جزئي في نسبة الامتثال، وإن طُبّق أغلب ضوابطه الفرعية.</p>
         <p class="gx-sec">حالات الملاحظة والأولوية</p>
         <dl>
           <dt>حالات الملاحظة</dt><dd>مفتوحة، قيد المعالجة، بانتظار التحقق، مغلقة.</dd>
-          <dt>الأولوية</dt><dd>حرجة، عالية، متوسطة، منخفضة، وفق أثر الملاحظة ومستوى المخاطر.</dd>
+          <dt>الأولوية</dt><dd>حرجة، عالية، متوسطة، منخفضة، وفق أثر الضابط ومستوى المخاطر.</dd>
         </dl>
       </div>
-
-      <div class="gx-card">
-        <h2>الوثائق المطلوبة والمخرجات المتوقعة</h2>
-        <ol>
-          <li>يُرجع لكل ضابط إلى دليله الإرشادي، وبالأخص قسمي «أدوات الأمن السيبراني ذات العلاقة» و«المخرجات المتوقعة».</li>
-          <li>تُصنّف الوثائق والنماذج ذات العلاقة إلى سياسة ومعيار وإجراء وخطة ونماذج أخرى.</li>
-          <li>تُعرض المخرجات المتوقعة وفق ما ورد في الدليل، مع تحديد ما يخص الضابط عند اشتراك عدة ضوابط في قسم واحد.</li>
-          <li>يُربط كل متطلب باسم الدليل ورقم الصفحة لتسهيل الرجوع إلى المصدر.</li>
-          <li>يمكن أن تغطي الوثيقة الواحدة أكثر من ضابط؛ لذلك يُعرض عدد الضوابط المرتبطة بها لتسهيل ترتيب أعمال إعداد الوثائق.</li>
-        </ol>
-        <p class="gx-note" style="margin-top: var(--cds-gap-sm)">تُستخدم هذه المتطلبات كمرجع إرشادي للتجهيز والتدقيق، ويجب مراجعة نص الدليل الرسمي عند الحاجة إلى التحقق الحرفي أو عند تحديث إصداراته.</p>
-      </div>
-
       <div class="gx-card">
         <h2>الربط بالضوابط الأساسية للأمن السيبراني (ECC)</h2>
-        <p>يُعرض الربط بين الضوابط المتخصصة والضوابط الأساسية عندما يستند إلى إشارة صريحة في النص الرسمي للضابط، مثل الإحالة إلى ضابط آخر أو النص على تطبيق متطلباته.</p>
+        <p>يُعرض الربط بالضوابط الأساسية فقط عندما يذكره النص الرسمي للضابط، بعبارة مثل «بالإضافة إلى…» أو «رجوعاً للضابط…» (48 ضابطاً). ولا تتضمن الأداة أي ربط اجتهادي.</p>
+        <p class="gx-note" style="margin-top: var(--cds-gap-sm)">يظهر الربط في الاتجاهين: من الضابط المتخصص إلى الضابط المقابل في ECC، ومن ضابط ECC إلى الضوابط التي تشير إليه.</p>
+      </div>
+      <div class="gx-card">
+        <h2>تحديد الوثائق المطلوبة والمخرجات المتوقعة</h2>
+        <ol>
+          <li>استُخرج لكل ضابط من دليله الإرشادي قسما «أدوات الأمن السيبراني ذات العلاقة» و«المخرجات المتوقعة».</li>
+          <li>صُنّفت النماذج الواردة في قسم الأدوات إلى: سياسة، ومعيار، وإجراء، وخطة، ونماذج أخرى.</li>
+          <li>نُقلت المخرجات المتوقعة بنصها الوارد في الدليل، مع الاقتصار على ما يخص الضابط عند اشتراك عدة ضوابط في قسم واحد.</li>
+          <li>رُبط كل ضابط برقم صفحته في الدليل لتسهيل الرجوع إلى النص الرسمي.</li>
+        </ol>
+        <p class="gx-note" style="margin-top: var(--cds-gap-sm)">قُرئت الأدلة آلياً لأن نصوصها محفوظة بصيغة صور، وأُدخلت الضوابط الفرعية التي تعذّرت قراءتها آلياً يدوياً من صفحاتها. ويُوصى بالرجوع إلى الدليل عند الحاجة إلى النص الحرفي.</p>
+      </div>
+      <div class="gx-card">
+        <h2>الخصوصية وأمن الأداة</h2>
         <ul>
-          <li>يظهر الربط من الضابط المتخصص إلى الضابط المقابل في ECC.</li>
-          <li>يظهر الربط العكسي من ضابط ECC إلى الضوابط المتخصصة التي تشير إليه.</li>
-          <li>لا يُنشأ ربط اجتهادي لمجرد التشابه في الموضوع أو المجال.</li>
+          <li><b>دون إدخال بيانات:</b> لا تستقبل الأداة أي بيانات من المستخدم، وتعرض بيانات نموذجية مضمّنة في ملفها لأغراض العرض.</li>
+          <li><b>منع الاتصال الشبكي:</b> تفرض الصفحة سياسة أمان المحتوى (Content Security Policy) تمنع المتصفح من طلبات الشبكة الصادرة منها، مثل إرسال البيانات وتحميل الصور والنماذج.</li>
+          <li><b>دون مصادر خارجية:</b> جميع الشيفرات مضمّنة في ملف الأداة نفسه، بما فيها مكتبة الرسوم D3 (رخصة ISC)، ولا تُحمّل أي شيفرة من مواقع أخرى.</li>
+          <li><b>دون تخزين أو تتبع:</b> لا تستخدم الأداة ملفات تعريف الارتباط أو التخزين في المتصفح أو أدوات التحليل.</li>
+          <li><b>التحقق:</b> يمكن التأكد بفتح أدوات المطوّر في المتصفح (F12) ثم تبويب Network.</li>
         </ul>
       </div>
-
       <div class="gx-card">
-        <h2>الخصوصية وأمن البيانات</h2>
+        <h2>حدود الاستخدام</h2>
         <ul>
-          <li><b>المعالجة داخل المتصفح:</b> صُممت الأداة لقراءة ملف التقييم محلياً داخل المتصفح، ولا ينبغي إرسال بيانات الجهة إلى طرف آخر من خلال وظيفة الاستيراد.</li>
-          <li><b>عدم افتراض الحفظ التلقائي:</b> لا يُعتمد على بقاء بيانات التقييم بعد إغلاق الصفحة؛ يجب حفظ ملف التقييم والاحتفاظ به في موقع آمن تابع للجهة.</li>
-          <li><b>البيانات الحساسة:</b> على الجهة الالتزام بسياساتها الداخلية لتصنيف المعلومات وتداولها، وعدم استخدام جهاز أو موقع تخزين غير معتمد.</li>
-          <li><b>التحقق التقني:</b> يمكن لمسؤول التقنية مراجعة سلوك الاتصالات في أدوات المطور بالمتصفح (Network) والتحقق من إعدادات الأمان في الإصدار المنشور.</li>
-        </ul>
-        <p class="gx-note">لا تُعد هذه الفقرة بديلاً عن مراجعة إعدادات الإصدار الفعلي وبيئة تشغيله قبل إدخال بيانات حساسة.</p>
-      </div>
-
-      <div class="gx-card">
-        <h2>حدود الاستخدام والمسؤوليات</h2>
-        <ul>
-          <li>الأداة وسيلة مساندة للمتابعة الداخلية، ولا تُغني عن التقييم الرسمي أو متطلبات الهيئة الوطنية للأمن السيبراني.</li>
-          <li>تتحمل الجهة مسؤولية دقة البيانات المدخلة، وصحة الأدلة، واعتماد حالات «لا ينطبق»، وتحديد المسؤولين والتواريخ المستهدفة.</li>
-          <li>تُراجع التواريخ المستهدفة والإجراءات التصحيحية مع الجهات المسؤولة عن التنفيذ، وتُتابع الالتزامات المعتمدة وفق إجراءات الجهة.</li>
-          <li>يُرجع دائماً إلى أحدث نسخ الوثائق المنشورة في الموقع الرسمي للهيئة الوطنية للأمن السيبراني: <a class="gx-link" href="https://nca.gov.sa" target="_blank" rel="noopener">nca.gov.sa</a>.</li>
-          <li>قد تتطلب تحديثات الأدلة أو القوالب أو قواعد التقييم تحديث بيانات الأداة ومنهجيتها قبل مواصلة استخدامها.</li>
-          <li>الأداة اجتهاد تنظيمي ومساند، وليست وثيقة رسمية صادرة عن الهيئة الوطنية للأمن السيبراني؛ والمرجع المعتمد هو الوثائق المنشورة من الهيئة.</li>
-          <li>إعداد: رسيل المطيري · الإصدار 1.0 (نوفمبر 2026).</li>
+          <li>الأداة وسيلة للمتابعة الداخلية، ولا تُغني عن التقييم الرسمي أو متطلبات الهيئة الوطنية للأمن السيبراني.</li>
+          <li>يُعتمد دائماً على أحدث نسخ الوثائق المنشورة في الموقع الرسمي للهيئة الوطنية للأمن السيبراني <a class="gx-link" href="https://nca.gov.sa" target="_blank" rel="noopener">nca.gov.sa</a>.</li>
+          <li>التواريخ المستهدفة في الخطة التصحيحية التزامات أمام الهيئة الوطنية للأمن السيبراني، ويُستحسن تحديدها بالاتفاق مع الجهات المسؤولة عن التنفيذ.</li>
+          <li>الأداة مقدّمة كما هي لأغراض العرض، دون أي ضمان.</li>
+          <li>المصدر: الأدلة الإرشادية لمجموعات الضوابط الصادرة عن الهيئة الوطنية للأمن السيبراني، والمنشورة على موقعها الرسمي (nca.gov.sa)، ويُذكر عند كل ضابط اسم الدليل ورقم الصفحة.</li>
+          <li>توضيح: هذه الأداة اجتهاد شخصي، وليست وثيقة رسمية من الهيئة الوطنية للأمن السيبراني. والمرجع المعتمد هو الوثائق المنشورة على موقع الهيئة.</li>
+          <li>إعداد: رسيل المطيري · الإصدار 1.1 (نوفمبر 2026).</li>
         </ul>
       </div>
     </div>
@@ -518,23 +479,29 @@ const isGap = (s) => s === 'مطبق جزئيًا' || s === 'غير مطبق';
 dash.calc('by_fw', {
   inputs: ['controls'],
   title: 'Compliance by framework',
-  description: 'Per control set plus an all-sets row. Compliance is counted at main-control level as the NCA does: a main control counts as implemented only when it and all its sub-controls are implemented; compliance = implemented main controls / (main controls − not applicable). Findings (open, overdue, due in 30 days, critical/high) are counted per item, including sub-controls; overdue = open finding whose target date is before today.',
+  description: 'Per control set plus an all-sets row. Compliance is counted at main-control level as the NCA does: a main control counts as implemented only when it and all its sub-controls are implemented; compliance = implemented main controls / (main controls − approved not applicable); not-assessed and incompletely assessed main controls stay in the denominator. Findings (open, overdue, due in 30 days, critical/high) are counted per item, including sub-controls; overdue = open finding whose target date is before today.',
   fn: (controls) => {
     const today = new Date().toISOString().slice(0, 10);
     const in30 = new Date(Date.now() + 30 * 864e5).toISOString().slice(0, 10);
     const mainKey = (id) => { const p = id.split('-'); const s = p.slice(1); const k = s.findIndex((x) => x === 'P' || x === 'T'); return p[0] + '-' + (k >= 0 ? s.slice(0, k + 2) : s.slice(0, 3)).join('-'); };
-    const mainStatus = (v) => { const a = v.filter((x) => x !== 'لا ينطبق'); if (!a.length) return 'لا ينطبق'; if (a.every((x) => x === 'مطبق')) return 'مطبق'; if (a.every((x) => x === 'غير مطبق')) return 'غير مطبق'; return 'مطبق جزئيًا'; };
+    const mainStatus = (v) => { const st = v.map((x) => x || ''); const done = st.filter(Boolean); if (!done.length) return 'لم يُقيّم'; if (done.length < st.length) return 'تقييم غير مكتمل'; const a = st.filter((x) => x !== 'لا ينطبق'); if (!a.length) return 'لا ينطبق'; if (a.every((x) => x === 'مطبق')) return 'مطبق'; if (a.every((x) => x === 'غير مطبق')) return 'غير مطبق'; return 'مطبق جزئيًا'; };
+    const naPending = (r) => r.status === 'لا ينطبق' && r.na_approved === false;
     const make = (framework, rows) => {
       const groups = new Map();
-      rows.forEach((r) => { const k = mainKey(r.id); if (!groups.has(k)) groups.set(k, []); groups.get(k).push(r.status); });
-      const mains = [...groups.values()].map(mainStatus);
+      rows.forEach((r) => { const k = mainKey(r.id); if (!groups.has(k)) groups.set(k, []); groups.get(k).push(r); });
+      const mainRows = [...groups.values()].map((rs) => ({ st: mainStatus(rs.map((r) => r.status)), pending: rs.some(naPending) }));
+      const mains = mainRows.map((m) => m.st);
       const c = (s) => mains.filter((x) => x === s).length;
       const gaps = rows.filter((r) => r.status === 'مطبق جزئيًا' || r.status === 'غير مطبق');
       const open = gaps.filter((r) => r.gap_status !== 'مغلقة');
       const total = mains.length, implemented = c('مطبق'), na = c('لا ينطبق');
+      const naOk = mainRows.filter((m) => m.st === 'لا ينطبق' && !m.pending).length;
+      const notAssessed = c('لم يُقيّم'), incomplete = c('تقييم غير مكتمل');
       return {
         framework, total, items: rows.length, implemented, partial: c('مطبق جزئيًا'), not_implemented: c('غير مطبق'), not_applicable: na,
-        compliance: total - na > 0 ? implemented / (total - na) : null,
+        compliance: total - naOk > 0 ? implemented / (total - naOk) : null, denom: total - naOk,
+        not_assessed: notAssessed, incomplete, assessed_pct: total > 0 ? (total - notAssessed - incomplete) / total : null,
+        na_pending: rows.filter(naPending).length,
         gaps: gaps.length, open: open.length, closed: gaps.length - open.length,
         overdue: open.filter((r) => r.due && r.due < today).length,
         due30: open.filter((r) => r.due && r.due >= today && r.due <= in30).length,
@@ -672,7 +639,8 @@ dash.draw('kpi', (el) => {
   el.classList.remove('dash-skeleton');
   const row = g.data.find((r) => r.framework === fw);
   const v = row ? row[el.dataset.field] : null;
-  el.textContent = v == null ? '—' : el.dataset.field === 'compliance' ? pct(v) : num(v);
+  el.textContent = v == null ? '—' : (el.dataset.field === 'compliance' || el.dataset.field === 'assessed_pct') ? pct(v) : num(v);
+  if (el.dataset.field === 'na_pending') el.classList.toggle('s-warn', !!v);
 });
 
 const tipFor = (box) => { let t = box.querySelector('.gx-tip'); if (!t) { t = document.createElement('div'); t.className = 'gx-tip'; t.hidden = true; box.append(t); } return t; };
@@ -695,6 +663,8 @@ dash.draw('statuschart', (box) => {
     { k: 'جزئي', v: row.partial, c: 'var(--color-warn)' },
     { k: 'غير مطبّق', v: row.not_implemented, c: 'var(--cds-chart-status-critical)' },
     { k: 'لا ينطبق', v: row.not_applicable, c: 'var(--cds-chart-muted)' },
+    ...(row.not_assessed ? [{ k: 'لم يُقيّم', v: row.not_assessed, c: 'var(--cds-chart-muted)' }] : []),
+    ...(row.incomplete ? [{ k: 'غير مكتمل', v: row.incomplete, c: 'var(--cds-chart-muted)' }] : []),
   ];
   const W = Math.max(260, box.clientWidth), H = 240, m = { t: 22, r: 8, b: 28, l: 8 };
   const x = d3.scaleBand(data.map((d) => d.k), [m.l, W - m.r]).padding(0.35);
@@ -721,10 +691,10 @@ dash.draw('fwchart', (box) => {
   const H = m.t + m.b + data.length * rowH;
   const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('height', H).style('direction', 'ltr');
   const probe = svg.append('g');
-  const labels = probe.selectAll('text').data(data).join('text').style('font-size', 'var(--cds-font-size-caption)').text((d) => d.framework === 'الضوابط الأساسية للأمن السيبراني (ECC)' ? 'ECC (المجموعة الأساسية)' : window.gxAbbr(d.framework));
+  const labels = probe.selectAll('text').data(data).join('text').style('font-size', 'var(--cds-font-size-caption)').style('font-weight', 600).text((d) => d.framework === 'الضوابط الأساسية للأمن السيبراني (ECC)' ? 'ECC (المجموعة الأساسية)' : window.gxAbbr(d.framework));
   const lw = d3.max(labels.nodes(), (n) => n.getComputedTextLength()) || 60;
   probe.remove();
-  const l = lw + 12, valW = 44;
+  const l = lw + 18, valW = 44;
   const x = d3.scaleLinear([0, 1], [l, W - m.r - valW]);
   const y = d3.scaleBand(data.map((d) => d.framework), [m.t, H - m.b]).padding(0.28);
   [0, 0.5, 1].forEach((t) => {
@@ -909,11 +879,23 @@ dash.draw('mainstatus', (el) => {
   const mk = (x) => { const p = x.split('-'); const s = p.slice(1); const k = s.findIndex((t) => t === 'P' || t === 'T'); return p[0] + '-' + (k >= 0 ? s.slice(0, k + 2) : s.slice(0, 3)).join('-'); };
   const key = mk(id);
   const sibs = g.data.filter((x) => mk(x.id) === key);
-  const a = sibs.map((x) => x.status).filter((t) => t !== 'لا ينطبق');
-  const st = !a.length ? 'لا ينطبق' : a.every((t) => t === 'مطبق') ? 'مطبق' : a.every((t) => t === 'غير مطبق') ? 'غير مطبق' : 'مطبق جزئيًا';
+  const all = sibs.map((x) => x.status || ''), done = all.filter(Boolean);
+  const a = done.filter((t) => t !== 'لا ينطبق');
+  const st = !done.length ? 'لم يُقيّم' : done.length < all.length ? 'تقييم غير مكتمل' : !a.length ? 'لا ينطبق' : a.every((t) => t === 'مطبق') ? 'مطبق' : a.every((t) => t === 'غير مطبق') ? 'غير مطبق' : 'مطبق جزئيًا';
   const sp = document.createElement('span'); sp.className = 'pill ' + statusClass(st); sp.textContent = st;
   el.append(key + ' · ', sp);
   if (sibs.length > 1) el.append(' (' + num(sibs.filter((x) => x.status === 'مطبق').length) + ' من ' + num(sibs.length) + ' ضوابط فرعية مطبّقة)');
+});
+
+dash.draw('excl', (el) => {
+  const g = dash.data('by_fw');
+  if (g.status !== 'ok') return;
+  const row = g.data.find((r) => r.framework === window.gxFw());
+  if (!row) return;
+  el.replaceChildren();
+  const b = (t) => { const x = document.createElement('b'); x.textContent = t; return x; };
+  el.append('الضوابط الرئيسية المحتسبة في مقام نسبة الامتثال: ', b(num(row.denom)), ' من أصل ', b(num(row.total)), '، إذ يُستبعد «لا ينطبق» المعتمد فقط (', b(num(row.total - row.denom)), '). وتبقى الضوابط «لم يُقيّم» (', b(num(row.not_assessed)), ') و«تقييم غير مكتمل» (', b(num(row.incomplete)), ') في المقام ولا تُحتسب مطبّقة. اكتمال التقييم: ', b(row.assessed_pct == null ? '—' : pct(row.assessed_pct)), '.');
+  if (row.na_pending) { const w = document.createElement('span'); w.className = 's-warn'; w.textContent = ' تنبيه: عدد البنود بحالة «لا ينطبق» بانتظار الاعتماد ' + num(row.na_pending) + '، وتبقى في المقام حتى تُعتمد.'; el.append(w); }
 });
 
 dash.draw('docpicked', (el) => { el.textContent = dash.params().doc || ''; });
