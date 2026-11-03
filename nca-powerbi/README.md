@@ -4,19 +4,26 @@
 
 ## الملفات
 
-| الملف | الوصف |
-|---|---|
-| [1_Sample_Report.pbix](1_Sample_Report.pbix) | التقرير ببيانات نموذجية لأغراض العرض |
-| [2_Blank_Template.pbit](2_Blank_Template.pbit) | القالب الفارغ للاستخدام الفعلي |
-| [3_Sample_Data.xlsx](3_Sample_Data.xlsx) | البيانات النموذجية التي يقرأ منها تقرير العرض |
-| [4_Blank_Data.xlsx](4_Blank_Data.xlsx) | ملف البيانات الفارغ الذي يُعبّأ ويُربط بالقالب |
-| [5_Sample_Report.pdf](5_Sample_Report.pdf) | نسخة PDF من تقرير العرض |
+<div align="right">
+
+| الوصف | الملف |
+|---:|---:|
+| التقرير ببيانات نموذجية لأغراض العرض | [1_Sample_Report.pbix](1_Sample_Report.pbix) |
+| القالب الفارغ للاستخدام الفعلي | [2_Blank_Template.pbit](2_Blank_Template.pbit) |
+| البيانات النموذجية التي يقرأ منها تقرير العرض | [3_Sample_Data.xlsx](3_Sample_Data.xlsx) |
+| ملف البيانات الفارغ الذي يقرأ منه القالب | [4_Blank_Data.xlsx](4_Blank_Data.xlsx) |
+| نسخة PDF من تقرير العرض | [5_Sample_Report.pdf](5_Sample_Report.pdf) |
+
+</div>
 
 ## طريقة استخدام القالب
 
-1. عبّئ ورقة **Controls** في ملف `4_Blank_Data.xlsx`، ثم احفظه في Excel حتى تُحتسب حالة الضوابط الرئيسية.
-2. افتح `2_Blank_Template.pbit` وأدخل مسار ملف البيانات عند الطلب.
-3. لتحديث النتائج بعد أي تعديل، احفظ ملف Excel ثم اضغط **Refresh** في Power BI.
+1. أنشئ مجلداً باسم `NCA` داخل `C:\Users\Public\Documents`، وضع فيه ملف `4_Blank_Data.xlsx`.
+2. عبّئ ورقة **Controls** في الملف، ثم احفظه في Excel حتى تُحتسب حالة الضوابط الرئيسية.
+3. افتح `2_Blank_Template.pbit`، فيقرأ البيانات من المجلد تلقائياً.
+4. لتحديث النتائج بعد أي تعديل، احفظ ملف Excel ثم اضغط **Refresh** في Power BI.
+
+ولتحديث تقرير العرض، ضع ملف `3_Sample_Data.xlsx` في المجلد نفسه.
 
 ## منهجية الاحتساب
 
