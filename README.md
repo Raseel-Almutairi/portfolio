@@ -9,9 +9,9 @@
 <img src="nca-tool/screenshot.png" alt="واجهة أداة متابعة الامتثال">
 
 - [عرض الأداة](https://raseel-almutairi.github.io/portfolio/nca-tool/)
-- [تنزيل قالب الإكسل](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Blank.xlsx)
+- [سجل الامتثال في Excel (يعمل دون Power BI)](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Blank.xlsx)
 
-> **الأداة للعرض فقط:** تعرض بيانات نموذجية مضمّنة فيها، ولا تتيح إدخال بيانات الجهة أو حفظها. وللاستخدام الفعلي، استخدم قالب Power BI الفارغ أو قالب الإكسل.
+> **الأداة للعرض فقط:** تعرض بيانات نموذجية مضمّنة فيها، ولا تتيح إدخال بيانات الجهة أو حفظها. وللاستخدام الفعلي، استخدم سجل الامتثال في Excel، أو قالب Power BI الفارغ.
 
 ## تقرير Power BI
 
@@ -21,6 +21,12 @@
 - **نسخة الاستخدام:** [تنزيل القالب الفارغ (PBIT)](https://raseel-almutairi.github.io/portfolio/nca-powerbi/2_Blank_Template.pbit) · [ملف البيانات الفارغ (Excel)](https://raseel-almutairi.github.io/portfolio/nca-powerbi/4_Blank_Data.xlsx)
 
 تفاصيل الملفات وطريقة استخدام القالب في [مجلد Power BI](nca-powerbi/).
+
+## منهجية الاحتساب
+
+- نسبة الامتثال = الضوابط الرئيسية المطبّقة ÷ (إجمالي الضوابط الرئيسية − «لا ينطبق» المعتمد).
+- لا يُعدّ الضابط الرئيسي مطبّقاً إلا إذا طُبّقت جميع ضوابطه الفرعية المنطبقة.
+- تبقى الضوابط «لم يُقيّم» و«تقييم غير مكتمل» في المقام، حتى لا ترتفع النسبة لمجرد نقص التقييم.
 
 **توضيح:** هذه الأعمال اجتهاد شخصي، وليست وثائق رسمية من الهيئة الوطنية للأمن السيبراني. والمرجع المعتمد هو الوثائق المنشورة على موقع الهيئة.
 
