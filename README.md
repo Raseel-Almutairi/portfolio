@@ -1,31 +1,26 @@
-# ملف أعمال الحوكمة والمخاطر والامتثال للأمن السيبراني
+# تقرير Power BI لمتابعة الامتثال لضوابط الهيئة الوطنية للأمن السيبراني
 
-مجموعة من أعمالي في الحوكمة والمخاطر والامتثال للأمن السيبراني. البيانات المستخدمة نموذجية لأغراض العرض.
+تقرير تفاعلي لمتابعة مستوى الامتثال لضوابط الهيئة الوطنية للأمن السيبراني، في نسختين بالتصميم والمعادلات نفسها.
 
-## أداة متابعة الامتثال لضوابط الهيئة الوطنية للأمن السيبراني
+## الملفات
 
-أداة لمتابعة الامتثال لمجموعات الضوابط الثماني، مع الملاحظات والخطة التصحيحية، والوثائق المطلوبة والمخرجات المتوقعة لكل ضابط من الأدلة الإرشادية الرسمية.
+| الملف | الوصف |
+|---|---|
+| [1_Sample_Report.pbix](1_Sample_Report.pbix) | التقرير ببيانات نموذجية لأغراض العرض |
+| [2_Blank_Template.pbit](2_Blank_Template.pbit) | القالب الفارغ للاستخدام الفعلي |
+| [3_Sample_Data.xlsx](3_Sample_Data.xlsx) | البيانات النموذجية التي يقرأ منها تقرير العرض |
+| [4_Blank_Data.xlsx](4_Blank_Data.xlsx) | ملف البيانات الفارغ الذي يقرأ منه القالب |
+| [5_Sample_Report.pdf](5_Sample_Report.pdf) | نسخة PDF من تقرير العرض |
 
-<img src="nca-tool/screenshot.png" alt="واجهة أداة متابعة الامتثال">
+## طريقة استخدام القالب
 
-- [عرض الأداة](https://raseel-almutairi.github.io/portfolio/nca-tool/)
-- [تنزيل قالب الإكسل](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Blank.xlsx)
+1. أنشئ مجلداً باسم `NCA` داخل `C:\Users\Public\Documents`، وضع فيه ملف `4_Blank_Data.xlsx`.
+2. عبّئ ورقة **Controls** في الملف، ثم احفظه في Excel حتى تُحتسب حالة الضوابط الرئيسية.
+3. افتح `2_Blank_Template.pbit`، فيقرأ البيانات من المجلد تلقائياً.
+4. لتحديث النتائج بعد أي تعديل، احفظ ملف Excel ثم اضغط **Refresh** في Power BI.
 
-## تقرير Power BI
+## منهجية الاحتساب
 
-نسختان بالتصميم والمعادلات نفسها، ويختلفان في البيانات فقط:
-
-- **نسخة العرض:** [تنزيل التقرير ببيانات نموذجية (PBIX)](https://raseel-almutairi.github.io/portfolio/nca-powerbi/1_Sample_Report.pbix) · [بيانات العينة (Excel)](https://raseel-almutairi.github.io/portfolio/nca-powerbi/3_Sample_Data.xlsx) · [عرض التقرير بصيغة PDF](https://raseel-almutairi.github.io/portfolio/nca-powerbi/5_Sample_Report.pdf)
-- **نسخة الاستخدام:** [تنزيل القالب الفارغ (PBIT)](https://raseel-almutairi.github.io/portfolio/nca-powerbi/2_Blank_Template.pbit) · [ملف البيانات الفارغ (Excel)](https://raseel-almutairi.github.io/portfolio/nca-powerbi/4_Blank_Data.xlsx)
-
-**توضيح:** هذه الأعمال اجتهاد شخصي، وليست وثائق رسمية من الهيئة الوطنية للأمن السيبراني. والمرجع المعتمد هو الوثائق المنشورة على موقع الهيئة.
-
----
-
-**رسيل المطيري**
-
-مختصة في الحوكمة والمخاطر والامتثال للأمن السيبراني
-
-الشهادات: CompTIA Security+ · GRCP · GRCA
-
-للتواصل: [LinkedIn](https://www.linkedin.com/in/raseel-almutairi/)
+- نسبة الامتثال = الضوابط الرئيسية المطبّقة ÷ (إجمالي الضوابط الرئيسية − «لا ينطبق» المعتمد).
+- تبقى الضوابط «لم يُقيّم» و«تقييم غير مكتمل» في المقام ولا تُحتسب مطبّقة.
+- لا يُستبعد «لا ينطبق» من المقام إلا بعد اعتماده في عمود `NAApproved`.
