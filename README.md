@@ -8,9 +8,9 @@
 <img src="nca-tool/screenshot.png" alt="واجهة أداة متابعة الامتثال">
 
 - [عرض الأداة](https://raseel-almutairi.github.io/portfolio/nca-tool/)
-- [سجل الامتثال في Excel (يعمل دون Power BI)](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Blank.xlsx)
+- **سجل الامتثال في Excel (يعمل دون Power BI):** [نسخة ببيانات نموذجية](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Sample.xlsx) · [نسخة فارغة للاستخدام الفعلي](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Blank.xlsx)
 
-> **الأداة للعرض فقط:** تعرض بيانات نموذجية مضمّنة فيها، ولا تتيح إدخال بيانات الجهة أو حفظها. وللاستخدام الفعلي، استخدم سجل الامتثال في Excel، أو قالب Power BI الفارغ.
+> **الأداة للعرض فقط:** تعرض بيانات نموذجية مضمّنة فيها، ولا تتيح إدخال بيانات الجهة أو حفظها. وللاستخدام الفعلي، استخدم نسخة سجل الامتثال الفارغة في Excel، أو قالب Power BI الفارغ.
 
 ## تقرير Power BI
 
