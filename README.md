@@ -1,5 +1,4 @@
 # GRC & Cybersecurity Compliance Portfolio
-# ملف أعمال الحوكمة والمخاطر والامتثال للأمن السيبراني
 
 **Raseel Almutairi** · Cybersecurity GRC Specialist
 
@@ -59,4 +58,6 @@ A compliance tracker for 8 sets of NCA (National Cybersecurity Authority) contro
 - **تقرير Power BI:** [عرض التقرير (PDF)](https://raseel-almutairi.github.io/portfolio/nca-powerbi/5_Sample_Report.pdf) · [مجلد Power BI](nca-powerbi/)
 - [تفاصيل الأداة ومنهجية الاحتساب](nca-tool/)
 
-> **الأدوات للعرض فقط:** تعرض بيانات نموذجية، ولا تجمع أي بيانات. وللاستخدام الفعلي، استخدم نسخ Excel الفارغة، وهي تع
+> **الأدوات للعرض فقط:** تعرض بيانات نموذجية، ولا تجمع أي بيانات. وللاستخدام الفعلي، استخدم نسخ Excel الفارغة، وهي تعمل على جهازك.
+
+**توضيح:** هذه الأعمال اجتهاد شخصي، وليست أدوات رسمية من الهيئة الوطنية للأمن السيبراني أو من ساما، ولا تغني عن تقييمهما. والمرجع المعتمد هو الوثائق المنشورة على موقع كل جهة.
