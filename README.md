@@ -1,40 +1,34 @@
 # ملف أعمال الحوكمة والمخاطر والامتثال للأمن السيبراني
 
+**رسيل المطيري** · مختصة في الحوكمة والمخاطر والامتثال للأمن السيبراني
+
+الشهادات: CompTIA Security+ · GRCP · GRCA · للتواصل: [LinkedIn](https://www.linkedin.com/in/raseel-almutairi/)
+
 مجموعة من أعمالي في الحوكمة والمخاطر والامتثال للأمن السيبراني. البيانات المستخدمة نموذجية لأغراض العرض.
 
-## أداة متابعة الامتثال لضوابط الهيئة الوطنية للأمن السيبراني
+---
+
+## 1. أداة متابعة الامتثال لضوابط الهيئة الوطنية للأمن السيبراني
 
 أداة لمتابعة الامتثال لـ 8 مجموعات من ضوابط الهيئة الوطنية للأمن السيبراني، مع الملاحظات والخطة التصحيحية، والوثائق المطلوبة والمخرجات المتوقعة لكل ضابط من الأدلة الإرشادية الرسمية.
 <img src="nca-tool/screenshot.png" alt="واجهة أداة متابعة الامتثال">
 
 - [عرض الأداة](https://raseel-almutairi.github.io/portfolio/nca-tool/)
-- **سجل الامتثال في Excel (يعمل دون Power BI):** [نسخة ببيانات نموذجية](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Sample.xlsx) · [نسخة فارغة للاستخدام الفعلي](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Blank.xlsx)
+- **سجل الامتثال في Excel:** [نسخة ببيانات نموذجية](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Sample.xlsx) · [نسخة فارغة للاستخدام الفعلي](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Blank.xlsx)
+- **تقرير Power BI:** [عرض التقرير (PDF)](https://raseel-almutairi.github.io/portfolio/nca-powerbi/5_Sample_Report.pdf) · [مجلد Power BI](nca-powerbi/)
+- [تفاصيل الأداة ومنهجية الاحتساب](nca-tool/)
 
-> **الأداة للعرض فقط:** تعرض بيانات نموذجية مضمّنة فيها، ولا تتيح إدخال بيانات الجهة أو حفظها. وللاستخدام الفعلي، استخدم نسخة سجل الامتثال الفارغة في Excel، أو قالب Power BI الفارغ.
+## 2. أداة التقييم الذاتي لإطار الأمن السيبراني لساما
 
-## تقرير Power BI
+أداة تقييم ذاتي للمكونات الـ 32 في إطار الأمن السيبراني للبنك المركزي السعودي (ساما)، مبنية على نموذج النضج الخاص بساما من المستوى 0 إلى 5، والحد الأدنى المطلوب هو المستوى 3. كل إجابة «لا» تتحول تلقائياً إلى إجراء في خطة العمل، مع تصعيد على ثلاث مراحل وإيميل جاهز لكل إجراء.
+<img src="sama-tool/screenshot.png" alt="واجهة أداة التقييم الذاتي لإطار ساما">
 
-نسختان بالتصميم والمعادلات نفسها، ويختلفان في البيانات فقط:
-
-- **نسخة العرض:** [تنزيل التقرير ببيانات نموذجية (PBIX)](https://raseel-almutairi.github.io/portfolio/nca-powerbi/1_Sample_Report.pbix) · [بيانات العينة (Excel)](https://raseel-almutairi.github.io/portfolio/nca-powerbi/3_Sample_Data.xlsx) · [عرض التقرير بصيغة PDF](https://raseel-almutairi.github.io/portfolio/nca-powerbi/5_Sample_Report.pdf)
-- **نسخة الاستخدام:** [تنزيل القالب الفارغ (PBIT)](https://raseel-almutairi.github.io/portfolio/nca-powerbi/2_Blank_Template.pbit) · [ملف البيانات الفارغ (Excel)](https://raseel-almutairi.github.io/portfolio/nca-powerbi/4_Blank_Data.xlsx)
-
-تفاصيل الملفات وطريقة استخدام القالب في [مجلد Power BI](nca-powerbi/).
-
-## منهجية الاحتساب
-
-- نسبة الامتثال = الضوابط الرئيسية المطبّقة ÷ (إجمالي الضوابط الرئيسية − «لا ينطبق» المعتمد).
-- لا يُعدّ الضابط الرئيسي مطبّقاً إلا إذا طُبّقت جميع ضوابطه الفرعية المنطبقة.
-- تبقى الضوابط «لم يُقيّم» و«تقييم غير مكتمل» في المقام، حتى لا ترتفع النسبة لمجرد نقص التقييم.
-
-**توضيح:** هذه الأعمال اجتهاد شخصي، وليست أداة رسمية من الهيئة الوطنية للأمن السيبراني. والمرجع المعتمد هو الوثائق المنشورة على موقع الهيئة.
+- [عرض الأداة](https://raseel-almutairi.github.io/portfolio/sama-tool/)
+- **ملف التقييم في Excel:** [نسخة ببيانات نموذجية](https://raseel-almutairi.github.io/portfolio/sama-tool/SAMA_CSF_Assessment_Sample.xlsx) · [نسخة فارغة للاستخدام الفعلي](https://raseel-almutairi.github.io/portfolio/sama-tool/SAMA_CSF_Assessment_Blank.xlsx)
+- [تفاصيل الأداة وطريقة العمل](sama-tool/)
 
 ---
 
-**رسيل المطيري**
+> **الأدوات للعرض فقط:** تعرض بيانات نموذجية، ولا تجمع أي بيانات. وللاستخدام الفعلي، استخدم نسخ Excel الفارغة، وهي تعمل على جهازك.
 
-مختصة في الحوكمة والمخاطر والامتثال للأمن السيبراني
-
-الشهادات: CompTIA Security+ · GRCP · GRCA
-
-للتواصل: [LinkedIn](https://www.linkedin.com/in/raseel-almutairi/)
+**توضيح:** هذه الأعمال اجتهاد شخصي، وليست أدوات رسمية من الهيئة الوطنية للأمن السيبراني أو من ساما، ولا تغني عن تقييمهما. والمرجع المعتمد هو الوثائق المنشورة على موقع كل جهة.
