@@ -1,0 +1,66 @@
+[
+ {
+  "framework": "الضوابط الأساسية للأمن السيبراني (ECC)",
+  "code": "GECC-2:2026",
+  "name": "الدليل الإرشادي لتطبيق الضوابط الأساسية للأمن السيبراني",
+  "url": "https://cdn.nca.gov.sa/ar/Guide_to_Essential_Cybersecurity_Controls_Implementation.pdf",
+  "file": "GECC-2-2026.pdf",
+  "pages": 133
+ },
+ {
+  "framework": "ضوابط الأمن السيبراني للأنظمة الحساسة (CSCC)",
+  "code": "GCSCC-1:2023",
+  "name": "الدليل الإرشادي لتطبيق ضوابط الأمن السيبراني للأنظمة الحساسة",
+  "url": "https://cdn.nca.gov.sa/api/files/public/upload/a338f221-154e-4cf7-b1cb-f13ecc881ebc_CSCC_Implementation_Guidelines_ar.pdf",
+  "file": "GCSCC-1-2023.pdf",
+  "pages": 71
+ },
+ {
+  "framework": "ضوابط الأمن السيبراني للحوسبة السحابية لمقدمي الخدمات (CCC-CSP)",
+  "code": "GCCC-CSP-2:2026",
+  "name": "الدليل الإرشادي لتطبيق ضوابط الأمن السيبراني للحوسبة السحابية لمقدمي الخدمات",
+  "url": "https://cdn.nca.gov.sa/ar/Guide_to_Cloud_Cybersecurity_Controls_for_Service_Providers_Implementation.pdf",
+  "file": "GCCC-CSP-2-2026.pdf",
+  "pages": 82
+ },
+ {
+  "framework": "ضوابط الأمن السيبراني للحوسبة السحابية للمشتركين (CCC-CST)",
+  "code": "GCCC-CST-1:2023",
+  "name": "الدليل الإرشادي لتطبيق ضوابط الأمن السيبراني للحوسبة السحابية للمشتركين",
+  "url": "https://cdn.nca.gov.sa/api/files/public/upload/96663229-7b3f-4a26-8858-cc69d4eb6966_CCC_CST_Implementation_Guideline_ar.pdf",
+  "file": "GCCC-CST-1-2023.pdf",
+  "pages": 31
+ },
+ {
+  "framework": "ضوابط الأمن السيبراني للبيانات (DCC)",
+  "code": "GDCC-1:2023",
+  "name": "الدليل الإرشادي لتطبيق ضوابط الأمن السيبراني للبيانات",
+  "url": "https://cdn.nca.gov.sa/api/files/public/upload/617dd3e3-7323-4867-8713-57765b959b01_DCC_Implementation-Guideline_ar.pdf",
+  "file": "GDCC-1-2023.pdf",
+  "pages": 48
+ },
+ {
+  "framework": "ضوابط الأمن السيبراني للأنظمة التشغيلية (OTCC)",
+  "code": "GOTCC-1:2023",
+  "name": "الدليل الإرشادي لتطبيق ضوابط الأمن السيبراني للأنظمة التشغيلية",
+  "url": "https://cdn.nca.gov.sa/api/files/public/upload/d719f258-5661-40cd-8f20-852b54edfd7b_OTCC_Implementation-Guideline_ar-.pdf",
+  "file": "GOTCC-1-2023.pdf",
+  "pages": 103
+ },
+ {
+  "framework": "ضوابط الأمن السيبراني للعمل عن بعد (TCC)",
+  "code": "GTCC-1:2023",
+  "name": "الدليل الإرشادي لتطبيق ضوابط الأمن السيبراني للعمل عن بعد",
+  "url": "https://cdn.nca.gov.sa/api/files/public/upload/44a5c26e-44ca-4fe0-bb4d-a0f2ef26b90b_TCC_Implementation-Guideline_ar.pdf",
+  "file": "GTCC-1-2023.pdf",
+  "pages": 51
+ },
+ {
+  "framework": "ضوابط الأمن السيبراني لحسابات التواصل الاجتماعي للجهات (OSMACC)",
+  "code": "GOSMACC-1:2023",
+  "name": "الدليل الإرشادي لتطبيق ضوابط الأمن السيبراني لحسابات التواصل الاجتماعي للجهات",
+  "url": "https://cdn.nca.gov.sa/api/files/public/upload/09454a41-ebd7-4a15-a497-1683d7d1d355_OSMACC_Implementation-Guideline_ar-.pdf",
+  "file": "GOSMACC-1-2023.pdf",
+  "pages": 41
+ }
+]
