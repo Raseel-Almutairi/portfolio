@@ -42,5 +42,5 @@ check("action text names the subdomain", all(g["action"].startswith(g["sub"] + "
 import os
 web = open(os.path.join("..", "index.html"), encoding="utf-8").read()
 check("web makes no external requests", "googleapis" not in web and "Content-Security-Policy" in web)
-check("web shows the assessment date", "18 November 2026" in web)
+check("web shows the assessment date", "18 Nov 2026" in web)
 print(f"\n{ok} tests passed")
