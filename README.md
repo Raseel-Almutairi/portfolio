@@ -10,7 +10,7 @@ A collection of my work in cybersecurity governance, risk and compliance. All da
 
 ## 1. SAMA Cyber Security Framework Self-Assessment Tool
 
-A self-assessment of the 32 subdomains of the SAMA Cyber Security Framework v1.0, using SAMA's own maturity model (levels 0 to 5, minimum required level 3). Every "No" answer becomes an action in the action plan, with three-stage escalation and a ready-to-send email for each action.
+A self-assessment of the 32 subdomains of the SAMA Cyber Security Framework v1.0, using SAMA's own maturity model (levels 0 to 5, minimum required level 3). Every unmet criterion up to level 3 becomes an action in the action plan, linked to its control considerations, with three-stage escalation and a ready-to-send email.
 <img src="sama-tool/screenshot.png" alt="SAMA CSF self-assessment tool">
 
 - [Open the tool](https://raseel-almutairi.github.io/portfolio/sama-tool/) · [Details](sama-tool/)
@@ -39,7 +39,7 @@ A compliance tracker for 8 sets of NCA (National Cybersecurity Authority) contro
 
 ### 1. أداة التقييم الذاتي لإطار الأمن السيبراني لساما
 
-أداة تقييم ذاتي للمكونات الـ 32 في إطار الأمن السيبراني للبنك المركزي السعودي (ساما)، مبنية على نموذج النضج الخاص بساما من المستوى 0 إلى 5، والحد الأدنى المطلوب هو المستوى 3. كل إجابة «لا» تتحول تلقائياً إلى إجراء في خطة العمل، مع تصعيد على ثلاث مراحل وإيميل جاهز لكل إجراء.
+أداة تقييم ذاتي للمكونات الـ 32 في إطار الأمن السيبراني للبنك المركزي السعودي (ساما)، مبنية على نموذج النضج الخاص بساما من المستوى 0 إلى 5، والحد الأدنى المطلوب هو المستوى 3. كل معيار غير مستوفى حتى المستوى 3 يتحول تلقائياً إلى إجراء في خطة العمل، مرتبط بضوابطه، مع تصعيد على ثلاث مراحل وإيميل جاهز.
 
 - [عرض الأداة](https://raseel-almutairi.github.io/portfolio/sama-tool/) · [التفاصيل](sama-tool/)
 - **Excel:** [نموذجي](https://raseel-almutairi.github.io/portfolio/sama-tool/SAMA_CSF_Assessment_Sample.xlsx) · [فارغ](https://raseel-almutairi.github.io/portfolio/sama-tool/SAMA_CSF_Assessment_Blank.xlsx)
