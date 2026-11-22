@@ -8,7 +8,7 @@ A collection of my work in cybersecurity governance, risk and compliance. All da
 
 ---
 
-## 1. SAMA Cyber Security Framework Self-Assessment Tool (English)
+## 1. SAMA Cyber Security Framework Self-Assessment Tool
 
 A self-assessment of the 32 subdomains of the SAMA Cyber Security Framework v1.0, using SAMA's own maturity model (levels 0 to 5, minimum required level 3). Every "No" answer becomes an action in the action plan, with three-stage escalation and a ready-to-send email for each action.
 <img src="sama-tool/screenshot.png" alt="SAMA CSF self-assessment tool">
@@ -17,7 +17,7 @@ A self-assessment of the 32 subdomains of the SAMA Cyber Security Framework v1.0
 - **Excel assessment:** [Sample data](https://raseel-almutairi.github.io/portfolio/sama-tool/SAMA_CSF_Assessment_Sample.xlsx) · [Blank, ready to use](https://raseel-almutairi.github.io/portfolio/sama-tool/SAMA_CSF_Assessment_Blank.xlsx)
 - [Details and how it works](sama-tool/)
 
-## 2. NCA Controls Compliance Tracker (Arabic interface)
+## 2. NCA Controls Compliance Tracker
 
 A compliance tracker for 8 sets of NCA (National Cybersecurity Authority) controls, with findings, a corrective action plan, and the required documents and expected outputs for each control from the official guidelines.
 <img src="nca-tool/screenshot.png" alt="NCA compliance tracker">
@@ -42,7 +42,7 @@ A compliance tracker for 8 sets of NCA (National Cybersecurity Authority) contro
 
 مجموعة من أعمالي في الحوكمة والمخاطر والامتثال للأمن السيبراني. البيانات المستخدمة نموذجية لأغراض العرض.
 
-### 1. أداة التقييم الذاتي لإطار الأمن السيبراني لساما (بالإنقليزي)
+### 1. أداة التقييم الذاتي لإطار الأمن السيبراني لساما
 
 أداة تقييم ذاتي للمكونات الـ 32 في إطار الأمن السيبراني للبنك المركزي السعودي (ساما)، مبنية على نموذج النضج الخاص بساما من المستوى 0 إلى 5، والحد الأدنى المطلوب هو المستوى 3. كل إجابة «لا» تتحول تلقائياً إلى إجراء في خطة العمل، مع تصعيد على ثلاث مراحل وإيميل جاهز لكل إجراء.
 
@@ -50,7 +50,7 @@ A compliance tracker for 8 sets of NCA (National Cybersecurity Authority) contro
 - **ملف التقييم في Excel:** [نسخة ببيانات نموذجية](https://raseel-almutairi.github.io/portfolio/sama-tool/SAMA_CSF_Assessment_Sample.xlsx) · [نسخة فارغة للاستخدام الفعلي](https://raseel-almutairi.github.io/portfolio/sama-tool/SAMA_CSF_Assessment_Blank.xlsx)
 - [تفاصيل الأداة وطريقة العمل](sama-tool/)
 
-### 2. أداة متابعة الامتثال لضوابط الهيئة الوطنية للأمن السيبراني (بالعربي)
+### 2. أداة متابعة الامتثال لضوابط الهيئة الوطنية للأمن السيبراني
 
 أداة لمتابعة الامتثال لـ 8 مجموعات من ضوابط الهيئة الوطنية للأمن السيبراني، مع الملاحظات والخطة التصحيحية، والوثائق المطلوبة والمخرجات المتوقعة لكل ضابط من الأدلة الإرشادية الرسمية.
 
