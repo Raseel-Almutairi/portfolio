@@ -8,6 +8,7 @@
 - The corrected texts are in the web, the Excel register and the Power BI data (tests check they match).
 - The 41 OSMACC item texts were compared the same way with the OSMACC-1:2021 document (Arabic): 38 matched and 3 were corrected. OSMACC is now **Verified** too.
 - CSCC was updated to the new version, CSCC-2:2026 (Arabic). The 85 item texts were copied from the document pages, and 55 changed. Most changes are punctuation and wording. The main change in meaning is CSCC-4-2-1-1: hosting must now be in the entity's own data center, the National Information Center, or a sovereign cloud. The new control CSCC-2-3-4 is not in the tool yet. The required evidence and page references still come from the GCSCC-1:2023 guide.
+- The 47 TCC item texts were compared with the TCC-1:2021 document (Arabic), and all of them matched. TCC is now **Verified**.
 
 ## v1.2.1 (2026-11-22)
 
