@@ -6,6 +6,7 @@
 - 151 matched, and 25 were corrected to the guide's wording. Most of them had been shortened; a few had a missing word (for example «الخارجية» in ECC-2-15-4). The list, before and after, is in `src/TEXT_REVIEW.md`.
 - Each item now has a text review status: **Verified** for the 176 ECC items, and **Needs Review** for the other 7 frameworks until they are checked against their guides. The status is shown in the item details on the web.
 - The corrected texts are in the web, the Excel register and the Power BI data (tests check they match).
+- The 41 OSMACC item texts were compared the same way with the OSMACC-1:2021 document (Arabic): 38 matched and 3 were corrected. OSMACC is now **Verified** too.
 
 ## v1.2.1 (2026-11-22)
 
