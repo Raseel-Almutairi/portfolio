@@ -1,5 +1,9 @@
 # Changelog: SAMA CSF tool
 
+## v1.3 (2026-11-22)
+
+- **Target level per subdomain (Excel):** each subdomain header in sheet 3 has a target (column H). It is 3 by default, which is SAMA's minimum, and it can be raised to 4 or 5. A lower value counts as 3. With a raised target, the unmet level 4 or 5 criteria become actions too, with their own action texts, and action tracking is available for every criterion. Two scenario tests cover a raised target and a target below 3. The sample data keeps every target at 3, so the sample figures do not change.
+
 ## v1.2.1 (2026-11-22)
 
 - The tests now fail if an action ID is missing, extra or repeated in the Excel action plan.

@@ -16,7 +16,14 @@ ACT={"L1a":("Start basic control activities for this subdomain.","Records of the
  "L3c":("Document the step-by-step procedure and approve it.","Approved procedure"),
  "L3d":("Collect and keep evidence that the control is implemented.","Evidence pack (records, configurations, reports)"),
  "L3e":("Set up periodic compliance monitoring, preferably in a GRC tool.","Compliance monitoring reports"),
- "L3f":("Define KPIs, track them and report them to the committee.","KPI reports")}
+ "L3f":("Define KPIs, track them and report them to the committee.","KPI reports"),
+ # used only when a subdomain's target is raised above the minimum level 3
+ "L4a":("Assess the effectiveness of the controls periodically and improve them when needed.","Effectiveness assessment reports and improvement records"),
+ "L4b":("Define KRIs with thresholds and trend reporting for the controls.","KRI reports with thresholds and trends"),
+ "L4c":("Document the periodic measurements, evaluations and improvement opportunities.","Documented evaluation and improvement records"),
+ "L5a":("Put the controls under a continuous improvement plan.","Approved continuous improvement plan and progress records"),
+ "L5b":("Integrate the controls with the enterprise risk management framework.","Risk management records that include the cyber security controls"),
+ "L5c":("Evaluate the performance of the controls against peer and sector data.","Benchmarking reports using peer or sector data")}
 CRITICAL={"3.3.5","3.3.12","3.3.13","3.3.15","3.3.17","3.3.9"}
 NA_SET={("3.3.10",4),("3.1.6",7),("3.4.3",4)}
 def answers(sid,L,k):

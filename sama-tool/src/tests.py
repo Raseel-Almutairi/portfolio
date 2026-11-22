@@ -88,6 +88,24 @@ if soffice:
         after = actions(os.path.join(tmp, "out", "t.xlsx"))
     check("re-assessed action leaves the plan", key not in after and len(after) == len(xa) - 1)
     check("no other action changes status, overdue or escalation (no row shift)", all(after[k] == xa[k] for k in after))
+    # Raise one level-3 subdomain's target to 4: its unmet level-4 criteria become actions; the target cannot go below 3
+    with tempfile.TemporaryDirectory() as tmp:
+        wb = load_workbook(SAMPLE)
+        la = wb["3. Assessment"]
+        lvl3 = [x for x in subs if x["level"] == 3 and any(v == "No" for k_, v in x["ans"].items() if k_.startswith("L4"))]
+        sid = lvl3[0]["sid"]
+        hr = next(r for r in range(4, la.max_row + 1) if str(la.cell(r, 1).value).startswith(sid + " "))
+        la.cell(hr, 8).value = 4
+        other = next(x for x in subs if x["sid"] != sid)
+        la.cell(next(r for r in range(4, la.max_row + 1) if str(la.cell(r, 1).value).startswith(other["sid"] + " ")), 8).value = 2
+        wb.save(os.path.join(tmp, "t.xlsx"))
+        subprocess.run([soffice, "--headless", "--convert-to", "xlsx", "--outdir", os.path.join(tmp, "out"), os.path.join(tmp, "t.xlsx")],
+                       capture_output=True, check=True, timeout=300)
+        after = actions(os.path.join(tmp, "out", "t.xlsx"))
+    new = {k for k in after if k.startswith(sid + "-L4")}
+    check("raising a target to 4 creates actions for its unmet level-4 criteria",
+          new == {f"{sid}-{k_}" for k_, v in lvl3[0]["ans"].items() if k_.startswith("L4") and v == "No"} and all(after[k] == xa[k] for k in xa if k in after))
+    check("a target below 3 is not allowed (counted as 3)", {k for k in after if k.startswith(other["sid"] + "-")} == {k for k in xa if k.startswith(other["sid"] + "-")})
 else:
     print("SKIP re-assessment scenario (LibreOffice not installed)")
 print(f"\n{ok} tests passed")
