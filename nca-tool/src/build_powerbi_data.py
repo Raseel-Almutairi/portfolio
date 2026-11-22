@@ -57,7 +57,7 @@ def fill(wb, controls):
         if not r:
             continue
         na = r["status"] == "لا ينطبق"
-        vals = {8: r["owner"], 9: r["status"], 10: r["evidence"], 11: r["gap"] or None, 12: r["action"] or None,
+        vals = {7: r["description"], 8: r["owner"], 9: r["status"], 10: r["evidence"], 11: r["gap"] or None, 12: r["action"] or None,
                 13: date.fromisoformat(r["due"]) if r["due"] else None, 14: r["priority"] or None, 15: r["gap_status"] or None,
                 30: "خارج نطاق أعمال الجهة (بيانات نموذجية)" if na else None,
                 31: ("نعم" if r["na_approved"] else "لا") if na else None}

@@ -1,5 +1,12 @@
 # Changelog: NCA tool
 
+## v1.3 (2026-11-22): ECC text review (FIX-15)
+
+- The 176 ECC item texts were compared one by one with the official NCA guide (GECC-2:2026, Arabic). The guide pages were read with OCR, compared automatically, and every difference was checked on the page image.
+- 151 matched, and 25 were corrected to the guide's wording. Most of them had been shortened; a few had a missing word (for example «الخارجية» in ECC-2-15-4). The list, before and after, is in `src/TEXT_REVIEW.md`.
+- Each item now has a text review status: **Verified** for the 176 ECC items, and **Needs Review** for the other 7 frameworks until they are checked against their guides. The status is shown in the item details on the web.
+- The corrected texts are in the web, the Excel register and the Power BI data (tests check they match).
+
 ## v1.2.1 (2026-11-22)
 
 - The overall compliance rate is empty (not an error) when every main control is excluded, so there is no division by zero.
