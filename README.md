@@ -13,24 +13,19 @@ A collection of my work in cybersecurity governance, risk and compliance. All da
 A self-assessment of the 32 subdomains of the SAMA Cyber Security Framework v1.0, using SAMA's own maturity model (levels 0 to 5, minimum required level 3). Every "No" answer becomes an action in the action plan, with three-stage escalation and a ready-to-send email for each action.
 <img src="sama-tool/screenshot.png" alt="SAMA CSF self-assessment tool">
 
-- [Open the tool](https://raseel-almutairi.github.io/portfolio/sama-tool/)
-- **Excel assessment:** [Sample data](https://raseel-almutairi.github.io/portfolio/sama-tool/SAMA_CSF_Assessment_Sample.xlsx) · [Blank, ready to use](https://raseel-almutairi.github.io/portfolio/sama-tool/SAMA_CSF_Assessment_Blank.xlsx)
-- [Details and how it works](sama-tool/)
+- [Open the tool](https://raseel-almutairi.github.io/portfolio/sama-tool/) · [Details](sama-tool/)
+- **Excel:** [Sample](https://raseel-almutairi.github.io/portfolio/sama-tool/SAMA_CSF_Assessment_Sample.xlsx) · [Blank](https://raseel-almutairi.github.io/portfolio/sama-tool/SAMA_CSF_Assessment_Blank.xlsx)
 
 ## 2. NCA Controls Compliance Tracker
 
 A compliance tracker for 8 sets of NCA (National Cybersecurity Authority) controls, with findings, a corrective action plan, and the required documents and expected outputs for each control from the official guidelines.
 <img src="nca-tool/screenshot.png" alt="NCA compliance tracker">
 
-- [Open the tool](https://raseel-almutairi.github.io/portfolio/nca-tool/)
-- **Excel register:** [Sample data](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Sample.xlsx) · [Blank, ready to use](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Blank.xlsx)
-- **Power BI report:** [View report (PDF)](https://raseel-almutairi.github.io/portfolio/nca-powerbi/5_Sample_Report.pdf) · [Power BI folder](nca-powerbi/)
-  - The web and Excel are updated (34.9%); the report is an earlier version (35.8%).
-- [Details and calculation method](nca-tool/)
+- [Open the tool](https://raseel-almutairi.github.io/portfolio/nca-tool/) · [Details](nca-tool/)
+- **Excel:** [Sample](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Sample.xlsx) · [Blank](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Blank.xlsx)
+- **Power BI:** [Report (PDF, earlier version)](https://raseel-almutairi.github.io/portfolio/nca-powerbi/5_Sample_Report.pdf) · [Files](nca-powerbi/)
 
-> **The web tools are for display only:** they show sample data and collect no data. For real use, download the blank Excel files, which run on your own device.
-
-**Disclaimer:** These are personal initiatives, not official tools of the NCA or SAMA, and they do not replace their assessments. The official documents published by each authority are the reference.
+> The web tools are for display only. For real use, download the blank Excel files. These are personal initiatives and do not replace the assessments of the NCA or SAMA.
 
 ---
 
@@ -46,20 +41,15 @@ A compliance tracker for 8 sets of NCA (National Cybersecurity Authority) contro
 
 أداة تقييم ذاتي للمكونات الـ 32 في إطار الأمن السيبراني للبنك المركزي السعودي (ساما)، مبنية على نموذج النضج الخاص بساما من المستوى 0 إلى 5، والحد الأدنى المطلوب هو المستوى 3. كل إجابة «لا» تتحول تلقائياً إلى إجراء في خطة العمل، مع تصعيد على ثلاث مراحل وإيميل جاهز لكل إجراء.
 
-- [عرض الأداة](https://raseel-almutairi.github.io/portfolio/sama-tool/)
-- **ملف التقييم في Excel:** [نسخة ببيانات نموذجية](https://raseel-almutairi.github.io/portfolio/sama-tool/SAMA_CSF_Assessment_Sample.xlsx) · [نسخة فارغة للاستخدام الفعلي](https://raseel-almutairi.github.io/portfolio/sama-tool/SAMA_CSF_Assessment_Blank.xlsx)
-- [تفاصيل الأداة وطريقة العمل](sama-tool/)
+- [عرض الأداة](https://raseel-almutairi.github.io/portfolio/sama-tool/) · [التفاصيل](sama-tool/)
+- **Excel:** [نموذجي](https://raseel-almutairi.github.io/portfolio/sama-tool/SAMA_CSF_Assessment_Sample.xlsx) · [فارغ](https://raseel-almutairi.github.io/portfolio/sama-tool/SAMA_CSF_Assessment_Blank.xlsx)
 
 ### 2. أداة متابعة الامتثال لضوابط الهيئة الوطنية للأمن السيبراني
 
 أداة لمتابعة الامتثال لـ 8 مجموعات من ضوابط الهيئة الوطنية للأمن السيبراني، مع الملاحظات والخطة التصحيحية، والوثائق المطلوبة والمخرجات المتوقعة لكل ضابط من الأدلة الإرشادية الرسمية.
 
-- [عرض الأداة](https://raseel-almutairi.github.io/portfolio/nca-tool/)
-- **سجل الامتثال في Excel:** [نسخة ببيانات نموذجية](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Sample.xlsx) · [نسخة فارغة للاستخدام الفعلي](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Blank.xlsx)
-- **تقرير Power BI:** [عرض التقرير (PDF)](https://raseel-almutairi.github.io/portfolio/nca-powerbi/5_Sample_Report.pdf) · [مجلد Power BI](nca-powerbi/)
-  - تم تحديث الويب و Excel (34.9%)، أما التقرير فنسخة سابقة (35.8%).
-- [تفاصيل الأداة ومنهجية الاحتساب](nca-tool/)
+- [عرض الأداة](https://raseel-almutairi.github.io/portfolio/nca-tool/) · [التفاصيل](nca-tool/)
+- **Excel:** [نموذجي](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Sample.xlsx) · [فارغ](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Blank.xlsx)
+- **Power BI:** [التقرير (PDF، نسخة سابقة)](https://raseel-almutairi.github.io/portfolio/nca-powerbi/5_Sample_Report.pdf) · [الملفات](nca-powerbi/)
 
-> **الأدوات للعرض فقط:** تعرض بيانات نموذجية، ولا تجمع أي بيانات. وللاستخدام الفعلي، استخدم نسخ Excel الفارغة، وهي تعمل على جهازك.
-
-**توضيح:** هذه الأعمال اجتهاد شخصي، وليست أدوات رسمية من الهيئة الوطنية للأمن السيبراني أو من ساما، ولا تغني عن تقييمهما. والمرجع المعتمد هو الوثائق المنشورة على موقع كل جهة.
+> أدوات الويب للعرض فقط، وللاستخدام الفعلي حمّل نسخ Excel الفارغة. هذه الأعمال اجتهاد شخصي ولا تغني عن تقييم الهيئة الوطنية للأمن السيبراني أو ساما.
