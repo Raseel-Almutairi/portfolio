@@ -13,7 +13,17 @@ body=r'''<main class="wrap">
   <h1>SAMA Cyber Security Framework Maturity Self-Assessment (Demo)</h1>
   <p class="sub">A self-assessment of the 32 subdomains of the SAMA Cyber Security Framework v1.0, using SAMA's own maturity model: each subdomain gets a level from 0 to 5, the minimum required is level 3, and every unmet criterion becomes an action.</p>
   <div class="note">Personal initiative · sample data only</div>
+  <button type="button" class="themebtn" id="themebtn" aria-label="Switch light or dark mode">Light mode</button>
 </header>
+<script>
+(function(){ /* light / dark mode; the choice is remembered in this browser only */
+ var b=document.getElementById("themebtn"), root=document.documentElement;
+ function set(t){ root.dataset.theme=t; b.textContent=t==="light"?"Dark mode":"Light mode"; b.setAttribute("aria-pressed",t==="light"); }
+ var saved=null; try{ saved=localStorage.getItem("sama-theme"); }catch(e){}
+ set(saved==="light"?"light":"dark");
+ b.addEventListener("click",function(){ var t=root.dataset.theme==="light"?"dark":"light"; set(t); try{ localStorage.setItem("sama-theme",t); }catch(e){} });
+})();
+</script>
 <nav class="tabs" aria-label="Views">
   <a href="#framework">1. SAMA Framework</a><a href="#controls">2. Controls &amp; Evidence</a><a href="#assessment">3. Assessment</a><a href="#plan">4. Action Plan</a><a href="#summary">5. Summary</a>
 </nav>

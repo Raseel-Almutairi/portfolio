@@ -9,10 +9,12 @@
 | Tests read Excel | 8 new tests: the Excel actions, statuses, overdue and summary must match the web, the blank file must show Not assessed, and a re-assessment scenario (close an action, answer Yes, recalculate with LibreOffice) must leave every other action unchanged. |
 | Encoding | The build scripts now read and write UTF-8 on every system (Windows included). |
 | Mobile | The level badge no longer overflows in the Assessment tab. |
+| Actions linked to control considerations (FIX-12) | Each action now names the control considerations it covers (for example "Covers 3.1.2.1, 3.1.2.2, 3.1.2.3"). The implementation action (L3d) lists the required evidence for each control consideration as its closure evidence. The assessment itself is unchanged: it is still per criterion, using SAMA's maturity model. |
+| Light mode | The web page has a Light / Dark mode button. Dark is the default, and the choice is remembered in the browser. |
 
 Corrections to v1.1 below:
 - **FIX-03:** the assessment date is shown in the footer of the web page, not in the header.
-- **FIX-12:** the 63 action texts are the 7 templates with the subdomain name in front. Linking an action to a specific control consideration would change the method.
+- **FIX-12:** in v1.1 the 63 action texts were the 7 templates with the subdomain name in front. v1.2 links each action to its control considerations (see above).
 
 
 ## v1.1 (2026-11-21): fixes after the technical review

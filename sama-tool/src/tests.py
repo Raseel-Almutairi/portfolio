@@ -37,6 +37,10 @@ check("closed or risk accepted actions are never overdue",
       not any(g["overdue"] for g in gaps if g["fstatus"] in ("Closed", "Risk Accepted")))
 check("every action has a target date", all(g["due"] for g in gaps))
 check("action text names the subdomain", all(g["action"].startswith(g["sub"] + ": ") for g in gaps))
+check("every action is linked to the control considerations of its subdomain",
+      all(g["ccids"] and g["ccids"] == [c["ccid"] for c in ccs if c["sid"] == g["sid"]] and g["ccids"][0] in g["action"] for g in gaps))
+check("the implementation action (L3d) names the evidence per control consideration",
+      all(g["ccids"][0] in g["closure"] or "sheet 2" in g["closure"] for g in gaps if g["crit"] == "L3d"))
 
 # Built files
 import os

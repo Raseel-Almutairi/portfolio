@@ -113,4 +113,14 @@ td.esc{font-size:12px;font-weight:600} td.esc small{display:block;color:var(--mu
 .st.rs{background:rgba(240,180,80,.15);color:var(--warn);margin-left:4px}
 .em summary{cursor:pointer;color:var(--accent);font-size:12.5px;white-space:nowrap}
 .em pre{white-space:pre-wrap;font-size:11.5px;line-height:1.45;background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:10px;min-width:340px;margin:6px 0 0;color:var(--ink)}
+/* light mode */
+:root[data-theme="light"]{--bg:#F4F6FA; --panel:#FFFFFF; --panel2:#EEF2F8; --line:#D5DCE7; --ink:#14213A; --muted:#5A6B85; --accent:#2F64D6;
+  --good:#1E8A52; --warn:#A76A06; --bad:#C2403A; --na:#7A879B; color-scheme:light}
+:root[data-theme="light"] tr.g td{background:#E4EAF4}
+:root[data-theme="light"] .chip[aria-pressed="true"]{color:#fff}
+:root[data-theme="light"] .st.RiskAccepted{color:#6D4FC2;background:rgba(109,79,194,.12)}
+:root[data-theme="light"] .escm .e1{border-left-color:#B39A10}
+.themebtn{display:inline-block;margin:10px 0 0 8px;font:inherit;font-size:12px;color:var(--ink);background:var(--panel2);border:1px solid var(--line);border-radius:999px;padding:2px 12px;cursor:pointer}
+.themebtn:hover{border-color:var(--accent)} .themebtn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media print{.themebtn{display:none}}
 </style>

@@ -1,6 +1,6 @@
 import sys; sys.path.insert(0, '.')
 from datetime import date
-from model import build, SH, CRIT, CSRC, TABLE1
+from model import build, SH, CRIT, CSRC, TABLE1, action_for
 from official import SUBSEC, PO, SECS
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side, Protection
@@ -252,7 +252,7 @@ def make(path, sample):
             en.cell(er, 5, f'=INDEX({MA("S")},MATCH(A{er},{MA("B")},0))')
             en.cell(er, 6, f'=IF(AND(E{er}<3,D{er}="No"),1,0)')
             en.cell(er, 7, f'=IF(F{er}=1,SUM($F$2:F{er}),"")')
-            en.cell(er, 8, s_["sub"] + ": " + ACT[c_[0]][0]); en.cell(er, 9, ACT[c_[0]][1])
+            a_, cl_, _ = action_for(s_["sid"], s_["sub"], c_[0]); en.cell(er, 8, a_); en.cell(er, 9, cl_)
             en.cell(er, 10, "High" if (c_[1] <= 2 or s_["sid"] in CRITICAL) else "Medium")
             er += 1
     en1 = er - 1

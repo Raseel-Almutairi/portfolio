@@ -53,6 +53,20 @@ EVN={"L1a":"No records of control activities found","L2a":"Practice differs betw
  "L5a":"No continuous improvement plan","L5b":"Not integrated with the ERM framework","L5c":"No peer or sector benchmarking"}
 def act_text(sub,cid):
     return sub+": "+ACT[cid][0]
+def action_for(sid, sub, cid):
+    """Action, closure evidence and the control considerations it covers (FIX-12).
+    The assessment stays per criterion; each action is linked to the control considerations of its subdomain,
+    and the 'implementation can be demonstrated' action (L3d) lists the required evidence per control consideration."""
+    ids = [it["ccid"] for it in ITEMS[sid]]
+    rng = ", ".join(ids) if len(ids) <= 4 else f"{ids[0]} to {ids[-1]} ({len(ids)} control considerations)"
+    act = f"{sub}: {ACT[cid][0]} Covers {rng}."
+    clos = ACT[cid][1]
+    if cid == "L3d":
+        if len(ids) <= 6:
+            clos = "Evidence per control consideration: " + "; ".join(f"{i} - {e}" for i, e in zip(ids, EVCC[sid]))
+        else:
+            clos = f"Evidence for each control consideration {ids[0]} to {ids[-1]}, as listed in sheet 2 (Controls & Evidence)"
+    return act, clos, ids
 def evid(sid, sub, cid, ans):
     if ans == "Yes": return EVT[cid].format(sub=sub, c=sid.replace(".", ""))
     if ans == "No": return "Gap: " + EVN[cid]
@@ -75,8 +89,8 @@ def build():
                     pr="High" if (lv<=2 or sid in CRITICAL) else "Medium"
                     due=TODAY+timedelta(days=((g*41)%330)-60)
                     fs="Closed" if g%10==0 else ("In Progress" if g%3==0 else "Open")
-                    act,clos=ACT[cid]; act=act_text(name,cid)
-                    gaps.append(dict(gid=f"{sid}-{cid}",n=g,sid=sid,sub=name,dom=dom,domain=SH[dom],crit=cid,clevel=lv,ctext=txt,cur=lvl,action=act,closure=clos,owner=owner,priority=pr,due=due.isoformat(),fstatus=fs,overdue=(fs!="Closed" and due<TODAY),due30=(fs!="Closed" and TODAY<=due<=TODAY+timedelta(days=30))))
+                    act,clos,ccids_=action_for(sid,name,cid)
+                    gaps.append(dict(ccids=ccids_,gid=f"{sid}-{cid}",n=g,sid=sid,sub=name,dom=dom,domain=SH[dom],crit=cid,clevel=lv,ctext=txt,cur=lvl,action=act,closure=clos,owner=owner,priority=pr,due=due.isoformat(),fstatus=fs,overdue=(fs!="Closed" and due<TODAY),due30=(fs!="Closed" and TODAY<=due<=TODAY+timedelta(days=30))))
     # sample showcase: one action escalated to the committee, one risk accepted
     from datetime import date as _d
     gaps[0]["due"] = (TODAY - timedelta(days=75)).isoformat()
