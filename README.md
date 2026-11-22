@@ -25,7 +25,7 @@ A compliance tracker for 8 sets of NCA (National Cybersecurity Authority) contro
 - [Open the tool](https://raseel-almutairi.github.io/portfolio/nca-tool/)
 - **Excel register:** [Sample data](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Sample.xlsx) · [Blank, ready to use](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Blank.xlsx)
 - **Power BI report:** [View report (PDF)](https://raseel-almutairi.github.io/portfolio/nca-powerbi/5_Sample_Report.pdf) · [Power BI folder](nca-powerbi/)
-  - The report is from an earlier version (35.8%); the current figure in the web and Excel is 34.9%.
+  - The web and Excel are updated (34.9%); the report is an earlier version (35.8%).
 - [Details and calculation method](nca-tool/)
 
 > **The web tools are for display only:** they show sample data and collect no data. For real use, download the blank Excel files, which run on your own device.
@@ -57,7 +57,7 @@ A compliance tracker for 8 sets of NCA (National Cybersecurity Authority) contro
 - [عرض الأداة](https://raseel-almutairi.github.io/portfolio/nca-tool/)
 - **سجل الامتثال في Excel:** [نسخة ببيانات نموذجية](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Sample.xlsx) · [نسخة فارغة للاستخدام الفعلي](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Blank.xlsx)
 - **تقرير Power BI:** [عرض التقرير (PDF)](https://raseel-almutairi.github.io/portfolio/nca-powerbi/5_Sample_Report.pdf) · [مجلد Power BI](nca-powerbi/)
-  - التقرير من نسخة سابقة (35.8%)، والنسبة الحالية في الويب و Excel هي 34.9%.
+  - تم تحديث الويب و Excel (34.9%)، أما التقرير فنسخة سابقة (35.8%).
 - [تفاصيل الأداة ومنهجية الاحتساب](nca-tool/)
 
 > **الأدوات للعرض فقط:** تعرض بيانات نموذجية، ولا تجمع أي بيانات. وللاستخدام الفعلي، استخدم نسخ Excel الفارغة، وهي تعمل على جهازك.
