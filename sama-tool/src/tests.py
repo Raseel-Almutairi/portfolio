@@ -58,12 +58,14 @@ SAMPLE = os.path.join("..", "SAMA_CSF_Assessment_Sample.xlsx")
 
 def actions(path):
     rp = load_workbook(path, data_only=True)["4. Action Plan"]
+    ids = [rp.cell(r, 1).value for r in range(4, rp.max_row + 1) if rp.cell(r, 1).value]
+    assert len(ids) == len(set(ids)), "repeated action ID in the Excel action plan"
     return {rp.cell(r, 1).value: (rp.cell(r, 12).value, rp.cell(r, 13).value, rp.cell(r, 15).value)
             for r in range(4, rp.max_row + 1) if rp.cell(r, 1).value}
 
 
 xa = actions(SAMPLE)
-check("Excel actions = web actions (same 63 keys)", set(xa) == {g["gid"] for g in gaps})
+check("Excel actions = web actions: same 63 keys, none missing, extra or repeated", set(xa) == {g["gid"] for g in gaps} and len(xa) == len(gaps) == 63)
 check("Excel action status = web status, per key", all(xa[g["gid"]][0] == g["fstatus"] for g in gaps))
 check("Excel overdue = web overdue (8)", sum(v[1] == "Yes" for v in xa.values()) == sum(g["overdue"] for g in gaps) == 8)
 ds = load_workbook(SAMPLE, data_only=True)["5. Summary"]

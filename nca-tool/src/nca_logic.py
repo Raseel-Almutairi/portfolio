@@ -53,7 +53,7 @@ def summary(controls, as_of):
     open_ = [r for r in gaps if r["gap_status"] != "مغلقة"]
     return {
         "mains": len(mains), "implemented": implemented, "denom": len(mains) - excluded,
-        "compliance": round(implemented / (len(mains) - excluded), 4),
+        "compliance": round(implemented / (len(mains) - excluded), 4) if len(mains) > excluded else None,  # no denominator: no rate
         "open": len(open_), "overdue": sum(1 for r in open_ if r["due"] and r["due"] < as_of),
         "na_pending": sum(na_pending(r) for r in controls),
         "closed_reassess": sum(r["gap_status"] == "مغلقة" for r in gaps),

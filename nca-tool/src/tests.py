@@ -61,14 +61,20 @@ by_id = {x["id"]: x for x in controls}
 diff = 0
 for n in range(5, ws.max_row + 1):
     cid = ws.cell(n, 2).value
-    if cid not in by_id:
+    if not cid:
         continue
-    x = by_id[cid]
+    x = by_id.get(cid)
+    if x is None:
+        diff += 1
+        continue
     due = ws.cell(n, 10).value
     row = (ws.cell(n, 5).value, ws.cell(n, 6).value, ws.cell(n, 7).value, due.date().isoformat() if due else "",
            ws.cell(n, 13).value or "", ws.cell(n, 14).value or "", (ws.cell(n, 16).value == "نعم") if x["status"] == "لا ينطبق" else None)
     diff += row != (x["owner"], x["status"], x["evidence"], x["due"], x["priority"], x["gap_status"], x["na_approved"])
 check("Excel register = web data, field by field (689 items)", diff == 0)
+reg_ids = [ws.cell(n, 2).value for n in range(5, ws.max_row + 1) if ws.cell(n, 2).value]
+check("same IDs in the source and the Excel register: none missing, extra or repeated",
+      len(reg_ids) == len(set(reg_ids)) == len(by_id) == len(controls) and set(reg_ids) == set(by_id))
 mains = {}
 for x in controls:
     mains.setdefault(main_key(x["id"]), []).append(x)
@@ -83,16 +89,24 @@ pbi = load_workbook("../../nca-powerbi/3_Sample_Data.xlsx", data_only=True)
 c = pbi["Controls"]
 diff = 0
 for n in range(2, c.max_row + 1):
+    if not c.cell(n, 1).value:
+        continue
     x = by_id.get(c.cell(n, 1).value)
-    if not x:
+    if x is None:
+        diff += 1
         continue
     na = (c.cell(n, 31).value == "نعم") if x["status"] == "لا ينطبق" else None
     diff += (c.cell(n, 9).value, c.cell(n, 10).value, c.cell(n, 15).value or "", na) != (x["status"], x["evidence"], x["gap_status"], x["na_approved"])
 check("Power BI data = web data (status, evidence, finding status, approval)", diff == 0)
+pbi_ids = [c.cell(n, 1).value for n in range(2, c.max_row + 1) if c.cell(n, 1).value]
+check("same IDs in the source and the Power BI data: none missing, extra or repeated",
+      len(pbi_ids) == len(set(pbi_ids)) == len(by_id) and set(pbi_ids) == set(by_id))
 pm = pbi["MainControls"]
 check("Power BI main-control status = Excel register", all(xl_main.get(pm.cell(n, 1).value) == pm.cell(n, 5).value for n in range(2, 299)))
 blank = load_workbook("../NCA_Compliance_Register_Blank.xlsx", data_only=True)
 check("blank register: 297 main controls not assessed", Counter(blank["07 الضوابط الرئيسية - Main"].cell(n, 8).value for n in range(4, 301)) == Counter({"لم يُقيّم": 297}))
+check("no compliance rate (not an error) when every main control is excluded",
+      summary([{"id": "X-1-1", "status": "لا ينطبق", "na_approved": True, "gap_status": "", "due": ""}], "2026-11-21")["compliance"] is None)
 check("missing approval counts as pending", main_status([r("مطبق"), {"id": "X-1-1-2", "status": "لا ينطبق"}]) == "مطبق جزئيًا")
 
 # One source: a change in controls.json reaches the Excel register (patch run in a temporary folder)

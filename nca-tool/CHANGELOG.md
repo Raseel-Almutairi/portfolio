@@ -1,5 +1,10 @@
 # Changelog: NCA tool
 
+## v1.2.1 (2026-11-22)
+
+- The overall compliance rate is empty (not an error) when every main control is excluded, so there is no division by zero.
+- The tests now fail if an ID is missing, extra or repeated in the Excel register or the Power BI data, instead of skipping it.
+
 ## v1.2 (2026-11-22): fixes after the second review
 
 | Item | Change |

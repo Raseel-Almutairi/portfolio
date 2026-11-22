@@ -1,5 +1,9 @@
 # Changelog: SAMA CSF tool
 
+## v1.2.1 (2026-11-22)
+
+- The tests now fail if an action ID is missing, extra or repeated in the Excel action plan.
+
 ## v1.2 (2026-11-22): fixes after the second review
 
 | Item | Change |
