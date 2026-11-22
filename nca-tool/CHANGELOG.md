@@ -1,12 +1,26 @@
 # Changelog: NCA tool
 
+## v1.2 (2026-11-22): fixes after the second review
+
+| Item | Change |
+|---|---|
+| One source for the Excel register | Before, the register took only the approval column from `controls.json`, and its other values came from the base file. Now `patch_excel.py` writes every register field from `controls.json`. A test changes an item in `controls.json`, rebuilds the register and checks that the change arrives. |
+| Missing approval | If the approval field is missing, the web, Python and Excel all treat the exception as pending, not approved. |
+| Date written as text | A target date pasted as text is no longer hidden. The finding shows «تاريخ غير صالح», and the dashboard data quality line counts it (tested with LibreOffice). |
+| Lists | The framework pickers on the dashboard and the documents sheet now also block invalid values. All lists in the register are now Stop alerts. |
+| Assessment date | Shown next to the overdue figure (intro and KPI card), not only in the method tab. |
+| CI | Installs LibreOffice and rebuilds the web page from `src/`, then fails if it differs from the published page. |
+
+Correction to v1.1 below: "one source" was only true for the web and Power BI data until v1.2, because the register was still read from its base file.
+
+
 ## v1.1 (2026-11-21): fixes after the technical review
 
 ### Changes by FIX number
 
 | FIX | Change |
 |---|---|
-| FIX-00 | One source (`src/controls.json`) for the web, the Excel register and the Power BI data, with build scripts and 24 tests (`src/tests.py`). The tests check, field by field, that the three hold the same data and give the same results. The 9 items that differed (web: «لا ينطبق - بانتظار الاعتماد», Excel: «معتمد») were settled on the web version. |
+| FIX-00 | One source (`src/controls.json`) for the web, the Excel register and the Power BI data, with build scripts and 27 tests (`src/tests.py`). The tests check, field by field, that the three hold the same data and give the same results. The 9 items that differed (web: «لا ينطبق - بانتظار الاعتماد», Excel: «معتمد») were settled on the web version. |
 | FIX-01 + 04 | Approval of "not applicable" is now its own field (`na_approved` in the web, column P in Excel, `NAApproved` in Power BI), no longer part of the evidence status. An item awaiting approval is not excluded when the main control's status is set: implemented + pending exception gives «مطبق جزئيًا». A main control leaves the denominator only if all its items are approved as not applicable. The "pending" indicator works now; it showed 0 before because the field it read did not exist. |
 | FIX-02 | Every Excel list now blocks invalid values (Stop alert). Values pasted around the list are caught: the main control shows «حالة غير صالحة» instead of «لم يُقيّم», and a data quality line on the dashboard counts them. The evidence list is the same in the register and the Power BI data. |
 | FIX-03 | One assessment date, in Riyadh time. The web demo is pinned to 21 November 2026, so its numbers no longer age and it no longer uses UTC. In Excel the date is in the dashboard (cell D26; blank = today), and all 36 `TODAY()` were replaced with it. |

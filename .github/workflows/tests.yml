@@ -16,6 +16,13 @@ jobs:
         with:
           node-version: "20"
       - run: pip install openpyxl
+      - name: Install LibreOffice (recalculates Excel in the scenario tests)
+        run: sudo apt-get update -q && sudo apt-get install -y -q libreoffice-calc-nogui
+      - name: Rebuild the web pages from src and check they match the published ones
+        run: |
+          (cd sama-tool/src && python -c "import runpy; runpy.run_path('build_web.py')")
+          (cd nca-tool/src && python build.py)
+          git diff --exit-code -- sama-tool/index.html nca-tool/index.html
       - name: SAMA tool
         working-directory: sama-tool/src
         run: python tests.py

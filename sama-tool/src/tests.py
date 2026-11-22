@@ -41,6 +41,47 @@ check("action text names the subdomain", all(g["action"].startswith(g["sub"] + "
 # Built files
 import os
 web = open(os.path.join("..", "index.html"), encoding="utf-8").read()
+check("action IDs are stable keys (subdomain-criterion)", all(g["gid"] == f'{g["sid"]}-{g["crit"]}' for g in gaps))
 check("web makes no external requests", "googleapis" not in web and "Content-Security-Policy" in web)
 check("web shows the assessment date", "18 Nov 2026" in web)
+
+# Excel (reads the values saved in the file: open and save it in Excel, or recalculate with LibreOffice, after a rebuild)
+import shutil, subprocess, tempfile, warnings
+from openpyxl import load_workbook
+warnings.filterwarnings("ignore")
+SAMPLE = os.path.join("..", "SAMA_CSF_Assessment_Sample.xlsx")
+
+
+def actions(path):
+    rp = load_workbook(path, data_only=True)["4. Action Plan"]
+    return {rp.cell(r, 1).value: (rp.cell(r, 12).value, rp.cell(r, 13).value, rp.cell(r, 15).value)
+            for r in range(4, rp.max_row + 1) if rp.cell(r, 1).value}
+
+
+xa = actions(SAMPLE)
+check("Excel actions = web actions (same 63 keys)", set(xa) == {g["gid"] for g in gaps})
+check("Excel action status = web status, per key", all(xa[g["gid"]][0] == g["fstatus"] for g in gaps))
+check("Excel overdue = web overdue (8)", sum(v[1] == "Yes" for v in xa.values()) == sum(g["overdue"] for g in gaps) == 8)
+ds = load_workbook(SAMPLE, data_only=True)["5. Summary"]
+check("Excel summary: 2.5 average, 17 / 32, 56 open", (ds["A5"].value, ds["C5"].value, ds["E5"].value) == (2.5, "17 / 32", 56))
+blank = load_workbook(os.path.join("..", "SAMA_CSF_Assessment_Blank.xlsx"), data_only=True)["5. Summary"]
+check("blank Excel: not assessed, 0% complete", (blank["A5"].value, blank["I5"].value) == ("Not assessed", 0))
+
+soffice = shutil.which("soffice") or shutil.which("libreoffice")
+if soffice:
+    # Re-assess one closed action to Yes: it must leave the plan, and every other action keeps its own status and escalation
+    with tempfile.TemporaryDirectory() as tmp:
+        wb = load_workbook(SAMPLE)
+        la = wb["3. Assessment"]
+        r = next(r for r in range(4, la.max_row + 1) if la.cell(r, 10).value == "Closed")
+        key = la.cell(r, 14).value.replace("|", "-")
+        la.cell(r, 5).value = "Yes"
+        wb.save(os.path.join(tmp, "t.xlsx"))
+        subprocess.run([soffice, "--headless", "--convert-to", "xlsx", "--outdir", os.path.join(tmp, "out"), os.path.join(tmp, "t.xlsx")],
+                       capture_output=True, check=True, timeout=300)
+        after = actions(os.path.join(tmp, "out", "t.xlsx"))
+    check("re-assessed action leaves the plan", key not in after and len(after) == len(xa) - 1)
+    check("no other action changes status, overdue or escalation (no row shift)", all(after[k] == xa[k] for k in after))
+else:
+    print("SKIP re-assessment scenario (LibreOffice not installed)")
 print(f"\n{ok} tests passed")

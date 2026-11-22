@@ -93,4 +93,33 @@ pm = pbi["MainControls"]
 check("Power BI main-control status = Excel register", all(xl_main.get(pm.cell(n, 1).value) == pm.cell(n, 5).value for n in range(2, 299)))
 blank = load_workbook("../NCA_Compliance_Register_Blank.xlsx", data_only=True)
 check("blank register: 297 main controls not assessed", Counter(blank["07 الضوابط الرئيسية - Main"].cell(n, 8).value for n in range(4, 301)) == Counter({"لم يُقيّم": 297}))
+check("missing approval counts as pending", main_status([r("مطبق"), {"id": "X-1-1-2", "status": "لا ينطبق"}]) == "مطبق جزئيًا")
+
+# One source: a change in controls.json reaches the Excel register (patch run in a temporary folder)
+import os, tempfile
+with tempfile.TemporaryDirectory() as tmp:
+    changed_ = json.loads(json.dumps(controls))
+    changed_[0]["status"], changed_[0]["owner"] = "غير مطبق", "تقنية المعلومات"
+    json.dump(changed_, open(os.path.join(tmp, "controls.json"), "w", encoding="utf-8"), ensure_ascii=False)
+    subprocess.run(["python3" if shutil.which("python3") else "python", os.path.abspath("patch_excel.py"), os.path.abspath("base/register_v1.0.xlsx"),
+                    os.path.join(tmp, "s.xlsx"), os.path.join(tmp, "b.xlsx"), "2026-11-21"], cwd=tmp, check=True, capture_output=True)
+    w_ = load_workbook(os.path.join(tmp, "s.xlsx"))["01 سجل الضوابط - Register"]
+    row0 = next(n for n in range(5, w_.max_row + 1) if w_.cell(n, 2).value == changed_[0]["id"])
+    check("a change in controls.json reaches the Excel register", (w_.cell(row0, 6).value, w_.cell(row0, 5).value) == ("غير مطبق", "تقنية المعلومات"))
+
+soffice = shutil.which("soffice") or shutil.which("libreoffice")
+if soffice:
+    # A target date pasted as text must not disappear: it is flagged in the findings sheet and in the data quality line
+    with tempfile.TemporaryDirectory() as tmp:
+        wb = load_workbook("../NCA_Compliance_Register_Sample.xlsx")
+        w_ = wb["01 سجل الضوابط - Register"]
+        n = next(n for n in range(5, w_.max_row + 1) if w_.cell(n, 6).value == "غير مطبق" and w_.cell(n, 14).value != "مغلقة")
+        w_.cell(n, 10).value = "2026-01-01"
+        wb.save(os.path.join(tmp, "t.xlsx"))
+        subprocess.run([soffice, "--headless", "--convert-to", "xlsx", "--outdir", os.path.join(tmp, "o"), os.path.join(tmp, "t.xlsx")], check=True, capture_output=True, timeout=300)
+        out = load_workbook(os.path.join(tmp, "o", "t.xlsx"), data_only=True)
+        k_ = [c.value for c in out["05 متابعة الملاحظات - Findings"]["K"]]
+        check("date written as text is flagged, not hidden", "تاريخ غير صالح" in k_ and out["06 لوحة المؤشرات - Dashboard"]["B25"].value.startswith("تنبيه: 1 "))
+else:
+    print("SKIP text-date scenario (LibreOffice not installed)")
 print(f"\n{ok} tests passed")

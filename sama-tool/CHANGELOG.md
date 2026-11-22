@@ -1,5 +1,20 @@
 # Changelog: SAMA CSF tool
 
+## v1.2 (2026-11-22): fixes after the second review
+
+| Item | Change |
+|---|---|
+| Action plan row shift (Excel) | Target date, status, escalation, escalation date and risk acceptance ref. are now entered in sheet 3, next to their criterion (columns I-M). Sheet 4 reads them by a stable key (subdomain and criterion), so they always stay with their action. Before, these inputs sat by row number in sheet 4, and when an action appeared or disappeared the inputs stayed on the same row and landed on another action. Action IDs are the same key (for example `3.1.3-L3a`), in Excel and in the web. |
+| Web page vs source | The published page is rebuilt from `src/`: the assessment date is in the footer in both the page and the source. CI now rebuilds the page and fails if it differs from the published one. |
+| Tests read Excel | 8 new tests: the Excel actions, statuses, overdue and summary must match the web, the blank file must show Not assessed, and a re-assessment scenario (close an action, answer Yes, recalculate with LibreOffice) must leave every other action unchanged. |
+| Encoding | The build scripts now read and write UTF-8 on every system (Windows included). |
+| Mobile | The level badge no longer overflows in the Assessment tab. |
+
+Corrections to v1.1 below:
+- **FIX-03:** the assessment date is shown in the footer of the web page, not in the header.
+- **FIX-12:** the 63 action texts are the 7 templates with the subdomain name in front. Linking an action to a specific control consideration would change the method.
+
+
 ## v1.1 (2026-11-21): fixes after the technical review
 
 ### Changes by FIX number

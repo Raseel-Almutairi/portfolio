@@ -42,13 +42,36 @@ def set_cell(xml, ref, text):
     new = '<c r="%s"%s t="inlineStr"><is><t>%s</t></is></c>' % (ref, mm.group(1) or "" if mm else "", escape(text, quote=False))
     assert mm, ref
     return xml[:mm.start()] + new + xml[mm.end():]
+# every register field comes from controls.json (one source): text, owner, status, evidence, finding, date, priority, approval
+FIELDS = {"A": "framework", "C": "domain", "D": "description", "E": "owner", "F": "status", "G": "evidence", "H": "gap",
+          "I": "action", "J": "due", "M": "priority", "N": "gap_status", "P": "na_approved"}
+def cell_xml(ref, style, v):
+    if v in (None, ""):
+        return f'<c r="{ref}"{style}/>'
+    if isinstance(v, date):
+        return f'<c r="{ref}"{style}><v>{(v - date(1899, 12, 30)).days}</v></c>'
+    return f'<c r="{ref}"{style} t="inlineStr"><is><t>{escape(str(v), quote=False)}</t></is></c>'
+def fill_row(m_):
+    row_xml, n = m_.group(0), m_.group(1)
+    b = re.search(r'<c r="B%s"[^>]*t="s"[^>]*><v>(\d+)</v></c>' % n, row_xml)
+    r = controls.get(ss[int(b.group(1))]) if b else None
+    if not r:
+        return row_xml
+    global changed
+    changed += 1
+    for col, key in FIELDS.items():
+        v = r[key]
+        if key == "due":
+            v = date.fromisoformat(v) if v else None
+        if key == "na_approved":
+            v = ("نعم" if v is True else "لا") if r["status"] == "لا ينطبق" else None
+        pat = re.compile(r'<c r="%s%s"( s="\d+")?[^>]*?(?:/>|>.*?</c>)' % (col, n), re.S)
+        c_ = pat.search(row_xml)
+        assert c_, (col, n)
+        row_xml = row_xml[:c_.start()] + cell_xml(f"{col}{n}", c_.group(1) or "", v) + row_xml[c_.end():]
+    return row_xml
 changed = 0
-for row, idx in re.findall(r'<c r="B(\d+)"[^>]*t="s"[^>]*><v>(\d+)</v></c>', reg):
-    r = controls.get(ss[int(idx)])
-    if r and r["status"] == "لا ينطبق":
-        reg = set_cell(reg, f"G{row}", "لا ينطبق")
-        reg = set_cell(reg, f"P{row}", "نعم" if r["na_approved"] else "لا")
-        changed += 1
+reg = re.sub(r'<row r="(\d+)"[^>]*>.*?</row>', fill_row, reg, flags=re.S)
 # evidence list: approval of "not applicable" now lives only in column P
 reg = reg.replace("لا ينطبق - معتمد,لا ينطبق - بانتظار الاعتماد", "لا ينطبق")
 # every list blocks invalid typing (Stop alert)
@@ -58,6 +81,9 @@ def stop(tag):
 reg = re.sub(r"<(?:x14:)?dataValidation [^>]*>", lambda k: stop(k.group(0)), reg)
 reg = re.sub(r'error="اختر قيمة من القائمة\." (type="date")', r'error="أدخل تاريخاً صحيحاً." \1', reg)
 put("xl/worksheets/sheet2.xml", reg)
+# the framework pickers in the dashboard and the documents sheet also block invalid values
+for n_ in [f"xl/worksheets/sheet{i}.xml" for i in (1, 3, 4, 5, 6, 7, 8)]:
+    put(n_, re.sub(r"<(?:x14:)?dataValidation [^>]*>", lambda k: stop(k.group(0)), X(n_)))
 
 # ---------- 07 Main: a control with a not-applicable item awaiting approval is not "implemented"
 main = X("xl/worksheets/sheet8.xml")
@@ -73,7 +99,7 @@ put("xl/worksheets/sheet8.xml", main)
 # ---------- 05 Findings: closed findings and missing dates are shown, not hidden
 fnd = X("xl/worksheets/sheet6.xml")
 pat = re.compile(r'IF\(C(\d+)="","",IF\(AND\(ISNUMBER\(F\1\),H\1&lt;&gt;"مغلقة",F\1&lt;TODAY\(\)\),"متأخرة",""\)\)')
-fnd, k = pat.subn(lambda mm: esc(f'IF(C{mm.group(1)}="","",IF(H{mm.group(1)}="مغلقة","مغلقة - أعد تقييم الضابط",IF(F{mm.group(1)}="","بلا تاريخ مستهدف",IF(F{mm.group(1)}<{DASH}!$M$26,"متأخرة",""))))'), fnd)
+fnd, k = pat.subn(lambda mm: esc(f'IF(C{mm.group(1)}="","",IF(H{mm.group(1)}="مغلقة","مغلقة - أعد تقييم الضابط",IF(F{mm.group(1)}="","بلا تاريخ مستهدف",IF(NOT(ISNUMBER(F{mm.group(1)})),"تاريخ غير صالح",IF(F{mm.group(1)}<{DASH}!$M$26,"متأخرة","")))))'), fnd)
 assert k == 16, k
 fnd = fnd.replace('<f t="shared" ca="1"', '<f t="shared"')
 put("xl/worksheets/sheet6.xml", fnd)
@@ -89,8 +115,9 @@ def bad(col, vals):
     return f'SUMPRODUCT(({R(col)}<>"")*ISNA(MATCH({R(col)},{arr},0)))'
 dq = "+".join([bad("F", ["مطبق", "مطبق جزئيًا", "غير مطبق", "لا ينطبق"]),
                bad("G", ["متوفر", "تم التحقق", "جزئي", "بانتظار التحقق", "مفقود", "غير متوفر", "لا ينطبق"]),
-               bad("M", ["حرجة", "عالية", "متوسطة", "منخفضة"]), bad("N", ["مفتوحة", "قيد المعالجة", "بانتظار التحقق", "مغلقة"]), bad("P", ["نعم", "لا"])])
-dq_f = f'IF(({dq})=0,"جودة البيانات: لا توجد قيم غير صالحة في سجل الضوابط.","تنبيه: "&({dq})&" قيمة غير صالحة في سجل الضوابط (الحالة أو الأدلة أو الأولوية أو حالة الملاحظة أو اعتماد عدم الانطباق). صحّحها قبل اعتماد المؤشرات.")'
+               bad("M", ["حرجة", "عالية", "متوسطة", "منخفضة"]), bad("N", ["مفتوحة", "قيد المعالجة", "بانتظار التحقق", "مغلقة"]), bad("P", ["نعم", "لا"]),
+               f'SUMPRODUCT(({R("J")}<>"")*NOT(ISNUMBER({R("J")})))'])
+dq_f = f'IF(({dq})=0,"جودة البيانات: لا توجد قيم غير صالحة في سجل الضوابط.","تنبيه: "&({dq})&" قيمة غير صالحة في سجل الضوابط (الحالة أو الأدلة أو الأولوية أو حالة الملاحظة أو اعتماد عدم الانطباق أو تاريخ مكتوب كنص). صحّحها قبل اعتماد المؤشرات.")'
 gap2 = lambda extra: (f'COUNTIFS({R("A")},$M$3,{R("F")},"مطبق جزئيًا"{extra})+COUNTIFS({R("A")},$M$3,{R("F")},"غير مطبق"{extra})')
 cnt_f = (f'"«لا ينطبق» بانتظار الاعتماد: "&COUNTIFS({R("A")},$M$3,{R("F")},"لا ينطبق",{R("P")},"<>نعم")'
          f'&"   |   ملاحظات مغلقة بانتظار إعادة التقييم: "&({gap2(f",{R(chr(78))},\"مغلقة\"")})'
@@ -126,7 +153,7 @@ def save(path):
             if n in files:
                 z.writestr(n, files[n])
 save(dst)
-print(f"{dst}: {changed} not-applicable rows set, {n_today} TODAY() replaced by the assessment date")
+print(f"{dst}: {changed} rows filled from controls.json, {n_today} TODAY() replaced by the assessment date")
 
 # ---------- blank: clear the inputs (register answers, owners list, assessment date); default view ECC
 def clear(xml, cols, first):

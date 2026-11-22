@@ -76,7 +76,7 @@ def build():
                     due=TODAY+timedelta(days=((g*41)%330)-60)
                     fs="Closed" if g%10==0 else ("In Progress" if g%3==0 else "Open")
                     act,clos=ACT[cid]; act=act_text(name,cid)
-                    gaps.append(dict(gid=f"A-{g:03d}",sid=sid,sub=name,dom=dom,domain=SH[dom],crit=cid,clevel=lv,ctext=txt,cur=lvl,action=act,closure=clos,owner=owner,priority=pr,due=due.isoformat(),fstatus=fs,overdue=(fs!="Closed" and due<TODAY),due30=(fs!="Closed" and TODAY<=due<=TODAY+timedelta(days=30))))
+                    gaps.append(dict(gid=f"{sid}-{cid}",n=g,sid=sid,sub=name,dom=dom,domain=SH[dom],crit=cid,clevel=lv,ctext=txt,cur=lvl,action=act,closure=clos,owner=owner,priority=pr,due=due.isoformat(),fstatus=fs,overdue=(fs!="Closed" and due<TODAY),due30=(fs!="Closed" and TODAY<=due<=TODAY+timedelta(days=30))))
     # sample showcase: one action escalated to the committee, one risk accepted
     from datetime import date as _d
     gaps[0]["due"] = (TODAY - timedelta(days=75)).isoformat()
@@ -98,7 +98,7 @@ def build():
         else: x["esc"] = "1st Escalation"
         # sample escalation dates: stages sent every 3 days after the target date was missed
         n_ = {"1st Escalation": 1, "2nd Escalation": 2, "3rd Escalation": 3}.get(x["esc"], 0)
-        x["escd"] = (TODAY - timedelta(days=(int(x["gid"][2:]) % 5))).isoformat() if n_ else ""
+        x["escd"] = (TODAY - timedelta(days=(x["n"] % 5))).isoformat() if n_ else ""
         x["nextd"] = ("Report to Committee" if n_ == 3 else (_d.fromisoformat(x["escd"]) + timedelta(days=3)).isoformat()) if n_ else ""
     return subs,ccs,gaps,docs
 if __name__=="__main__":

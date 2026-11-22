@@ -2,7 +2,7 @@ import json, sys; sys.path.insert(0,'.')
 from model import TODAY as _TD
 from model import build, SH, CRIT, CSRC, TABLE1
 subs,ccs,gaps,docs=build()
-css=open('web.css').read()
+css=open('web.css',encoding='utf-8').read()
 lv=[dict(n=n,en=en,dc=dc,ex=ex) for n,en,dc,ex in TABLE1]
 from official import DOMS as FULL
 doms=[dict(id=k,name=v,full=FULL[k]) for k,v in SH.items()]
@@ -12,7 +12,7 @@ body=r'''<main class="wrap">
   <div class="eyebrow">Personal GRC Project · Raseel Almutairi</div>
   <h1>SAMA Cyber Security Framework Maturity Self-Assessment (Demo)</h1>
   <p class="sub">A self-assessment of the 32 subdomains of the SAMA Cyber Security Framework v1.0, using SAMA's own maturity model: each subdomain gets a level from 0 to 5, the minimum required is level 3, and every unmet criterion becomes an action.</p>
-  <div class="note">Personal initiative · demo with sample data · assessment date (as of): <b>%ASOF_TXT%</b></div>
+  <div class="note">Personal initiative · sample data only</div>
 </header>
 <nav class="tabs" aria-label="Views">
   <a href="#framework">1. SAMA Framework</a><a href="#controls">2. Controls &amp; Evidence</a><a href="#assessment">3. Assessment</a><a href="#plan">4. Action Plan</a><a href="#summary">5. Summary</a>
@@ -81,7 +81,7 @@ body=r'''<main class="wrap">
 </section>
 
 <footer>
-  <div>All answers, levels, actions, owners and dates are sample data and do not represent any organization. Principles, objectives, control considerations and Table 1 are taken verbatim from the official SAMA Cyber Security Framework v1.0; the 14 criteria are the statements of Table 1 and section 2.4. Required evidence is derived by the author from the wording of each control consideration.</div>
+  <div>All answers, levels, actions, owners and dates are sample data and do not represent any organization; overdue days are calculated as of %ASOF_TXT%. Principles, objectives, control considerations and Table 1 are taken verbatim from the official SAMA Cyber Security Framework v1.0; the 14 criteria are the statements of Table 1 and section 2.4. Required evidence is derived by the author from the wording of each control consideration.</div>
   <div><b style="color:var(--ink)">This tool is a personal initiative and does not replace SAMA's assessment.</b></div>
 </footer>
 </main>'''
@@ -166,4 +166,4 @@ window.addEventListener("hashchange",show);show();
 html='<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<title>SAMA CSF Maturity Self-Assessment Tool</title>\n<meta http-equiv="Content-Security-Policy" content="default-src \'none\'; style-src \'unsafe-inline\'; script-src \'unsafe-inline\'; img-src data:; base-uri \'none\'; form-action \'none\'">\n'+css+'\n</head>\n<body>\n'+body+'\n'+js+'\n</body>\n</html>'
 for k,v in {"__SUBS__":subs,"__CCS__":ccs,"__GAPS__":gaps,"__CRIT__":crit,"__LV__":lv,"__DOMS__":doms}.items():
     html=html.replace(k,json.dumps(v,ensure_ascii=False))
-html=html.replace("%TODAY%",_TD.isoformat()).replace("%ASOF_TXT%",_TD.strftime("%d %B %Y").lstrip("0")); open("../index.html","w").write(html); print(len(html))
+html=html.replace("%TODAY%",_TD.isoformat()).replace("%ASOF_TXT%",_TD.strftime("%d %b %Y").lstrip("0")); open("../index.html","w",encoding="utf-8").write(html); print(len(html))

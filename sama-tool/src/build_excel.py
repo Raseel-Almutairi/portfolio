@@ -94,7 +94,7 @@ def make(path, sample):
     sec("How to use this workbook (yellow cells = inputs)")
     row("3. Assessment", "The self-assessment: for each subdomain answer the 14 criteria Yes / No and write the evidence for Yes or what was found for No. The level appears in the subdomain header automatically. The Result column tells you if evidence is missing or an action was created.")
     row("2. Controls & Evidence", "Reference only: SAMA's principle, objective and control considerations for each subdomain (official text), with the required evidence. Use it to support your Yes / No answers in sheet 3.")
-    row("4. Action Plan", "Escalation: you choose the stage (1st: To owner, CC GRC Manager and Line Manager; 2nd: To Line Manager, CC GRC Manager and Head of Department; 3rd: To Head of Department, CC GRC Manager and CISO). To, CC and the email text are filled automatically. Generated automatically: every No answer up to level 3 becomes an action with its corrective action, closure evidence, owner and priority. You only add the target date and status. Fill the owner emails once (right side) to use the Send reminder links, which open an email on your own device. The full reminder email for each action is ready in column P to copy and paste.")
+    row("4. Action Plan", "Escalation: you choose the stage (1st: To owner, CC GRC Manager and Line Manager; 2nd: To Line Manager, CC GRC Manager and Head of Department; 3rd: To Head of Department, CC GRC Manager and CISO). To, CC and the email text are filled automatically. Generated automatically: every No answer up to level 3 becomes an action with its corrective action, closure evidence, owner and priority. You add the target date, status and escalation in sheet 3 next to the criterion (columns I-M), so they stay with the right action when answers change. Fill the owner emails once (right side) to use the Send reminder links, which open an email on your own device. The full reminder email for each action is ready in column P to copy and paste.")
     row("5. Summary", "Updates automatically, including lists of overdue actions and actions due in the next 30 days. A data quality line at the top warns about invalid answers or statuses and missing target dates.")
     row("Rules", "Not assessed: a subdomain gets a level only when all 14 criteria are answered Yes or No; until then it is Not assessed and excluded from the average. Closing an action does not change the answer or the level: re-assess the criterion with evidence in sheet 3. Risk Accepted keeps the criterion unmet; its target date is the acceptance expiry date. All dates use one assessment date (as of) in sheet 4, cell AB29 (blank = today).")
     row("Privacy", "No data is collected. This workbook runs locally on your device; nothing is sent anywhere unless you send it.")
@@ -104,7 +104,13 @@ def make(path, sample):
     la = wb.create_sheet("3. Assessment"); la.sheet_view.showGridLines = False
     title(la, "3. Assessment - the self-assessment questionnaire",
           "For each subdomain: answer every criterion Yes or No, and write the evidence (Yes) or what was found (No). Optionally paste a link to the evidence file in your own system. The level is calculated automatically: a level is reached only when all its criteria and all lower-level criteria are Yes. Yellow cells are inputs.", 8)
-    hdr(la, 3, ["ID", "Level", "Criterion", "Question (from SAMA Table 1 and section 2.4)", "Answer", "Evidence (Yes) / What was found (No)", "Result", "Evidence link (optional)"])
+    hdr(la, 3, ["ID", "Level", "Criterion", "Question (from SAMA Table 1 and section 2.4)", "Answer", "Evidence (Yes) / What was found (No)", "Result", "Evidence link (optional)",
+              "Action Target Date (RA: expiry)", "Action Status", "Escalation", "Escalation Date", "Risk Acceptance Ref.", "Key"])
+    # Action tracking is entered here, next to its criterion, so it can never move to another action (stable key = subdomain|criterion)
+    GBY = {(g["sid"], g["crit"]): g for g in gaps} if sample else {}
+    dst = DataValidation(type="list", formula1='"Open,In Progress,Closed,Risk Accepted"', allow_blank=True); la.add_data_validation(dst)
+    desc = DataValidation(type="list", formula1='"1st Escalation,2nd Escalation,3rd Escalation"', allow_blank=True); la.add_data_validation(desc)
+    dtv = DataValidation(type="date", operator="greaterThan", formula1="36526", allow_blank=True); la.add_data_validation(dtv)
     dyn = DataValidation(type="list", formula1='"Yes,No"', allow_blank=True); la.add_data_validation(dyn)
     POS, HROW = {}, {}; r = 4; RPN = 3 + len(subs) * len([c for c in CRIT if c[1] <= 3])
     for k, s in enumerate(subs):
@@ -113,7 +119,8 @@ def make(path, sample):
         h = la.cell(r, 1, f'{s["sid"]}  {s["sub"]}   ·   {s["domain"]}'); h.font = f(True, "FFFFFF", 11); h.fill = HEAD; h.alignment = Alignment(vertical="center", indent=1)
         o = la.cell(r, 5, "Owner:"); o.font = f(True, "FFFFFF"); o.fill = HEAD; o.alignment = Alignment(horizontal="right", vertical="center")
         ow = la.cell(r, 6, s["owner"] if use else None); ow.fill = YEL; ow.font = f(True); ow.border = B; ow.alignment = Alignment(vertical="center")
-        la.cell(r, 8).fill = HEAD
+        for j_ in range(8, 14): la.cell(r, j_).fill = HEAD
+        la.cell(r, 9, "Action tracking (only when sheet 4 lists an action)").font = f(True, "FFFFFF", 8.5)
         lv = la.cell(r, 7, f'=IF(ISNUMBER(INDEX(Results!$S$5:$S$36,MATCH("{s["sid"]}",Results!$B$5:$B$36,0))),"Level "&INDEX(Results!$S$5:$S$36,MATCH("{s["sid"]}",Results!$B$5:$B$36,0))&" · "&INDEX(Results!$T$5:$T$36,MATCH("{s["sid"]}",Results!$B$5:$B$36,0)),"Not assessed")'); lv.font = f(True, "FFFFFF"); lv.fill = HEAD; lv.alignment = CTR
         la.row_dimensions[r].height = 24; r += 1
         for c in CRIT:
@@ -126,6 +133,14 @@ def make(path, sample):
                 if j in (5, 6): x.fill = YEL
             y_ = la.cell(r, 8); y_.fill = YEL; y_.border = B; y_.font = f(s=9, c="0563C1")
             la.cell(r, 2).number_format = '"Level "0'; dyn.add(f"E{r}")
+            g_ = GBY.get((s["sid"], c[0]))
+            if c[1] <= 3:
+                for j_, v_ in ((9, date.fromisoformat(g_["due"]) if g_ else None), (10, g_["fstatus"] if g_ else None), (11, (g_["esc"] or None) if g_ else None),
+                               (12, (date.fromisoformat(g_["escd"]) if g_.get("escd") else None) if g_ else None), (13, (g_["ra"] or None) if g_ else None)):
+                    x = la.cell(r, j_, v_); x.fill = YEL; x.border = B; x.font = f(s=9.5); x.alignment = CTR
+                for j_ in (9, 12): la.cell(r, j_).number_format = "yyyy-mm-dd"
+                dst.add(f"J{r}"); desc.add(f"K{r}"); dtv.add(f"I{r}"); dtv.add(f"L{r}")
+            la.cell(r, 14, f'{s["sid"]}|{c[0]}').font = f(s=8, c="999999")
             la.row_dimensions[r].height = 13 * lines(c[2], 70) + 5; r += 1
         r += 1
     la_end = r - 1
@@ -136,7 +151,10 @@ def make(path, sample):
     la.conditional_formatting.add(f"G4:G{la_end}", CellIsRule(operator="equal", formula=['"Action closed: re-assess with evidence"'], fill=WARN))
     la.conditional_formatting.add(f"E4:E{la_end}", FormulaRule(formula=['AND(E4<>"",E4<>"Yes",E4<>"No")'], fill=fill("C00000"), font=Font(name=FN, bold=True, color="FFFFFF")))
     la.conditional_formatting.add(f"G4:G{la_end}", CellIsRule(operator="equal", formula=['"Action created in sheet 4"'], fill=fill("DCE6F5")))
-    for j, w in enumerate([9, 9, 9, 70, 10, 50, 26, 30], 1): la.column_dimensions[CL(j)].width = w
+    for j, w in enumerate([9, 9, 9, 70, 10, 50, 26, 30, 14, 14, 15, 13, 16, 12], 1): la.column_dimensions[CL(j)].width = w
+    la.column_dimensions["N"].hidden = True
+    la.conditional_formatting.add(f"J4:J{la_end}", FormulaRule(formula=['AND(J4<>"",J4<>"Open",J4<>"In Progress",J4<>"Closed",J4<>"Risk Accepted")'], fill=fill("C00000"), font=Font(name=FN, bold=True, color="FFFFFF")))
+    LA_END = la_end
     la.freeze_panes = "A4"
 
     # ---------------- Results (hidden, one row per subdomain) ----------------
@@ -243,7 +261,7 @@ def make(path, sample):
     OWN = sorted(set(x["owner"] for x in subs)) if sample else [subs[0]["owner"]]
     rp = wb.create_sheet("4. Action Plan")
     title(rp, "4. Action Plan - generated automatically from the No answers in sheet 3",
-          "Every criterion up to level 3 answered No (for a subdomain below level 3) appears here automatically. You fill the yellow cells: Target Date, Status, Escalation stage and the date you sent it. The next escalation date, To, CC and the email text are calculated automatically.", 22)
+          "Every criterion up to level 3 answered No (for a subdomain below level 3) appears here automatically. Target date, status, escalation stage, escalation date and risk acceptance ref. are entered in sheet 3, next to the criterion (columns I-M), so they stay with their action when answers change. The next escalation date, To, CC and the email text are calculated automatically.", 22)
     hdr(rp, 3, ["Action ID", "Subdomain ID", "Subdomain", "Current Level", "Criterion", "Criterion Text", "Corrective Action", "Closure Evidence", "Owner", "Priority", "Target Date (RA: expiry)", "Status", "Overdue", "Days Overdue", "Escalation", "Escalation Date", "Next Escalation Due", "Risk Acceptance Ref.", "Email To", "Email CC", "Send email", "Email text (copy and paste)"])
     rp.cell(2, 27, "Contacts (fill once; used for To and CC)").font = f(True, "1F3A68", 9)
     hdr(rp, 3, ["Control Owner", "Owner Email", "Line Manager Email", "Head of Department Email"], col=27)
@@ -258,40 +276,37 @@ def make(path, sample):
             b_.number_format = "yyyy-mm-dd"
             u_ = rp.cell(29, 29, '=IF(AB29="",TODAY(),AB29)'); u_.number_format = "yyyy-mm-dd"; u_.font = f(True, s=9.5); u_.border = B
             rp.cell(29, 30, "<- date used for Overdue, escalation and 30 days").font = f(s=8, i=True, c="555555")
-    rp.cell(30, 30, None); rp.cell(30, 27, "Escalation stages (you choose the stage in column O and the date you sent it in column P)").font = f(True, "1F3A68", 9)
+    rp.cell(30, 30, None); rp.cell(30, 27, "Escalation stages (you choose the stage and the date you sent it in sheet 3, columns K and L)").font = f(True, "1F3A68", 9)
     for rr, (st, to, cc_) in enumerate((("1st Escalation", "Control owner", "GRC Manager, Line Manager"), ("2nd Escalation", "Line Manager", "GRC Manager, Head of Department"), ("3rd Escalation", "Head of Department", "GRC Manager, CISO")), 31):
         for j, v in ((27, st), (28, "To: " + to), (29, "CC: " + cc_)):
             x = rp.cell(rr, j, v); x.border = B; x.font = f(s=9.5, b=(j == 27))
     rp.cell(35, 27, "Next Escalation Due = Escalation Date + days between escalations. If the action is still open after the 3rd escalation, report it to the Cyber Security Committee, which monitors cyber security risks (SAMA CSF 3.1.4).").font = f(s=8, i=True, c="555555")
     for c_, w_ in (("AA", 30), ("AB", 30), ("AC", 34), ("AD", 34)): rp.column_dimensions[c_].width = w_
-    dst = DataValidation(type="list", formula1='"Open,In Progress,Closed,Risk Accepted"', allow_blank=True); rp.add_data_validation(dst)
-    desc = DataValidation(type="list", formula1='"1st Escalation,2nd Escalation,3rd Escalation"', allow_blank=True); rp.add_data_validation(desc)
     nrows = en1 - 1
     DONE = lambda i: f'OR(L{i}="Closed",L{i}="Risk Accepted")'
     LK = lambda col, i: f'IFERROR(INDEX(${col}$4:${col}$23,MATCH(I{i},$AA$4:$AA$23,0))&"","")'
     for k in range(1, nrows + 1):
-        i = 3 + k; g = gaps[k - 1] if (sample and k <= len(gaps)) else None
+        i = 3 + k
+        KEY = f'B{i}&"|"&E{i}'
+        TR = lambda col: f"=IF(B{i}=\"\",\"\",IF(INDEX('3. Assessment'!${col}$4:${col}${LA_END},MATCH({KEY},'3. Assessment'!$N$4:$N${LA_END},0))=\"\",\"\",INDEX('3. Assessment'!${col}$4:${col}${LA_END},MATCH({KEY},'3. Assessment'!$N$4:$N${LA_END},0))))"
         M_ = lambda c: f'IFERROR(INDEX({EN(c)},MATCH({k},{EN("G")},0)),"")'
-        vals = [f'=IF(B{i}="","","A-"&TEXT({k},"000"))', f"={M_('A')}",
+        vals = [f'=IF(B{i}="","",B{i}&"-"&E{i})', f"={M_('A')}",
                 f'=IF(B{i}="","",INDEX({MA("C")},MATCH(B{i},{MA("B")},0)))',
                 f'=IF(B{i}="","",INDEX({MA("S")},MATCH(B{i},{MA("B")},0)))',
                 f"={M_('B')}", f"=IF(E{i}=\"\",\"\",INDEX('1. SAMA Framework'!$C${CR0}:$C${CR1},MATCH(E{i},'1. SAMA Framework'!$A${CR0}:$A${CR1},0)))",
                 f"={M_('H')}", f"={M_('I')}",
                 f'=IF(B{i}="","",INDEX({MA("D")},MATCH(B{i},{MA("B")},0))&"")', f"={M_('J')}",
-                date.fromisoformat(g["due"]) if g else None, g["fstatus"] if g else None,
+                TR("I"), TR("J"),
                 f'=IF(B{i}="","",IF(AND(L{i}="Risk Accepted",K{i}<>"",K{i}<$AC$29),"RA expired",IF({DONE(i)},"",IF(K{i}="","No target date",IF(K{i}<$AC$29,"Yes","")))))',
                 f'=IF(M{i}="Yes",$AC$29-K{i},"")',
-                (g["esc"] or None) if g else None,
-                (date.fromisoformat(g["escd"]) if g.get("escd") else None) if g else None,
+                TR("K"), TR("L"),
                 f'=IF(OR(B{i}="",{DONE(i)},P{i}="",O{i}=""),"",IF(O{i}="3rd Escalation","Report to Committee",P{i}+$AB$28))',
-                (g["ra"] or None) if g else None,
+                TR("M"),
                 f'=IF(OR(B{i}="",{DONE(i)}),"",IF(O{i}="2nd Escalation",{LK("AC", i)},IF(O{i}="3rd Escalation",{LK("AD", i)},{LK("AB", i)})))',
                 f'=IF(OR(B{i}="",{DONE(i)},O{i}=""),"",IF(O{i}="1st Escalation",$AB$25&";"&{LK("AC", i)},IF(O{i}="2nd Escalation",$AB$25&";"&{LK("AD", i)},$AB$25&";"&$AB$26)))']
         for j, v in enumerate(vals, 1):
             x = rp.cell(i, j, v); x.font = f(s=9.5); x.border = B; x.alignment = TOP
-            if j in (11, 12, 15, 16, 18): x.fill = YEL
         for j in (11, 16, 17): rp.cell(i, j).number_format = "yyyy-mm-dd"
-        dst.add(f"L{i}"); desc.add(f"O{i}")
         subj = f'"SAMA CSF action "&A{i}&IF(O{i}=""," - reminder"," - "&O{i})'
         body = f'LEFT("Please update action "&A{i}&" ("&B{i}&" "&E{i}&"): "&G{i},80)'
         rm = rp.cell(i, 21, f'=IF(S{i}="","",HYPERLINK("mailto:"&S{i}&"?cc="&T{i}&"&subject="&SUBSTITUTE({subj}," ","%20")&"&body="&SUBSTITUTE({body}," ","%20"),"Send email"))')

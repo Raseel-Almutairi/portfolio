@@ -94,7 +94,7 @@ footer{color:var(--muted);font-size:12px;display:grid;gap:4px;border-top:1px sol
 .sh{font-size:13px;font-weight:600;margin:4px 0 6px}
 @media (max-width:640px){.ctl{grid-template-columns:1fr}}
 .res{font-size:13px;color:var(--ink);background:var(--panel2);border-radius:8px;padding:10px 12px}
-@media (max-width:640px){.qs>summary{grid-template-columns:54px 1fr}.qs>summary .lvbadge,.qs>summary .gp{grid-column:2;justify-self:start}.lvg{grid-template-columns:1fr}}
+@media (max-width:640px){.qs>summary{grid-template-columns:54px 1fr}.qs>summary .lvbadge,.qs>summary .gp{grid-column:2;justify-self:start}.lvg{grid-template-columns:1fr}.qs>summary>*{min-width:0}.qs>summary .lvbadge{white-space:normal;max-width:100%;font-size:12px}.qs .nm b,.qs .nm small{overflow-wrap:anywhere}}
 .ft{line-height:1.6;min-width:320px;white-space:pre-wrap}
 .sg td{background:var(--panel2);color:var(--ink);font-size:12.5px;line-height:1.55;border-top:2px solid var(--accent)} .sg i{color:var(--muted);font-style:normal;font-weight:600}
 .bl{margin:0;padding-left:16px} .bl li{margin:2px 0;line-height:1.5}

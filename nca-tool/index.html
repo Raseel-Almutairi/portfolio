@@ -109,7 +109,7 @@
   <div class="gx-head">
     <div>
       <h1 class="gx-title">أداة متابعة الامتثال لضوابط الهيئة الوطنية للأمن السيبراني</h1>
-      <p class="gx-take">نسبة امتثال <span data-draw="fwname">—</span>: <b data-draw="kpi" data-source="by_fw" data-field="compliance">—</b>، مع <b data-draw="kpi" data-source="by_fw" data-field="open">—</b> ملاحظة مفتوحة، منها <b data-draw="kpi" data-source="by_fw" data-field="overdue">—</b> متأخرة عن مواعيد الخطة التصحيحية المرفوعة إلى الهيئة الوطنية للأمن السيبراني.</p>
+      <p class="gx-take">نسبة امتثال <span data-draw="fwname">—</span>: <b data-draw="kpi" data-source="by_fw" data-field="compliance">—</b>، مع <b data-draw="kpi" data-source="by_fw" data-field="open">—</b> ملاحظة مفتوحة، منها <b data-draw="kpi" data-source="by_fw" data-field="overdue">—</b> متأخرة عن مواعيد الخطة التصحيحية المرفوعة إلى الهيئة الوطنية للأمن السيبراني (كما في 21 نوفمبر 2026).</p>
       <p class="gx-intro">تجمع هذه الأداة في مكان واحد: حالة الامتثال لكل ضابط، والملاحظات والخطة التصحيحية المرفوعة إلى الهيئة الوطنية للأمن السيبراني، والوثائق والأدلة المطلوبة لتغطية كل ضابط وفق الأدلة الإرشادية الرسمية، مع ربط مجموعات الضوابط المتخصصة بالضوابط الأساسية (ECC).</p>
       <p class="gx-note">البيانات نموذجية لأغراض العرض. نسبة الامتثال = الضوابط الرئيسية المطبّقة ÷ (الضوابط الرئيسية − «لا ينطبق» المعتمد)، ولا يُعدّ الضابط الرئيسي مطبّقاً إلا بتطبيق جميع ضوابطه الفرعية. <a class="gx-link gx-go-method" href="#method">مصادر البيانات وطريقة الاحتساب (المنهجية)</a></p>
     </div>
@@ -143,7 +143,7 @@
       <div class="gx-kpi" id="kpi-overdue">
         <p class="gx-kpi-label">متأخرة</p>
         <p class="gx-kpi-val is-bad"><span class="dash-skeleton" data-draw="kpi" data-source="by_fw" data-field="overdue">—</span></p>
-        <p class="gx-kpi-sub">تجاوزت التاريخ المستهدف في الخطة التصحيحية</p>
+        <p class="gx-kpi-sub">تجاوزت التاريخ المستهدف في الخطة التصحيحية، كما في 21 نوفمبر 2026</p>
       </div>
       <div class="gx-kpi" id="kpi-crit">
         <p class="gx-kpi-label">حرجة / عالية</p>
@@ -487,8 +487,8 @@ const addDays = (iso, n) => { const d = new Date(iso + 'T00:00:00Z'); d.setUTCDa
 const normAr = (s) => String(s || '').toLowerCase().replace(/[\u064B-\u0652\u0670\u0640]/g, '').replace(/[\u0622\u0623\u0625\u0671]/g, '\u0627').replace(/\u0649/g, '\u064A').replace(/\u0629/g, '\u0647').replace(/\s+/g, ' ').trim();
 /* Main-control status (FIX-01): a not-applicable item counts as excluded only when its exception is approved */
 const VALID = ['مطبق', 'مطبق جزئيًا', 'غير مطبق', 'لا ينطبق'];
-const naOk = (r) => r.status === 'لا ينطبق' && r.na_approved !== false;
-const naPend = (r) => r.status === 'لا ينطبق' && r.na_approved === false;
+const naOk = (r) => r.status === 'لا ينطبق' && r.na_approved === true;
+const naPend = (r) => r.status === 'لا ينطبق' && r.na_approved !== true; /* missing approval = pending */
 window.gxNormAr = normAr; window.gxRiyadhToday = riyadhToday;
 window.gxMainStatus = (rs) => { const st = rs.map((r) => r.status || ''); const done = st.filter(Boolean);
  if (!done.length) return 'لم يُقيّم';
@@ -514,7 +514,7 @@ dash.calc('by_fw', {
     const mainKey = (id) => { const p = id.split('-'); const s = p.slice(1); const k = s.findIndex((x) => x === 'P' || x === 'T'); return p[0] + '-' + (k >= 0 ? s.slice(0, k + 2) : s.slice(0, 3)).join('-'); };
     const mainStatus = window.gxMainStatus;
 
-    const naPending = (r) => r.status === 'لا ينطبق' && r.na_approved === false;
+    const naPending = (r) => r.status === 'لا ينطبق' && r.na_approved !== true;
     const make = (framework, rows) => {
       const groups = new Map();
       rows.forEach((r) => { const k = mainKey(r.id); if (!groups.has(k)) groups.set(k, []); groups.get(k).push(r); });
@@ -778,7 +778,7 @@ dash.draw('regrows', (tb) => {
     if (r.id === sel) tr.className = 'is-sel';
     const td = (t, cls) => { const c = document.createElement('td'); if (cls) c.className = cls; c.textContent = t; tr.append(c); return c; };
     const idc = td(r.id, 'id');
-    td(r.description, 'desc'); pill(td('', ''), r.status); td(r.owner); td(r.status === 'لا ينطبق' ? (r.na_approved === false ? 'لا ينطبق - بانتظار الاعتماد' : 'لا ينطبق - معتمد') : r.evidence);
+    td(r.description, 'desc'); pill(td('', ''), r.status); td(r.owner); td(r.status === 'لا ينطبق' ? (r.na_approved === true ? 'لا ينطبق - معتمد' : 'لا ينطبق - بانتظار الاعتماد') : r.evidence);
     tr.tabIndex = 0;
     tr.addEventListener('click', () => { dash.setParams({ sel: r.id }); document.getElementById('detail')?.scrollIntoView({ block: 'nearest' }); });
     tr.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tr.click(); } });

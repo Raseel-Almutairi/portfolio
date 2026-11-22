@@ -27,4 +27,4 @@ Open each Excel file in Excel and save it, so the formulas are calculated. Libre
 python tests.py
 ```
 
-Needs Python 3 with openpyxl, and Node.js for the web checks. The tests run on every push (GitHub Actions).
+Needs Python 3 with openpyxl, Node.js for the web checks, and LibreOffice for the scenario tests (skipped without it). The tests run on every push (GitHub Actions), after the web page is rebuilt from this folder and compared with the published one.

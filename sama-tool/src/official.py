@@ -2,7 +2,7 @@
 # Risk management sub-sections 3.2.1.1 to 3.2.1.4 are kept under 3.2.1 as groups.
 import json, os
 from evcc import E as OLD_EV
-_d = json.load(open(os.path.join(os.path.dirname(__file__), "sama_official.json")))
+_d = json.load(open(os.path.join(os.path.dirname(__file__), "sama_official.json"), encoding="utf-8"))
 DOMS = _d["doms"]
 SECS = {s["id"]: s for s in _d["secs"]}
 

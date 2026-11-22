@@ -15,11 +15,11 @@ def main_key(cid):
 
 
 def na_ok(r):
-    return r["status"] == "لا ينطبق" and r.get("na_approved") is not False
+    return r["status"] == "لا ينطبق" and r.get("na_approved") is True
 
 
 def na_pending(r):
-    return r["status"] == "لا ينطبق" and r.get("na_approved") is False
+    return r["status"] == "لا ينطبق" and r.get("na_approved") is not True  # missing approval = pending
 
 
 def main_status(rows):
