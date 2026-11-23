@@ -33,9 +33,81 @@ S_DATE, S_LINE, S_LABEL = n0, n0 + 1, 113
 # ---------- shared strings (to find control IDs)
 ss = [unescape(re.sub(r"<[^>]+>", "", x)) for x in re.findall(r"<si>(.*?)</si>", X("xl/sharedStrings.xml"), re.S)]
 
-# ---------- 01 Register
-reg = X("xl/worksheets/sheet2.xml")
+# ---------- new controls: an item in controls.json that the base register does not have (e.g. CSCC-2-3-4,
+# new in CSCC-2:2026) gets a row right after the item before it, in the register (01), the requirements (02)
+# and, for a new main control, the main-controls sheet (07). Rows below move down one.
+from nca_logic import main_key
 controls = {r["id"]: r for r in json.load(open("controls.json", encoding="utf-8"))}
+ROW_RE = r'<row r="(\d+)"[^>]*?(?:/>|>.*?</row>)'
+def id_rows(xml, col="B"):
+    out = {}
+    for mm in re.finditer(r'<c r="%s(\d+)"[^>]*?t="(s|inlineStr)"[^>]*>(?:<v>(\d+)</v>|<is><t>([^<]*)</t></is>)</c>' % col, xml):
+        out[ss[int(mm.group(3))] if mm.group(2) == "s" else unescape(mm.group(4))] = int(mm.group(1))
+    return out
+def renumber(row_xml, old, new, own_refs=""):
+    row_xml = re.sub(r'(<row r=")%d"' % old, r'\g<1>%d"' % new, row_xml, count=1)
+    row_xml = re.sub(r'(<c r="[A-Z]+)%d"' % old, lambda k: f'{k.group(1)}{new}"', row_xml)
+    if own_refs:  # formulas that point at their own row (A5, C5 ...): move them with the row
+        row_xml = re.sub(r'(?<![$A-Z])([%s])%d(?!\d)' % (own_refs, old), lambda k: f"{k.group(1)}{new}", row_xml)
+    return row_xml
+def insert_after(xml, after, new_row_of, own_refs=""):
+    """Moves rows > after down one and puts new_row_of(template_row_xml_renumbered) at after+1."""
+    rows = {int(mm.group(1)): mm.group(0) for mm in re.finditer(ROW_RE, xml, re.S)}
+    tpl = renumber(rows[after], after, after + 1, own_refs)
+    def mv(mm):
+        n = int(mm.group(1))
+        if n < after:
+            return mm.group(0)
+        if n == after:
+            return mm.group(0) + new_row_of(tpl)
+        return renumber(mm.group(0), n, n + 1, own_refs)
+    return re.sub(ROW_RE, mv, xml, flags=re.S)
+def set_inline(row_xml, ref, text):
+    pat = re.compile(r'<c r="%s"( s="\d+")?[^>]*?(?:/>|>.*?</c>)' % ref, re.S)
+    mm = pat.search(row_xml)
+    assert mm, ref
+    return row_xml[:mm.start()] + '<c r="%s"%s t="inlineStr"><is><t>%s</t></is></c>' % (ref, mm.group(1) or "", escape(text, quote=False)) + row_xml[mm.end():]
+def shift_links(xml, after, target_sheet):
+    def mv(mm):
+        a, b = int(mm.group(1)), int(mm.group(2))
+        return mm.group(0).replace(f'ref="B{a}"', f'ref="B{a + 1 if a > after else a}"').replace(f"'!B{b}\"", f"'!B{b + 1 if b > after else b}\"")
+    xml = re.sub(r'<hyperlink ref="B(\d+)" location="[^"]*!B(\d+)"[^>]*/>', mv, xml)
+    return xml.replace("</hyperlinks>", f'<hyperlink ref="B{after + 1}" location="\'{target_sheet}\'!B{after + 1}" display="{new_id}"/></hyperlinks>')
+reg, req, main = X("xl/worksheets/sheet2.xml"), X("xl/worksheets/sheet3.xml"), X("xl/worksheets/sheet8.xml")
+order = list(controls)
+new_mains = 0
+for new_id in [i for i in order if i not in id_rows(reg)]:
+    r, prev = controls[new_id], order[order.index(new_id) - 1]
+    at = id_rows(reg)[prev]
+    # 01 register: last (empty) row dropped so the sheet still ends at row 1000
+    reg = insert_after(reg, at, lambda t: set_inline(set_inline(t, f"B{at + 1}", new_id), f"O{at + 1}", main_key(new_id)))
+    reg = re.sub(r'<row r="1001"[^>]*?(?:/>|>.*?</row>)', "", reg, flags=re.S)
+    reg = shift_links(reg, at, "02 المتطلبات - Requirements")
+    # 02 requirements
+    ev = "\n".join("• " + x.strip() for x in r["req_evidence"].split("•") if x.strip())
+    docs = "\n".join(f"{k}: {r[f]}" for k, f in (("سياسة", "req_policy"), ("معيار", "req_standard"), ("إجراء", "req_procedure"), ("خطة", "req_plan"), ("وثائق أخرى", "req_other")) if r[f]) or "—"
+    def req_row(t, n=at + 1):
+        t = set_inline(t, f"B{n}", new_id)
+        for col, v in (("C", r["req_type"]), ("D", docs), ("E", ev), ("F", r["ref_guide"])):
+            t = set_inline(t, f"{col}{n}", v)
+        return re.sub(r'(<c r="G%d"[^>]*?)(?:/>|>.*?</c>)' % n, lambda k: f'{k.group(1)}><v>{r["ref_page"]}</v></c>', t, flags=re.S)
+    assert id_rows(req)[prev] == at, "requirements rows must match register rows"
+    req = insert_after(req, at, req_row)
+    req = shift_links(req, at, "01 سجل الضوابط - Register")
+    req = re.sub(r'<dimension ref="A1:G(\d+)"/>', lambda k: f'<dimension ref="A1:G{int(k.group(1)) + 1}"/>', req)
+    # 07 main controls
+    mk = main_key(new_id)
+    if mk not in id_rows(main, "A"):
+        pm = id_rows(main, "A")[main_key(prev)]
+        main = insert_after(main, pm, lambda t: set_inline(t, f"A{pm + 1}", mk), own_refs="A-H")
+        main = re.sub(r'<dimension ref="A1:H(\d+)"/>', lambda k: f'<dimension ref="A1:H{int(k.group(1)) + 1}"/>', main)
+        new_mains += 1
+# the sequence formula in L counts findings above each row
+reg = re.sub(r'(<c r="L(\d+)"[^>]*><f>)IF\(OR\(B\d+="".*?</f>', lambda k: k.group(1) + esc(f'IF(OR(B{k.group(2)}="",NOT(OR(F{k.group(2)}="مطبق جزئيًا",F{k.group(2)}="غير مطبق"))),"",COUNT($L$4:L{int(k.group(2)) - 1})+1)') + "</f>", reg)
+put("xl/worksheets/sheet3.xml", req)
+MAIN_LAST = 300 + new_mains
+
+# ---------- 01 Register
 def set_cell(xml, ref, text):
     pat = re.compile(r'<c r="%s"( s="\d+")?[^>]*?(?:/>|>.*?</c>)' % ref, re.S)
     mm = pat.search(xml)
@@ -53,8 +125,8 @@ def cell_xml(ref, style, v):
     return f'<c r="{ref}"{style} t="inlineStr"><is><t>{escape(str(v), quote=False)}</t></is></c>'
 def fill_row(m_):
     row_xml, n = m_.group(0), m_.group(1)
-    b = re.search(r'<c r="B%s"[^>]*t="s"[^>]*><v>(\d+)</v></c>' % n, row_xml)
-    r = controls.get(ss[int(b.group(1))]) if b else None
+    b = id_rows(row_xml)
+    r = controls.get(next(iter(b))) if b else None
     if not r:
         return row_xml
     global changed
@@ -86,14 +158,13 @@ for n_ in [f"xl/worksheets/sheet{i}.xml" for i in (1, 3, 4, 5, 6, 7, 8)]:
     put(n_, re.sub(r"<(?:x14:)?dataValidation [^>]*>", lambda k: stop(k.group(0)), X(n_)))
 
 # ---------- 07 Main: a control with a not-applicable item awaiting approval is not "implemented"
-main = X("xl/worksheets/sheet8.xml")
 def main_f(n):
     ok = f'COUNTIFS({REG}!$O$5:$O$1000,A{n},{REG}!$F$5:$F$1000,"لا ينطبق",{REG}!$P$5:$P$1000,"نعم")'
     filled = f'COUNTIFS({REG}!$O$5:$O$1000,A{n},{REG}!$F$5:$F$1000,"<>")'
     return (f'IF({filled}>D{n},"حالة غير صالحة",IF(D{n}=0,"لم يُقيّم",IF(D{n}<C{n},"تقييم غير مكتمل",IF(G{n}=C{n},IF({ok}=C{n},"لا ينطبق","لا ينطبق - بانتظار الاعتماد"),'
             f'IF(AND(E{n}=C{n}-G{n},{ok}=G{n}),"مطبق",IF(F{n}=C{n}-G{n},"غير مطبق","مطبق جزئيًا"))))))')
 main, k = re.subn(r'(<c r="H(\d+)"[^>]*><f>)IF\(D\d+=0.*?(</f>)', lambda mm: mm.group(1) + esc(main_f(mm.group(2))) + mm.group(3), main)
-assert k == 297, k
+assert k == 297 + new_mains, k
 put("xl/worksheets/sheet8.xml", main)
 
 # ---------- 05 Findings: closed findings and missing dates are shown, not hidden
@@ -106,9 +177,10 @@ put("xl/worksheets/sheet6.xml", fnd)
 
 # ---------- 06 Dashboard
 d = X("xl/worksheets/sheet7.xml")
+d = re.sub(r"(Main'!\$[A-H]\$4:\$[A-H]\$)300(?!\d)", lambda k: f"{k.group(1)}{MAIN_LAST}", d)
 n_today = d.count("TODAY()")
 d = d.replace("TODAY()", "$M$26")
-d = re.sub(r'(<c r="H41"[^>]*><f>).*?(</f>)', lambda mm: mm.group(1) + esc(f'IFERROR(D41/(COUNTA({MAIN}!$A$4:$A$300)-G41),"")') + mm.group(2), d)
+d = re.sub(r'(<c r="H41"[^>]*><f>).*?(</f>)', lambda mm: mm.group(1) + esc(f'IFERROR(D41/(COUNTA({MAIN}!$A$4:$A${MAIN_LAST})-G41),"")') + mm.group(2), d)
 R = lambda c: f"{REG}!${c}$5:${c}$1000"
 def bad(col, vals):
     arr = "{" + ",".join(f'"{v}"' for v in vals) + "}"

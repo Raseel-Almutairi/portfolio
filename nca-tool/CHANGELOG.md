@@ -7,12 +7,13 @@
 - Each item now has a text review status: **Verified** for the 176 ECC items, and **Needs Review** for the other 7 frameworks until they are checked against their guides. The status is shown in the item details on the web.
 - The corrected texts are in the web, the Excel register and the Power BI data (tests check they match).
 - The 41 OSMACC item texts were compared the same way with the OSMACC-1:2021 document (Arabic): 38 matched and 3 were corrected. OSMACC is now **Verified** too.
-- CSCC was updated to the new version, CSCC-2:2026 (Arabic). The 85 item texts were copied from the document pages, and 55 changed. Most changes are punctuation and wording. The main change in meaning is CSCC-4-2-1-1: hosting must now be in the entity's own data center, the National Information Center, or a sovereign cloud. The new control CSCC-2-3-4 is not in the tool yet. The required evidence and page references still come from the GCSCC-1:2023 guide.
+- CSCC was updated to the new version, CSCC-2:2026 (Arabic). The 85 item texts were copied from the document pages, and 55 changed. Most changes are punctuation and wording. The main change in meaning is CSCC-4-2-1-1: hosting must now be in the entity's own data center, the National Information Center, or a sovereign cloud. The required evidence and page references still come from the GCSCC-1:2023 guide.
 - The 47 TCC item texts were compared with the TCC-1:2021 document (Arabic), and all of them matched. TCC is now **Verified**.
 - The 106 CCC-CSP item texts were compared with the GCCC-CSP-2:2026 guide (Arabic): 104 matched and 2 were corrected. CCC-CSP is now **Verified**.
 - The 29 CCC-CST item texts were compared with the GCCC-CST-1:2023 guide (Arabic): all matched. CCC-CST is now **Verified**.
 - The 150 OTCC item texts were compared with the OTCC-1:2022 controls document (Arabic): 127 matched and 23 were corrected. OTCC is now **Verified**.
 - The 55 DCC item texts were compared with the DCC-1:2022 controls document (Arabic): 49 matched and 6 were corrected. All 689 item texts are now **Verified**.
+- **New control CSCC-2-3-4** (CSCC-2:2026, page 15: periodic review of the system-protection requirements) was added after CSCC-2-3-1-8 in the web, the Excel register (register, requirements and main-control sheets) and the Power BI data. It has no guide yet, so its expected outputs come from the matching ECC-2-3-4. In the sample it is «غير مطبق» with an open finding due 2027-01-31. Totals: 690 items and 298 main controls; compliance 101 / 290 = 34.83%; 272 open findings; overdue stays 99.
 
 ## v1.2.1 (2026-11-22)
 

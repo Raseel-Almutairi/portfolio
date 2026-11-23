@@ -30,9 +30,9 @@ check("main key of a sub-control", main_key("CCC-2-3-P-1-6") == "CCC-2-3-P-1" an
 
 # ---- sample figures (as of 2026-11-21); any change must be explained in CHANGELOG.md
 s = summary(controls, "2026-11-21")
-check("689 items, 297 main controls", len(controls) == 689 and s["mains"] == 297)
-check("compliance 101 / 289 = 34.95%", (s["implemented"], s["denom"], s["compliance"]) == (101, 289, 0.3495))
-check("271 open findings, 99 overdue on 2026-11-21", (s["open"], s["overdue"]) == (271, 99))
+check("690 items, 298 main controls", len(controls) == 690 and s["mains"] == 298)
+check("compliance 101 / 290 = 34.83%", (s["implemented"], s["denom"], s["compliance"]) == (101, 290, 0.3483))
+check("272 open findings, 99 overdue on 2026-11-21", (s["open"], s["overdue"]) == (272, 99))
 check("10 overdue on 2026-08-01", summary(controls, "2026-08-01")["overdue"] == 10)
 check("9 not-applicable items awaiting approval, 27 closed findings to re-assess, 0 without date",
       (s["na_pending"], s["closed_reassess"], s["no_due"]) == (9, 27, 0))
@@ -71,10 +71,10 @@ for n in range(5, ws.max_row + 1):
     row = (ws.cell(n, 5).value, ws.cell(n, 6).value, ws.cell(n, 7).value, due.date().isoformat() if due else "",
            ws.cell(n, 13).value or "", ws.cell(n, 14).value or "", (ws.cell(n, 16).value == "نعم") if x["status"] == "لا ينطبق" else None)
     diff += row != (x["owner"], x["status"], x["evidence"], x["due"], x["priority"], x["gap_status"], x["na_approved"])
-check("Excel register = web data, field by field (689 items)", diff == 0)
-check("Excel register text = source text (689 items)", all(ws.cell(n, 4).value == by_id[ws.cell(n, 2).value]["description"] for n in range(5, ws.max_row + 1) if ws.cell(n, 2).value in by_id))
-check("text review status: all 689 item texts Verified (ECC, OSMACC, CSCC, TCC, CCC, OTCC, DCC)",
-      Counter(x["text_review"] for x in controls) == Counter({"Verified": 689}))
+check("Excel register = web data, field by field (690 items)", diff == 0)
+check("Excel register text = source text (690 items)", all(ws.cell(n, 4).value == by_id[ws.cell(n, 2).value]["description"] for n in range(5, ws.max_row + 1) if ws.cell(n, 2).value in by_id))
+check("text review status: all 690 item texts Verified (ECC, OSMACC, CSCC, TCC, CCC, OTCC, DCC)",
+      Counter(x["text_review"] for x in controls) == Counter({"Verified": 690}))
 reg_ids = [ws.cell(n, 2).value for n in range(5, ws.max_row + 1) if ws.cell(n, 2).value]
 check("same IDs in the source and the Excel register: none missing, extra or repeated",
       len(reg_ids) == len(set(reg_ids)) == len(by_id) == len(controls) and set(reg_ids) == set(by_id))
@@ -82,10 +82,10 @@ mains = {}
 for x in controls:
     mains.setdefault(main_key(x["id"]), []).append(x)
 m = reg["07 الضوابط الرئيسية - Main"]
-xl_main = {m.cell(n, 1).value: m.cell(n, 8).value for n in range(4, 301) if m.cell(n, 1).value}
-check("Excel main-control status = web rule (297 main controls)", all(xl_main[k] in (main_status(v), "لا ينطبق - بانتظار الاعتماد") for k, v in mains.items()))
+xl_main = {m.cell(n, 1).value: m.cell(n, 8).value for n in range(4, 302) if m.cell(n, 1).value}
+check("Excel main-control status = web rule (298 main controls)", all(xl_main[k] in (main_status(v), "لا ينطبق - بانتظار الاعتماد") for k, v in mains.items()))
 d = reg["06 لوحة المؤشرات - Dashboard"]
-check("Excel dashboard: 34.95%, 271 open, 99 overdue", (round(d["B6"].value, 4), d["D6"].value, d["F6"].value) == (0.3495, 271, 99))
+check("Excel dashboard: 34.83%, 272 open, 99 overdue", (round(d["B6"].value, 4), d["D6"].value, d["F6"].value) == (0.3483, 272, 99))
 check("Excel dashboard: no data quality issues", d["B25"].value.startswith("جودة البيانات"))
 
 pbi = load_workbook("../../nca-powerbi/3_Sample_Data.xlsx", data_only=True)
@@ -105,9 +105,14 @@ pbi_ids = [c.cell(n, 1).value for n in range(2, c.max_row + 1) if c.cell(n, 1).v
 check("same IDs in the source and the Power BI data: none missing, extra or repeated",
       len(pbi_ids) == len(set(pbi_ids)) == len(by_id) and set(pbi_ids) == set(by_id))
 pm = pbi["MainControls"]
-check("Power BI main-control status = Excel register", all(xl_main.get(pm.cell(n, 1).value) == pm.cell(n, 5).value for n in range(2, 299)))
+check("Power BI main-control status = Excel register", all(xl_main.get(pm.cell(n, 1).value) == pm.cell(n, 5).value for n in range(2, 300)))
 blank = load_workbook("../NCA_Compliance_Register_Blank.xlsx", data_only=True)
-check("blank register: 297 main controls not assessed", Counter(blank["07 الضوابط الرئيسية - Main"].cell(n, 8).value for n in range(4, 301)) == Counter({"لم يُقيّم": 297}))
+check("blank register: 298 main controls not assessed", Counter(blank["07 الضوابط الرئيسية - Main"].cell(n, 8).value for n in range(4, 302)) == Counter({"لم يُقيّم": 298}))
+req = reg["02 المتطلبات - Requirements"]
+check("new control CSCC-2-3-4 sits right after CSCC-2-3-1-8 in the register, the requirements and the main sheet",
+      [ws.cell(n, 2).value for n in (267, 268, 269)] == [req.cell(n, 2).value for n in (267, 268, 269)] == ["CSCC-2-3-1-8", "CSCC-2-3-4", "CSCC-2-4-1-1"]
+      and [m.cell(n, 1).value for n in (122, 123, 124)] == ["CSCC-2-3-1", "CSCC-2-3-4", "CSCC-2-4-1"]
+      and all(ws.cell(n, 2).hyperlink.location.endswith(f"!B{n}") for n in (267, 268, 269, 694)))
 check("no compliance rate (not an error) when every main control is excluded",
       summary([{"id": "X-1-1", "status": "لا ينطبق", "na_approved": True, "gap_status": "", "due": ""}], "2026-11-21")["compliance"] is None)
 check("missing approval counts as pending", main_status([r("مطبق"), {"id": "X-1-1-2", "status": "لا ينطبق"}]) == "مطبق جزئيًا")

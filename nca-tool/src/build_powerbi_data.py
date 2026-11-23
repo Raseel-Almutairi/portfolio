@@ -10,14 +10,20 @@ import json
 from datetime import date
 from openpyxl import load_workbook
 
+import re
+from copy import copy
+from nca_logic import main_key
+
 PBI = "../../nca-powerbi/"
 EVIDENCE = "متوفر,تم التحقق,جزئي,بانتظار التحقق,مفقود,غير متوفر,لا ينطبق"
-C = "Controls!$B$2:$B$690"
-I = "Controls!$I$2:$I$690"
-AE = "Controls!$AE$2:$AE$690"
+LAST = 690  # last row of the Controls table; set by add_new_controls()
+C = lambda: f"Controls!$B$2:$B${LAST}"
+I = lambda: f"Controls!$I$2:$I${LAST}"
+AE = lambda: f"Controls!$AE$2:$AE${LAST}"
 
 
 def main_status(n):
+    C, I, AE = globals()["C"](), globals()["I"](), globals()["AE"]()
     total = f"COUNTIFS({C},A{n})"
     filled = f'({total}-COUNTIFS({C},A{n},{I},""))'
     valid = "+".join(f'COUNTIFS({C},A{n},{I},"{s}")' for s in ("مطبق", "مطبق جزئيًا", "غير مطبق", "لا ينطبق"))
@@ -30,16 +36,60 @@ def main_status(n):
             f'IF(AND({impl}={total}-{na},{ok}={na}),"مطبق",IF({noimpl}={total}-{na},"غير مطبق","مطبق جزئيًا"))))))')
 
 
-def prepare(wb):
+def copy_style(src, dst):
+    for a, b in zip(src, dst):
+        b._style = copy(a._style)
+
+
+def add_new_controls(wb, controls):
+    """Appends controls.json items the file does not have yet (e.g. CSCC-2-3-4, new in CSCC-2:2026),
+    and their main control, then widens every range to the new last row."""
+    global LAST
+    ws, m = wb["Controls"], wb["MainControls"]
+    have = {ws.cell(n, 1).value for n in range(2, ws.max_row + 1)}
+    mains = {m.cell(n, 1).value for n in range(2, m.max_row + 1)}
+    for r in controls:
+        if r["id"] in have:
+            continue
+        code = r["framework"].split("(")[-1].rstrip(")")
+        like = next(n for n in range(2, ws.max_row + 1) if ws.cell(n, 4).value == code)
+        n = ws.max_row + 1
+        copy_style(ws[like], ws[n])
+        vals = {1: r["id"], 2: main_key(r["id"]), 3: r["framework"], 4: code, 5: ws.cell(like, 5).value, 6: r["domain"], 7: r["description"],
+                16: f'=IF(OR(I{n}="مطبق جزئيًا",I{n}="غير مطبق"),1,0)', 17: r["req_type"], 18: r["req_policy"], 19: r["req_standard"],
+                20: r["req_procedure"], 21: r["req_plan"], 22: r["req_other"], 23: r["req_evidence"], 24: r["ref_guide"], 25: r["ref_page"],
+                26: r["ecc_sub"], 27: r["ecc_sub_name"], 28: r["ecc_basis"], 29: r["ecc_ref"]}
+        for col, v in vals.items():
+            ws.cell(n, col).value = v if v != "" else None
+        if main_key(r["id"]) not in mains:
+            k = m.max_row + 1
+            ml = next(j for j in range(2, m.max_row + 1) if m.cell(j, 3).value == code)
+            copy_style(m[ml], m[k])
+            for col in (1, 2, 3, 4):
+                m.cell(k, col).value = m.cell(ml, col).value
+            m.cell(k, 1).value = main_key(r["id"])
+            mains.add(main_key(r["id"]))
+    LAST = ws.max_row
+    ws.tables["Controls"].ref = f"A1:AE{LAST}"
+    m.tables["MainControls"].ref = f"A1:G{m.max_row}"
+    for dv in ws.data_validations.dataValidation:
+        dv.sqref = re.sub(r"(\d+):([A-Z]+)\d+$", lambda k: f"{k.group(1)}:{k.group(2)}{LAST}", str(dv.sqref))
+    for j in range(2, m.max_row + 1):
+        m.cell(j, 6).value = f"=COUNTIFS({C()},A{j})"
+        m.cell(j, 7).value = f'=COUNTIFS({C()},A{j},{I()},"مطبق")'
+
+
+def prepare(wb, controls):
     if "README_DAX" in wb.sheetnames:
         del wb["README_DAX"]
+    add_new_controls(wb, controls)
     ws = wb["Controls"]
     for dv in ws.data_validations.dataValidation:
         dv.showErrorMessage = True
         dv.errorStyle = "stop"
         dv.errorTitle = "قيمة غير صالحة"
         dv.error = "اختر قيمة من القائمة."
-        if str(dv.sqref) == "J2:J690":
+        if str(dv.sqref).startswith("J2:"):
             dv.formula1 = f'"{EVIDENCE}"'
     m = wb["MainControls"]
     for n in range(2, m.max_row + 1):
@@ -69,7 +119,7 @@ def fill(wb, controls):
 if __name__ == "__main__":
     controls = json.load(open("controls.json", encoding="utf-8"))
     wb = load_workbook(PBI + "4_Blank_Data.xlsx")
-    prepare(wb)
+    prepare(wb, controls)
     wb.save(PBI + "4_Blank_Data.xlsx")
     wb = load_workbook(PBI + "4_Blank_Data.xlsx")
     fill(wb, controls)
