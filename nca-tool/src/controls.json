@@ -17817,7 +17817,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-1-2",
@@ -17850,13 +17850,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-1-3",
   "framework": "ضوابط الأمن السيبراني للأنظمة التشغيلية (OTCC)",
   "domain": "سياسات وإجراءات الأمن السيبراني",
-  "description": "رجوعاً للضابط 1-3-4 في الضوابط الأساسية للأمن السيبراني؛ يجب مراجعة سياسات وإجراءات الأمن السيبراني لأنظمة التحكم الصناعي (OT/ICS) دورياً، أو عند حدوث تغييرات تؤثر على أمن وسلامة أنظمة التحكم الصناعي (OT/ICS) (مثل: حدوث تغيرات في مستوى وطبيعة المخاطر، أو تغيير في الهيكل التنظيمي للجهة، أو تغيرات في العمليات والإجراءات التشغيلية).",
+  "description": "رجوعاً للضابط 1-3-4 في الضوابط الأساسية للأمن السيبراني؛ يجب مراجعة سياسات وإجراءات الأمن السيبراني لأنظمة التحكم الصناعي (OT/ICS) دورياً، أو عند حدوث تغييرات تؤثر على أمن وسلامة أنظمة التحكم الصناعي (OT/ICS) (مثل: حدوث تغييرات في مستوى وطبيعة المخاطر، أو تغيير في الهيكل التنظيمي للجهة، أو تغيرات في العمليات والإجراءات التشغيلية).",
   "owner": "فريق الأمن السيبراني",
   "status": "مطبق",
   "evidence": "متوفر",
@@ -17883,7 +17883,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-2-1-1",
@@ -17916,7 +17916,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-2-1-2",
@@ -17949,7 +17949,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-3-1-1",
@@ -17982,7 +17982,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-3-1-2",
@@ -18015,7 +18015,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-3-1-3",
@@ -18048,7 +18048,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-3-1-4",
@@ -18081,7 +18081,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-3-1-5",
@@ -18114,7 +18114,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-3-1-6",
@@ -18147,13 +18147,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-3-1-7",
   "framework": "ضوابط الأمن السيبراني للأنظمة التشغيلية (OTCC)",
   "domain": "إدارة مخاطر الأمن السيبراني",
-  "description": "في حال الموافقة على قبول المخاطر السيبرانية، فيجب تحديد الضوابط البديلة لها مع توثيقها واعتمادها من قبل صاحب الصلاحية، مع التأكد من تطبيقها بفعالية في وقت محدد، والاستمرار في تقييم تلك المخاطر ومراجعتها بشكل مستمر.",
+  "description": "في حال الموافقة على قبول المخاطر السيبرانية، فيجب تحديد الضوابط البديلة لها مع توثيقها واعتمادها من قبل صاحب الصلاحية، مع التأكد من تطبيقها بفعالية في وقت محدد، مع الاستمرار في تقييم تلك المخاطر ومراجعتها بشكل مستمر.",
   "owner": "فريق الأمن السيبراني",
   "status": "غير مطبق",
   "evidence": "غير متوفر",
@@ -18180,7 +18180,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-4-1-1",
@@ -18213,7 +18213,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": true,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-4-1-2",
@@ -18246,7 +18246,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-4-1-3",
@@ -18279,7 +18279,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-4-1-4",
@@ -18312,7 +18312,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-4-2",
@@ -18345,7 +18345,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-5-1",
@@ -18378,7 +18378,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-5-2",
@@ -18411,7 +18411,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": true,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-5-3-1",
@@ -18444,7 +18444,7 @@
   "impl_parent": "OTCC-1-5-2",
   "req_note": "",
   "na_approved": true,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-5-3-2",
@@ -18477,7 +18477,7 @@
   "impl_parent": "OTCC-1-5-2",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-5-3-3",
@@ -18510,7 +18510,7 @@
   "impl_parent": "OTCC-1-5-2",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-5-3-4",
@@ -18543,7 +18543,7 @@
   "impl_parent": "OTCC-1-5-2",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-5-3-5",
@@ -18576,7 +18576,7 @@
   "impl_parent": "OTCC-1-5-2",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-5-4",
@@ -18609,7 +18609,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-6-1",
@@ -18642,7 +18642,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-6-2",
@@ -18675,13 +18675,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": true,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-7-1",
   "framework": "ضوابط الأمن السيبراني للأنظمة التشغيلية (OTCC)",
   "domain": "الأمن السيبراني المتعلق بالموارد البشرية",
-  "description": "بالإضافة للضوابط الفرعية ضمن الضابط 1-9-3 في الضوابط الأساسية للأمن السيبراني، يجب أن تغطي متطلبات الأمن السيبراني المتعلقة بالموارد البشرية لأنظمة التحكم الصناعي (OT/ICS) بحد أدنى: إجراء مسح أمني (Screening or Vetting) لجميع العاملين (ويشمل ذلك الموظفين والمتعاقدين) الذين يمكنهم الوصول إلى أصول أنظمة التحكم الصناعي (OT/ICS) أو استخدامها، وذلك قبل منحهم صلاحيات الوصول.",
+  "description": "بالإضافة للضوابط الفرعية ضمن الضابط 1-9-3 في الضوابط الأساسية للأمن السيبراني، يجب أن تغطي متطلبات الأمن السيبراني المتعلقة بالموارد البشرية لأنظمة التحكم الصناعي (OT/ICS) بحد أدنى: إجراء عمل مسح أمني (Screening or Vetting) لجميع العاملين (ويشمل ذلك الموظفين والمتعاقدين) الذين يمكنهم الوصول إلى أصول أنظمة التحكم الصناعي (OT/ICS) أو استخدامها، وذلك قبل منحهم صلاحيات الوصول.",
   "owner": "الموارد البشرية",
   "status": "مطبق",
   "evidence": "تم التحقق",
@@ -18708,7 +18708,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-7-2",
@@ -18741,7 +18741,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-8-1",
@@ -18774,7 +18774,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-8-2-1",
@@ -18807,7 +18807,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-1-8-2-2",
@@ -18840,7 +18840,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-1-1-1",
@@ -18873,7 +18873,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-1-1-2",
@@ -18906,7 +18906,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-1-1-3",
@@ -18939,7 +18939,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-1-1-4",
@@ -18972,7 +18972,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-1-1-5",
@@ -19005,7 +19005,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-1-2",
@@ -19038,13 +19038,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-2-1-1",
   "framework": "ضوابط الأمن السيبراني للأنظمة التشغيلية (OTCC)",
   "domain": "إدارة هويات الدخول والصلاحيات",
-  "description": "التأكد من أن دورة حياة إدارة هويات الدخول والصلاحيات لأنظمة التحكم الصناعي (OT/ICS) مفصولة ومستقلة عن تلك المتعلقة بتقنية المعلومات (IT)، ويشمل ذلك الحلول التقنية المستخدمة في الإدارة المركزية لهويات الدخول والصلاحيات.",
+  "description": "التأكد من أن دورة حياة إدارة هويات الدخول والصلاحيات لأنظمة التحكم الصناعي (OT/ICS) مفصولة ومستقلة عن تلك المتعلقة بتقنية المعلومات (IT)، وذلك يشمل الحلول التقنية المستخدمة في الإدارة المركزية لهويات الدخول والصلاحيات.",
   "owner": "فريق الأمن السيبراني",
   "status": "غير مطبق",
   "evidence": "غير متوفر",
@@ -19071,13 +19071,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-2-1-2",
   "framework": "ضوابط الأمن السيبراني للأنظمة التشغيلية (OTCC)",
   "domain": "إدارة هويات الدخول والصلاحيات",
-  "description": "الإدارة الآمنة لحسابات الخدمات (Service Accounts) المتعلقة بخدمات أنظمة التحكم الصناعي (OT/ICS) وتطبيقاتها وأنظمتها وأجهزتها، المعزولة وغير المتصلة بحسابات دخول المستخدمين التفاعلية (Interactive Login).",
+  "description": "الإدارة الآمنة لحسابات الخدمات (Service Accounts) المتعلقة بخدمات التحكم الصناعي (OT/ICS) وتطبيقاتها وأنظمتها وأجهزتها، المعزولة وغير المتصلة بحسابات دخول المستخدمين التفاعلية (Interactive Login).",
   "owner": "فريق الأمن السيبراني",
   "status": "مطبق",
   "evidence": "متوفر",
@@ -19104,7 +19104,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-2-1-3",
@@ -19137,7 +19137,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-2-1-4",
@@ -19170,7 +19170,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-2-1-5",
@@ -19203,7 +19203,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-2-1-6",
@@ -19236,13 +19236,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-2-1-7",
   "framework": "ضوابط الأمن السيبراني للأنظمة التشغيلية (OTCC)",
   "domain": "إدارة هويات الدخول والصلاحيات",
-  "description": "تقييد الوصول عن بعد لشبكات أنظمة التحكم الصناعي (OT/ICS) وتمكينه بشكل استثنائي عند الضرورة ووجود المبررات اللازمة، على أن يتم إجراء تقييم مخاطر الأمن السيبراني قبل منح الوصول عن بعد ورصد المخاطر المتعلقة بذلك وإدارتها، وأن يكون الدخول المصرح به من خلال التحقق من الهوية متعدد العناصر (MFA) وعبر قناة مشفرة لفترة زمنية محددة وبصلاحيات محدودة، ويتم مراقبة جلسة الوصول عن بعد وتسجيلها، على أن تكون الصلاحيات الممنوحة للمستخدم متوافقة مع تقييم مخاطر الأمن السيبراني.",
+  "description": "تقييد الوصول عن بعد لشبكات أنظمة التحكم الصناعي (OT/ICS) وتمكينه بشكل استثنائي عند الضرورة ووجود المبررات اللازمة، على أن يتم إجراء تقييم مخاطر الأمن السيبراني قبل منح الوصول عن بعد ورصد المخاطر المتعلقة بذلك وإدارتها، وأن يكون الدخول المصرح به من خلال التحقق من الهوية ذات العناصر المتعددة (Multi-Factor Authentication \"MFA\") وعبر قناة مشفرة لفترة زمنية محددة وبصلاحيات محدودة، ويتم مراقبة جلسة الوصول عن بعد وتسجيلها، على أن تكون الصلاحيات الممنوحة للمستخدم متوافقة مع تقييم مخاطر الأمن السيبراني.",
   "owner": "فريق الأمن السيبراني",
   "status": "مطبق جزئيًا",
   "evidence": "جزئي",
@@ -19269,7 +19269,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-2-1-8",
@@ -19302,7 +19302,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-2-1-9",
@@ -19335,7 +19335,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-2-1-10",
@@ -19368,7 +19368,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-2-1-11",
@@ -19401,13 +19401,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-2-2",
   "framework": "ضوابط الأمن السيبراني للأنظمة التشغيلية (OTCC)",
   "domain": "إدارة هويات الدخول والصلاحيات",
-  "description": "رجوعاً للضابط 2-2-4 في الضوابط الأساسية للأمن السيبراني؛ يجب مراجعة متطلبات الأمن السيبراني المتعلقة بإدارة هويات الدخول والصلاحيات في بيئة أنظمة التحكم الصناعي (OT/ICS)، وقياس فعالية تطبيقها وتقييمها دورياً.",
+  "description": "رجوعاً للضابط 2-2-4 في الضوابط الأساسية للأمن السيبراني؛ فإنه يجب مراجعة متطلبات الأمن السيبراني المتعلقة بإدارة هويات الدخول والصلاحيات في بيئة أنظمة التحكم الصناعي (OT/ICS)، وقياس فعالية تطبيقها وتقييمها دورياً.",
   "owner": "فريق الأمن السيبراني",
   "status": "مطبق جزئيًا",
   "evidence": "جزئي",
@@ -19434,7 +19434,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-3-1-1",
@@ -19467,13 +19467,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-3-1-2",
   "framework": "ضوابط الأمن السيبراني للأنظمة التشغيلية (OTCC)",
   "domain": "حماية النظم ومرافق المعالجة",
-  "description": "إجراء مراجعة دورية للإعدادات والتحصين (Secure Configuration and Hardening) بما يتوافق مع إرشادات الأمن السيبراني، وأفضل الممارسات، والتوصيات الخاصة بالموردين (Vendor)، وبما يتوافق مع آليات إدارة التغيير المتبعة في الجهة.",
+  "description": "إجراء مراجعة دورية للإعدادات والتحصين (Secure Configuration and Hardening) بما يتوافق مع إرشادات الأمن السيبراني، وأفضل الممارسات، والتوصيات الخاصة بالموردين (Vendors)، وبما يتوافق مع آليات إدارة التغيير المتبعة في الجهة.",
   "owner": "تقنية المعلومات",
   "status": "مطبق",
   "evidence": "متوفر",
@@ -19500,13 +19500,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-3-1-3",
   "framework": "ضوابط الأمن السيبراني للأنظمة التشغيلية (OTCC)",
   "domain": "حماية النظم ومرافق المعالجة",
-  "description": "تطبيق حزم التحديثات والإصلاحات الأمنية بشكل دوري على أنظمة التحكم الصناعي (OT/ICS)، بما يتوافق مع إرشادات الأمن السيبراني، وأفضل الممارسات الخاصة بالموردين (Vendor)، وبما يتوافق مع آليات إدارة التغيير المتبعة في الجهة.",
+  "description": "تطبيق حزم التحديثات والإصلاحات الأمنية بشكل دوري على أنظمة التحكم الصناعي (OT/ICS)، بما يتوافق مع إرشادات الأمن السيبراني، وأفضل الممارسات الخاصة بالموردين (Vendors)، وبما يتوافق مع آليات إدارة التغيير المتبعة في الجهة.",
   "owner": "تقنية المعلومات",
   "status": "مطبق",
   "evidence": "تم التحقق",
@@ -19533,7 +19533,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-3-1-4",
@@ -19566,7 +19566,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-3-1-5",
@@ -19599,7 +19599,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-3-1-6",
@@ -19632,7 +19632,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-3-1-7",
@@ -19665,7 +19665,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-3-1-8",
@@ -19698,7 +19698,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-3-1-9",
@@ -19731,7 +19731,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-3-1-10",
@@ -19764,7 +19764,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-3-1-11",
@@ -19797,7 +19797,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-3-1-12",
@@ -19830,7 +19830,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-3-1-13",
@@ -19863,7 +19863,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-3-2",
@@ -19896,7 +19896,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-4-1-1",
@@ -19929,7 +19929,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-4-1-2",
@@ -19962,13 +19962,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-4-1-3",
   "framework": "ضوابط الأمن السيبراني للأنظمة التشغيلية (OTCC)",
   "domain": "إدارة أمن الشبكات",
-  "description": "تقسيم أنظمة معدات السلامة (Safety Instrumented System \"SIS\") منطقياً أو مادياً عن الشبكات الأخرى الخاصة بأنظمة التحكم الصناعي (OT/ICS).",
+  "description": "تقسيم أنظمة معدات السلامة (Safety Instrumented Systems \"SIS\") منطقياً أو مادياً عن الشبكات الأخرى الخاصة بأنظمة التحكم الصناعي (OT/ICS).",
   "owner": "تقنية المعلومات",
   "status": "غير مطبق",
   "evidence": "غير متوفر",
@@ -19995,7 +19995,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-4-1-4",
@@ -20028,7 +20028,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-4-1-5",
@@ -20061,7 +20061,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-4-1-6",
@@ -20094,7 +20094,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-4-1-7",
@@ -20127,7 +20127,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-4-1-8",
@@ -20160,7 +20160,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-4-1-9",
@@ -20193,13 +20193,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-4-1-10",
   "framework": "ضوابط الأمن السيبراني للأنظمة التشغيلية (OTCC)",
   "domain": "إدارة أمن الشبكات",
-  "description": "عدم الاتصال بشبكات أنظمة التحكم الصناعي (OT/ICS) باستخدام نقطة الوصول عن بعد المتواجدة في المنطقة المحايدة (DMZ) إلا عند الحاجة، مع ضمان تطبيق مبدأ التحقق من الهوية متعدد العناصر (MFA) وتسجيل جلسات الاتصال (Session Recording)، وأن يكون الاتصال لفترة زمنية محددة فحسب.",
+  "description": "عدم الاتصال بشبكات أنظمة التحكم الصناعي (OT/ICS) باستخدام نقطة الوصول عن بعد المتواجدة في المنطقة المحايدة (DMZ) إلا عند الحاجة، مع ضمان تطبيق مبدأ التحقق من الهوية ذات العناصر المتعددة (Multi-Factor Authentication \"MFA\") وتسجيل جلسات الاتصال (Session Recording)، وأن يكون الاتصال لفترة زمنية محددة فحسب.",
   "owner": "تقنية المعلومات",
   "status": "غير مطبق",
   "evidence": "مفقود",
@@ -20226,7 +20226,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-4-1-11",
@@ -20259,7 +20259,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-4-1-12",
@@ -20292,7 +20292,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": true,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-4-1-13",
@@ -20325,13 +20325,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-4-1-14",
   "framework": "ضوابط الأمن السيبراني للأنظمة التشغيلية (OTCC)",
   "domain": "إدارة أمن الشبكات",
-  "description": "التقييد الصارم على تمكين البروتوكولات الصناعية (Industrial protocols) والمنافذ (Ports) واستخدامها إلى الحد الأدنى، بالتوافق مع متطلبات التشغيل والصيانة والسلامة.",
+  "description": "التقييد الصارم على تمكين البروتوكولات الصناعية (Industrial Protocols) والمنافذ (Ports) واستخدامها إلى الحد الأدنى، بالتوافق مع متطلبات التشغيل والصيانة والسلامة.",
   "owner": "تقنية المعلومات",
   "status": "لا ينطبق",
   "evidence": "لا ينطبق",
@@ -20358,7 +20358,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": true,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-4-1-15",
@@ -20391,7 +20391,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": true,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-4-1-16",
@@ -20424,7 +20424,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-4-2",
@@ -20457,13 +20457,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-5-1-1",
   "framework": "ضوابط الأمن السيبراني للأنظمة التشغيلية (OTCC)",
   "domain": "أمن الأجهزة المحمولة",
-  "description": "تقييد استخدام الأجهزة المحمولة لشبكات أنظمة التحكم الصناعي (OT/ICS)؛ وعند الحاجة لاستخدامها يجب إجراء تقييم مخاطر الأمن السيبراني وتحديد المخاطر وإدارتها، والحصول على موافقة الإدارة المعنية بالأمن السيبراني لفترة زمنية محددة فحسب، بما يتوافق مع آليات إدارة صلاحيات الوصول المتبعة في الجهة.",
+  "description": "تقييد استخدام الأجهزة المحمولة لشبكات أنظمة التحكم الصناعي (OT/ICS) عند الحاجة لاستخدام الأجهزة المحمولة. ويجب إجراء تقييم مخاطر الأمن السيبراني، وتحديد المخاطر وإدارتها. يجب الحصول على موافقة الإدارة المعنية بالأمن السيبراني لفترة زمنية محددة فحسب، بما يتوافق مع آليات إدارة صلاحيات الوصول المتبعة في الجهة.",
   "owner": "تقنية المعلومات",
   "status": "مطبق",
   "evidence": "متوفر",
@@ -20490,7 +20490,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-5-1-2",
@@ -20523,13 +20523,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-5-1-3",
   "framework": "ضوابط الأمن السيبراني للأنظمة التشغيلية (OTCC)",
   "domain": "أمن الأجهزة المحمولة",
-  "description": "تحديد قائمة مقيدة بالأجهزة المحمولة المصرح بها واعتمادها، مع ضمان إمكانية توصيل هذه الأجهزة فحسب ببيئة التقنية التشغيلية وأنظمة التحكم الصناعي (OT/ICS).",
+  "description": "تحديد قائمة مقيدة بالأجهزة المحمولة المصرح بها مع ضمان إمكانية توصيل هذه الأجهزة فحسب ببيئة التقنية التشغيلية وأنظمة التحكم الصناعي (OT/ICS)، واعتمادها.",
   "owner": "تقنية المعلومات",
   "status": "مطبق جزئيًا",
   "evidence": "جزئي",
@@ -20556,7 +20556,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-5-1-4",
@@ -20589,7 +20589,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-5-1-5",
@@ -20622,7 +20622,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-5-2",
@@ -20655,7 +20655,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-6-1-1",
@@ -20688,7 +20688,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-6-1-2",
@@ -20721,7 +20721,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-6-1-3",
@@ -20754,7 +20754,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-6-1-4",
@@ -20787,7 +20787,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": true,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-6-2",
@@ -20820,7 +20820,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-7-1",
@@ -20853,7 +20853,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-7-2",
@@ -20886,7 +20886,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-8-1-1",
@@ -20919,13 +20919,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-8-1-2",
   "framework": "ضوابط الأمن السيبراني للأنظمة التشغيلية (OTCC)",
   "domain": "إدارة النسخ الاحتياطية",
-  "description": "التأكد من أن ملفات الإعدادات الحساسة والهندسية المختصة بأنظمة التحكم الصناعي (OT/ICS) مضمنة في النسخ الاحتياطية.",
+  "description": "التأكد من كون ملفات الإعدادات الحساسة والهندسية المختصة بأنظمة التحكم الصناعي (OT/ICS) مضمنة في النسخ الاحتياطية.",
   "owner": "تقنية المعلومات",
   "status": "مطبق",
   "evidence": "تم التحقق",
@@ -20952,7 +20952,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-8-1-3",
@@ -20985,7 +20985,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-8-1-4",
@@ -21018,7 +21018,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-8-2",
@@ -21051,13 +21051,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-9-1-1",
   "framework": "ضوابط الأمن السيبراني للأنظمة التشغيلية (OTCC)",
   "domain": "إدارة الثغرات",
-  "description": "يجب تحديد نطاق عمليات تقييم الثغرات وأنشطتها لبيئة شبكات أنظمة التحكم الصناعي (OT/ICS) بوصفه جزءاً من الآليات الرسمية لإدارة الثغرات في الجهة، وضمان أن يكون تأثيرها محدوداً على بيئة الإنتاج.",
+  "description": "يجب تحديد نطاق عمليات تقييم الثغرات وأنشطتها لبيئة شبكات أنظمة التحكم الصناعي (OT/ICS) بوصفه جزءاً من الآليات الرسمية لإدارة الثغرات في الجهة، وضمان تأثير محدود أو غير محدود على بيئة الإنتاج.",
   "owner": "فريق الأمن السيبراني",
   "status": "مطبق جزئيًا",
   "evidence": "جزئي",
@@ -21084,13 +21084,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-9-1-2",
   "framework": "ضوابط الأمن السيبراني للأنظمة التشغيلية (OTCC)",
   "domain": "إدارة الثغرات",
-  "description": "رجوعاً للضابط الفرعي 2-10-3-3 في الضوابط الأساسية للأمن السيبراني؛ يتم التأكد من المعالجة الفورية للثغرات الحساسة المكتشفة حديثاً، والتي تشكل مخاطر كبيرة على بيئة شبكات أنظمة التحكم الصناعي (OT/ICS).",
+  "description": "رجوعاً للضابط الفرعي 2-10-3-3 في الضوابط الأساسية للأمن السيبراني؛ يتم التأكد من ضمان المعالجة الفورية للثغرات الحساسة المكتشفة حديثاً، والتي تشكل مخاطر كبيرة على بيئة شبكات أنظمة التحكم الصناعي (OT/ICS).",
   "owner": "فريق الأمن السيبراني",
   "status": "مطبق",
   "evidence": "تم التحقق",
@@ -21117,7 +21117,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-9-1-3",
@@ -21150,7 +21150,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-9-2",
@@ -21183,7 +21183,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-10-1-1",
@@ -21216,7 +21216,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-10-1-2",
@@ -21249,7 +21249,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-10-1-3",
@@ -21282,7 +21282,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-10-1-4",
@@ -21315,7 +21315,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-10-2",
@@ -21348,7 +21348,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-11-1-1",
@@ -21381,7 +21381,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-11-1-2",
@@ -21414,7 +21414,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-11-1-3",
@@ -21447,13 +21447,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-11-1-4",
   "framework": "ضوابط الأمن السيبراني للأنظمة التشغيلية (OTCC)",
   "domain": "إدارة سجلات الأحداث ومراقبة الأمن السيبراني",
-  "description": "إجراء مراقبة وكشف وتحليل لسلوك المستخدم (User Behavior Analytics \"UBA\").",
+  "description": "إجراء مراقبة وكشف وتحليل لسلوك المستخدم (User Behaviors Analytics \"UBA\").",
   "owner": "فريق الأمن السيبراني",
   "status": "مطبق",
   "evidence": "متوفر",
@@ -21480,7 +21480,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-11-1-5",
@@ -21513,7 +21513,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-11-1-6",
@@ -21546,7 +21546,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": true,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-11-1-7",
@@ -21579,7 +21579,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-11-1-8",
@@ -21612,13 +21612,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-11-1-9",
   "framework": "ضوابط الأمن السيبراني للأنظمة التشغيلية (OTCC)",
   "domain": "إدارة سجلات الأحداث ومراقبة الأمن السيبراني",
-  "description": "استخدام التهديدات الاستباقية (Threat Intelligence) المتعلقة بأنظمة التحكم الصناعي (OT/ICS) لضبط تنبيهات نظام إدارة سجلات الأحداث ومراقبة الأمن السيبراني (SIEM) وتحديثها بشكل منتظم.",
+  "description": "استخدام التهديدات الاستباقية (Threat Intelligence) المتعلقة بأنظمة التحكم الصناعي (OT/ICS) لضبط تنبيهات نظام إدارة سجلات الأحداث وتحديثها، ومراقبة الأمن السيبراني (SIEM) بشكل منتظم.",
   "owner": "فريق الأمن السيبراني",
   "status": "مطبق جزئيًا",
   "evidence": "جزئي",
@@ -21645,7 +21645,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-11-1-10",
@@ -21678,7 +21678,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-11-2",
@@ -21711,7 +21711,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-12-1-1",
@@ -21744,7 +21744,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-12-1-2",
@@ -21777,7 +21777,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-12-1-3",
@@ -21810,7 +21810,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-12-1-4",
@@ -21843,13 +21843,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-12-1-5",
   "framework": "ضوابط الأمن السيبراني للأنظمة التشغيلية (OTCC)",
   "domain": "إدارة حوادث وتهديدات الأمن السيبراني",
-  "description": "تضمين إجراءات التعافي لأنظمة التحكم الصناعي (OT/ICS)، وتشمل أنظمة معدات السلامة (SIS)، في خطط الاستجابة للحوادث، واستعادة النظام، واستمرارية الأعمال.",
+  "description": "تضمين إجراءات التعافي لأنظمة التحكم الصناعي وتشمل أنظمة معدات السلامة (SIS) في خطط الاستجابة للحوادث، واستعادة النظام، واستمرارية الأعمال.",
   "owner": "فريق الأمن السيبراني",
   "status": "مطبق",
   "evidence": "متوفر",
@@ -21876,13 +21876,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-12-1-6",
   "framework": "ضوابط الأمن السيبراني للأنظمة التشغيلية (OTCC)",
   "domain": "إدارة حوادث وتهديدات الأمن السيبراني",
-  "description": "تزويد العاملين بالجهة (الموظفين والمتعاقدين) بالمهارات والدورات التدريبية المطلوبة للاستجابة لحوادث الأمن السيبراني المتعلقة بأنظمة التحكم الصناعي (OT/ICS).",
+  "description": "تزويد العاملين بالجهة بالمهارات والدورات التدريبية المطلوبة (الموظفين والمتعاقدين)، للاستجابة لحوادث الأمن السيبراني المتعلقة بأنظمة التحكم الصناعي (OT/ICS).",
   "owner": "فريق الأمن السيبراني",
   "status": "مطبق جزئيًا",
   "evidence": "جزئي",
@@ -21909,7 +21909,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-12-1-7",
@@ -21942,7 +21942,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-12-1-8",
@@ -21975,7 +21975,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-12-2",
@@ -22008,7 +22008,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-13-1-1",
@@ -22041,7 +22041,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-13-1-2",
@@ -22074,7 +22074,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-13-1-3",
@@ -22107,7 +22107,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-13-1-4",
@@ -22140,7 +22140,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-13-1-5",
@@ -22173,13 +22173,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-13-1-6",
   "framework": "ضوابط الأمن السيبراني للأنظمة التشغيلية (OTCC)",
   "domain": "الأمن المادي",
-  "description": "الاحتفاظ بسجلات دخول الزوار إلى المناطق الحساسة التي تحتوي على أنظمة التحكم الصناعي (OT/ICS).",
+  "description": "الاحتفاظ بسجلات دخول الزوار إلى المناطق الحساسة، والتي تحتوي على أنظمة التحكم الصناعي (OT/ICS).",
   "owner": "تقنية المعلومات",
   "status": "مطبق",
   "evidence": "تم التحقق",
@@ -22206,7 +22206,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-13-1-7",
@@ -22239,7 +22239,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-13-1-8",
@@ -22272,7 +22272,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-13-1-9",
@@ -22305,7 +22305,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-2-13-2",
@@ -22338,7 +22338,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-3-1-1-1",
@@ -22371,7 +22371,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-3-1-1-2",
@@ -22404,13 +22404,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-3-1-1-3",
   "framework": "ضوابط الأمن السيبراني للأنظمة التشغيلية (OTCC)",
   "domain": "جوانب صمود الأمن السيبراني في إدارة استمرارية الأعمال",
-  "description": "تضمين متطلبات الأمن السيبراني المتعلقة بأنظمة التحكم الصناعي (OT/ICS) في خطة استمرارية الأعمال (BCP)؛ تحليل التأثر على الأعمال (BIA)، ووقت الاستعادة المستهدف (RTO)، ونقطة الاستعادة المستهدفة (RPO).",
+  "description": "تضمين متطلبات الأمن السيبراني المتعلقة بأنظمة التحكم الصناعي (OT/ICS) إلى خطة استمرارية الأعمال (BCP)؛ تحليل التأثر على الأعمال (BIA)، ووقت الاستعادة المستهدف (RTO)، ونقطة الاستعادة المستهدفة (RPO).",
   "owner": "تقنية المعلومات",
   "status": "مطبق",
   "evidence": "تم التحقق",
@@ -22437,7 +22437,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-3-1-1-4",
@@ -22470,7 +22470,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-3-1-1-5",
@@ -22503,7 +22503,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-3-1-1-6",
@@ -22536,7 +22536,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-3-1-2",
@@ -22569,7 +22569,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-4-1-1-1",
@@ -22602,7 +22602,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-4-1-1-2",
@@ -22635,7 +22635,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-4-1-1-3",
@@ -22668,7 +22668,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-4-1-1-4",
@@ -22701,7 +22701,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "OTCC-4-1-2",
@@ -22734,6 +22734,6 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  }
 ]

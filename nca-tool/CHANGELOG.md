@@ -11,6 +11,7 @@
 - The 47 TCC item texts were compared with the TCC-1:2021 document (Arabic), and all of them matched. TCC is now **Verified**.
 - The 106 CCC-CSP item texts were compared with the GCCC-CSP-2:2026 guide (Arabic): 104 matched and 2 were corrected. CCC-CSP is now **Verified**.
 - The 29 CCC-CST item texts were compared with the GCCC-CST-1:2023 guide (Arabic): all matched. CCC-CST is now **Verified**.
+- The 150 OTCC item texts were compared with the OTCC-1:2022 controls document (Arabic): 127 matched and 23 were corrected. OTCC is now **Verified**; only DCC is still Needs Review.
 
 ## v1.2.1 (2026-11-22)
 
