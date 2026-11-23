@@ -73,8 +73,8 @@ for n in range(5, ws.max_row + 1):
     diff += row != (x["owner"], x["status"], x["evidence"], x["due"], x["priority"], x["gap_status"], x["na_approved"])
 check("Excel register = web data, field by field (689 items)", diff == 0)
 check("Excel register text = source text (689 items)", all(ws.cell(n, 4).value == by_id[ws.cell(n, 2).value]["description"] for n in range(5, ws.max_row + 1) if ws.cell(n, 2).value in by_id))
-check("text review status: ECC (176), OSMACC (41), CSCC (85), TCC (47) and CCC-CSP (106) Verified, the other frameworks Needs Review",
-      Counter(x["text_review"] for x in controls) == Counter({"Verified": 455, "Needs Review": 234}) and all((x["text_review"] == "Verified") == (x["id"].startswith(("ECC-", "OSMACC-", "CSCC-", "TCC-")) or x["framework"].endswith("(CCC-CSP)")) for x in controls))
+check("text review status: ECC (176), OSMACC (41), CSCC (85), TCC (47) and CCC (135) Verified, the other frameworks Needs Review",
+      Counter(x["text_review"] for x in controls) == Counter({"Verified": 484, "Needs Review": 205}) and all((x["text_review"] == "Verified") == (x["id"].startswith(("ECC-", "OSMACC-", "CSCC-", "TCC-")) or x["id"].startswith("CCC-")) for x in controls))
 reg_ids = [ws.cell(n, 2).value for n in range(5, ws.max_row + 1) if ws.cell(n, 2).value]
 check("same IDs in the source and the Excel register: none missing, extra or repeated",
       len(reg_ids) == len(set(reg_ids)) == len(by_id) == len(controls) and set(reg_ids) == set(by_id))
