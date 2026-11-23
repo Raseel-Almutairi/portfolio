@@ -5838,7 +5838,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-1-1-2",
@@ -5871,13 +5871,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-1-2-1-1",
   "framework": "ضوابط الأمن السيبراني للبيانات (DCC)",
   "domain": "الأمن السيبراني المتعلق بالموارد البشرية",
-  "description": "إجراء مسح أمني (Screening and Vetting) للعاملين في الوظائف ذات العلاقة بالتعامل مع البيانات.",
+  "description": "إجراء مسح أمني (Screening and vetting) للعاملين في الوظائف ذات العلاقة بالتعامل مع البيانات.",
   "owner": "الموارد البشرية",
   "status": "مطبق",
   "evidence": "متوفر",
@@ -5904,7 +5904,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-1-2-1-2",
@@ -5937,13 +5937,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-1-3-1-1",
   "framework": "ضوابط الأمن السيبراني للبيانات (DCC)",
   "domain": "برنامج التوعية والتدريب بالأمن السيبراني",
-  "description": "مخاطر تسريب والوصول غير المصرح به للبيانات خلال دورة حياتها.",
+  "description": "مخاطر التسريب والوصول غير المصرح به للبيانات خلال دورة حياتها.",
   "owner": "فريق الأمن السيبراني",
   "status": "مطبق",
   "evidence": "متوفر",
@@ -5970,7 +5970,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-1-3-1-2",
@@ -6003,7 +6003,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-1-3-1-3",
@@ -6036,7 +6036,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-1-3-1-4",
@@ -6069,7 +6069,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-1-3-1-5",
@@ -6102,7 +6102,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-1-3-1-6",
@@ -6135,7 +6135,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-1-3-1-7",
@@ -6168,7 +6168,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-1-1-1",
@@ -6201,7 +6201,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-1-1-2",
@@ -6234,7 +6234,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-1-2",
@@ -6267,7 +6267,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-1-3",
@@ -6300,7 +6300,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-2-1-1",
@@ -6333,7 +6333,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-2-1-2",
@@ -6366,13 +6366,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-2-1-3",
   "framework": "ضوابط الأمن السيبراني للبيانات (DCC)",
   "domain": "حماية الأنظمة وأجهزة معالجة المعلومات",
-  "description": "مراجعة وتحصين الإعدادات المصنعية (مثل كلمة المرور الثابتة، والخلفية الافتراضية) للأصول التقنية المستخدمة للتعامل مع البيانات.",
+  "description": "مراجعة وتحصين الإعدادات المصنعية (مثل كلمات المرور الثابتة، والخلفية الافتراضية) للأصول التقنية المستخدمة للتعامل مع البيانات.",
   "owner": "تقنية المعلومات",
   "status": "مطبق",
   "evidence": "متوفر",
@@ -6399,7 +6399,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-2-1-4",
@@ -6432,7 +6432,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-3-1-1",
@@ -6465,7 +6465,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-3-1-2",
@@ -6498,7 +6498,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-4-1-1",
@@ -6531,7 +6531,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-4-1-2",
@@ -6564,7 +6564,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-4-1-3",
@@ -6597,7 +6597,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-4-1-4",
@@ -6630,7 +6630,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-5-1-1",
@@ -6663,13 +6663,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-5-1-2",
   "framework": "ضوابط الأمن السيبراني للبيانات (DCC)",
   "domain": "التشفير",
-  "description": "استخدام طرق وخوارزميات محدثة وآمنة للتشفير عند الإنشاء والتخزين والمشاركة وعلى كامل الاتصال الشبكي المستخدم لنقل البيانات وفقاً للمستوى المتوسط (Moderate) ضمن المعايير الوطنية للتشفير (NCS-1:2020).",
+  "description": "استخدام طرق وخوارزميات محدثة وآمنة للتشفير عند الإنشاء والتخزين والمشاركة وعلى كامل الاتصال الشبكي المستخدم لنقل البيانات وفقاً للمستوى الأساسي (Moderate) ضمن المعايير الوطنية للتشفير (NCS-1:2020).",
   "owner": "فريق الأمن السيبراني",
   "status": "مطبق جزئيًا",
   "evidence": "بانتظار التحقق",
@@ -6696,7 +6696,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-6-1-1",
@@ -6729,7 +6729,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-6-1-2",
@@ -6762,7 +6762,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-6-1-3",
@@ -6795,7 +6795,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-6-1-4",
@@ -6828,7 +6828,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-6-1-5",
@@ -6861,7 +6861,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-6-2",
@@ -6894,7 +6894,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-7-1",
@@ -6927,7 +6927,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": true,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-7-2",
@@ -6960,7 +6960,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-7-3-1",
@@ -6993,7 +6993,7 @@
   "impl_parent": "DCC-2-7-2",
   "req_note": "",
   "na_approved": true,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-7-3-2",
@@ -7026,7 +7026,7 @@
   "impl_parent": "DCC-2-7-2",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-7-3-3",
@@ -7059,7 +7059,7 @@
   "impl_parent": "DCC-2-7-2",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-7-3-4",
@@ -7092,7 +7092,7 @@
   "impl_parent": "DCC-2-7-2",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-7-3-5",
@@ -7125,7 +7125,7 @@
   "impl_parent": "DCC-2-7-2",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-2-7-4",
@@ -7158,7 +7158,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-3-1-1-1",
@@ -7191,7 +7191,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-3-1-1-2",
@@ -7224,7 +7224,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-3-1-1-3",
@@ -7257,7 +7257,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-3-1-1-4",
@@ -7290,13 +7290,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-3-1-1-5",
   "framework": "ضوابط الأمن السيبراني للبيانات (DCC)",
   "domain": "الأمن السيبراني المتعلق بالأطراف الخارجية",
-  "description": "إلزام الأطراف الخارجية بإبلاغ الجهة مباشرةً عند حدوث حادثة أمن سيبراني قد تؤثر على بيانات الجهة التي تم مشاركتها أو إنشائها.",
+  "description": "إلزام الأطراف الخارجية بإبلاغ الجهة مباشرةً عند حدوث حادثة أمن سيبراني قد تؤثر على البيانات التي تمت مشاركتها أو إنشائها.",
   "owner": "فريق الأمن السيبراني",
   "status": "مطبق",
   "evidence": "متوفر",
@@ -7323,7 +7323,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-3-1-1-6",
@@ -7356,7 +7356,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-3-1-2-1",
@@ -7389,7 +7389,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-3-1-2-2",
@@ -7422,7 +7422,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-3-1-2-3",
@@ -7455,7 +7455,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-3-1-2-4",
@@ -7488,7 +7488,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-3-1-2-5",
@@ -7521,7 +7521,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-3-1-2-6",
@@ -7554,7 +7554,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-3-1-2-7",
@@ -7587,13 +7587,13 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "DCC-3-1-2-8",
   "framework": "ضوابط الأمن السيبراني للبيانات (DCC)",
   "domain": "الأمن السيبراني المتعلق بالأطراف الخارجية",
-  "description": "منع خروج الأجهزة ووحدات التخزين والوثائق من القاعة المغلقة، ومن إدخال أي أجهزة إلكترونية للقاعة.",
+  "description": "منع خروج الأجهزة ووحدات التخزين والوثائق من القاعة المغلقة، ومنع إدخال أي أجهزة إلكترونية للقاعة.",
   "owner": "فريق الأمن السيبراني",
   "status": "غير مطبق",
   "evidence": "مفقود",
@@ -7620,7 +7620,7 @@
   "impl_parent": "",
   "req_note": "",
   "na_approved": null,
-  "text_review": "Needs Review"
+  "text_review": "Verified"
  },
  {
   "id": "CSCC-1-1-1",
