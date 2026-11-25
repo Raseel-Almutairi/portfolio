@@ -2,7 +2,7 @@
 
 ## v1.4 (2026-11-25): review notes
 
-- **CSCC-2:2026 source:** the file name and date of the NCA document are now in the README references and in TEXT_REVIEW.md, because the public CSCC page still shows CSCC-1:2019. The CSCC texts did not change.
+- **CSCC-2:2026 source:** the link to the NCA file (linked from the NCA CSCC page, last modified 29 Oct 2026) and its date are now in the README references and in TEXT_REVIEW.md, because the page text still says CSCC-1:2019. The CSCC texts did not change.
 - **ECC-1-5-3-2** corrected to «قبل إجراء تغيير جوهري في البنية التقنية.» (the guide box on page 18 has output text stuck to the control text).
 - ECC-2-15-4, ECC-2-9-4, ECC-2-13-4 and ECC-2-12-2 were checked again on their pages: the texts match. The guide page numbers of 10 ECC items were corrected (for example ECC-2-9-4: 84 → 86).
 - **Review status:** «Verified» is now only for texts compared by eye on the page image (322: all CSCC, OTCC and DCC, and every corrected or re-checked text). The other 368 are «مقارنة آلية» (OCR and automatic comparison, no difference found).
