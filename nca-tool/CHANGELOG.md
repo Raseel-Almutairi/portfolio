@@ -7,6 +7,7 @@
 - ECC-2-15-4, ECC-2-9-4, ECC-2-13-4 and ECC-2-12-2 were checked again on their pages: the texts match. The guide page numbers of 10 ECC items were corrected (for example ECC-2-9-4: 84 → 86).
 - **Review status:** «Verified» is now only for texts compared by eye on the page image (322: all CSCC, OTCC and DCC, and every corrected or re-checked text). The other 368 are «مقارنة آلية» (OCR and automatic comparison, no difference found).
 - **Sample data:** ECC-2-2-2 (identity and access management) and ECC-2-13-3-3 (reporting incidents to NCA) cannot be «لا ينطبق», so both are now «مطبق». Compliance 101 / 290 = 34.83% → 102 / 291 = 35.05%. Open findings 272, overdue 99 and pending exceptions 9 did not change.
+- The 12 approved «لا ينطبق» items no longer have a finding text, action or target date: they are approved, so nothing is pending. The 9 items still awaiting approval keep them. The figures do not change.
 - The guide page and the control text now come from controls.json in the Excel requirements sheet and in both Power BI data files (the blank Power BI data file had old texts).
 
 ## v1.3 (2026-11-22): ECC text review (FIX-15)

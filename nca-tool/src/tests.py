@@ -76,6 +76,7 @@ check("Excel register text = source text (690 items)", all(ws.cell(n, 4).value =
 check("text review status: 322 Verified (all CSCC, OTCC, DCC + corrected or re-checked), 368 automated comparison",
       Counter(x["text_review"] for x in controls) == Counter({"Verified": 322, "مقارنة آلية": 368})
       and all(x["text_review"] == "Verified" for x in controls if x["id"].startswith(("CSCC-", "OTCC-", "DCC-"))))
+check("approved not-applicable items have no finding text, action or target date", all(not (x["gap"] or x["action"] or x["due"]) for x in controls if x["status"] == "لا ينطبق" and x["na_approved"] is True))
 check("no sample item that every entity must apply is marked not applicable", all(by_id[i]["status"] != "لا ينطبق" for i in ("ECC-2-2-2", "ECC-2-13-3-3")))
 reg_ids = [ws.cell(n, 2).value for n in range(5, ws.max_row + 1) if ws.cell(n, 2).value]
 check("same IDs in the source and the Excel register: none missing, extra or repeated",
