@@ -31,7 +31,7 @@ check("main key of a sub-control", main_key("CCC-2-3-P-1-6") == "CCC-2-3-P-1" an
 # ---- sample figures (as of 2026-11-21); any change must be explained in CHANGELOG.md
 s = summary(controls, "2026-11-21")
 check("690 items, 298 main controls", len(controls) == 690 and s["mains"] == 298)
-check("compliance 101 / 290 = 34.83%", (s["implemented"], s["denom"], s["compliance"]) == (101, 290, 0.3483))
+check("compliance 102 / 291 = 35.05%", (s["implemented"], s["denom"], s["compliance"]) == (102, 291, 0.3505))
 check("272 open findings, 99 overdue on 2026-11-21", (s["open"], s["overdue"]) == (272, 99))
 check("10 overdue on 2026-08-01", summary(controls, "2026-08-01")["overdue"] == 10)
 check("9 not-applicable items awaiting approval, 27 closed findings to re-assess, 0 without date",
@@ -73,8 +73,10 @@ for n in range(5, ws.max_row + 1):
     diff += row != (x["owner"], x["status"], x["evidence"], x["due"], x["priority"], x["gap_status"], x["na_approved"])
 check("Excel register = web data, field by field (690 items)", diff == 0)
 check("Excel register text = source text (690 items)", all(ws.cell(n, 4).value == by_id[ws.cell(n, 2).value]["description"] for n in range(5, ws.max_row + 1) if ws.cell(n, 2).value in by_id))
-check("text review status: all 690 item texts Verified (ECC, OSMACC, CSCC, TCC, CCC, OTCC, DCC)",
-      Counter(x["text_review"] for x in controls) == Counter({"Verified": 690}))
+check("text review status: 322 Verified (all CSCC, OTCC, DCC + corrected or re-checked), 368 automated comparison",
+      Counter(x["text_review"] for x in controls) == Counter({"Verified": 322, "مقارنة آلية": 368})
+      and all(x["text_review"] == "Verified" for x in controls if x["id"].startswith(("CSCC-", "OTCC-", "DCC-"))))
+check("no sample item that every entity must apply is marked not applicable", all(by_id[i]["status"] != "لا ينطبق" for i in ("ECC-2-2-2", "ECC-2-13-3-3")))
 reg_ids = [ws.cell(n, 2).value for n in range(5, ws.max_row + 1) if ws.cell(n, 2).value]
 check("same IDs in the source and the Excel register: none missing, extra or repeated",
       len(reg_ids) == len(set(reg_ids)) == len(by_id) == len(controls) and set(reg_ids) == set(by_id))
@@ -85,7 +87,7 @@ m = reg["07 الضوابط الرئيسية - Main"]
 xl_main = {m.cell(n, 1).value: m.cell(n, 8).value for n in range(4, 302) if m.cell(n, 1).value}
 check("Excel main-control status = web rule (298 main controls)", all(xl_main[k] in (main_status(v), "لا ينطبق - بانتظار الاعتماد") for k, v in mains.items()))
 d = reg["06 لوحة المؤشرات - Dashboard"]
-check("Excel dashboard: 34.83%, 272 open, 99 overdue", (round(d["B6"].value, 4), d["D6"].value, d["F6"].value) == (0.3483, 272, 99))
+check("Excel dashboard: 35.05%, 272 open, 99 overdue", (round(d["B6"].value, 4), d["D6"].value, d["F6"].value) == (0.3505, 272, 99))
 check("Excel dashboard: no data quality issues", d["B25"].value.startswith("جودة البيانات"))
 
 pbi = load_workbook("../../nca-powerbi/3_Sample_Data.xlsx", data_only=True)
@@ -109,6 +111,10 @@ check("Power BI main-control status = Excel register", all(xl_main.get(pm.cell(n
 blank = load_workbook("../NCA_Compliance_Register_Blank.xlsx", data_only=True)
 check("blank register: 298 main controls not assessed", Counter(blank["07 الضوابط الرئيسية - Main"].cell(n, 8).value for n in range(4, 302)) == Counter({"لم يُقيّم": 298}))
 req = reg["02 المتطلبات - Requirements"]
+pbi_rows = [(n, ws_) for f in ("3_Sample_Data", "4_Blank_Data") for ws_ in [load_workbook(f"../../nca-powerbi/{f}.xlsx")["Controls"]] for n in range(2, ws_.max_row + 1)]
+check("guide page and text are the same in the source, the Excel requirements and both Power BI data files",
+      all(req.cell(n, 7).value == by_id[req.cell(n, 2).value]["ref_page"] for n in range(5, req.max_row + 1) if req.cell(n, 2).value in by_id)
+      and all((w.cell(n, 7).value, w.cell(n, 25).value) == (by_id[w.cell(n, 1).value]["description"], by_id[w.cell(n, 1).value]["ref_page"]) for n, w in pbi_rows))
 check("new control CSCC-2-3-4 sits right after CSCC-2-3-1-8 in the register, the requirements and the main sheet",
       [ws.cell(n, 2).value for n in (267, 268, 269)] == [req.cell(n, 2).value for n in (267, 268, 269)] == ["CSCC-2-3-1-8", "CSCC-2-3-4", "CSCC-2-4-1-1"]
       and [m.cell(n, 1).value for n in (122, 123, 124)] == ["CSCC-2-3-1", "CSCC-2-3-4", "CSCC-2-4-1"]

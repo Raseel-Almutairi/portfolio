@@ -84,6 +84,11 @@ def prepare(wb, controls):
         del wb["README_DAX"]
     add_new_controls(wb, controls)
     ws = wb["Controls"]
+    by_id = {r["id"]: r for r in controls}
+    for n in range(2, ws.max_row + 1):  # text and guide page come from controls.json in both files
+        r = by_id.get(ws.cell(n, 1).value)
+        if r:
+            ws.cell(n, 7).value, ws.cell(n, 25).value = r["description"], r["ref_page"]
     for dv in ws.data_validations.dataValidation:
         dv.showErrorMessage = True
         dv.errorStyle = "stop"

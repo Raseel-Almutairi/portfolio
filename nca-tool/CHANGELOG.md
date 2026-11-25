@@ -1,5 +1,14 @@
 # Changelog: NCA tool
 
+## v1.4 (2026-11-25): review notes
+
+- **CSCC-2:2026 source:** the file name and date of the NCA document are now in the README references and in TEXT_REVIEW.md, because the public CSCC page still shows CSCC-1:2019. The CSCC texts did not change.
+- **ECC-1-5-3-2** corrected to «قبل إجراء تغيير جوهري في البنية التقنية.» (the guide box on page 18 has output text stuck to the control text).
+- ECC-2-15-4, ECC-2-9-4, ECC-2-13-4 and ECC-2-12-2 were checked again on their pages: the texts match. The guide page numbers of 10 ECC items were corrected (for example ECC-2-9-4: 84 → 86).
+- **Review status:** «Verified» is now only for texts compared by eye on the page image (322: all CSCC, OTCC and DCC, and every corrected or re-checked text). The other 368 are «مقارنة آلية» (OCR and automatic comparison, no difference found).
+- **Sample data:** ECC-2-2-2 (identity and access management) and ECC-2-13-3-3 (reporting incidents to NCA) cannot be «لا ينطبق», so both are now «مطبق». Compliance 101 / 290 = 34.83% → 102 / 291 = 35.05%. Open findings 272, overdue 99 and pending exceptions 9 did not change.
+- The guide page and the control text now come from controls.json in the Excel requirements sheet and in both Power BI data files (the blank Power BI data file had old texts).
+
 ## v1.3 (2026-11-22): ECC text review (FIX-15)
 
 - The 176 ECC item texts were compared one by one with the official NCA guide (GECC-2:2026, Arabic). The guide pages were read with OCR, compared automatically, and every difference was checked on the page image.

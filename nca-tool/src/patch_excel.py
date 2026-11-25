@@ -104,6 +104,16 @@ for new_id in [i for i in order if i not in id_rows(reg)]:
         new_mains += 1
 # the sequence formula in L counts findings above each row
 reg = re.sub(r'(<c r="L(\d+)"[^>]*><f>)IF\(OR\(B\d+="".*?</f>', lambda k: k.group(1) + esc(f'IF(OR(B{k.group(2)}="",NOT(OR(F{k.group(2)}="مطبق جزئيًا",F{k.group(2)}="غير مطبق"))),"",COUNT($L$4:L{int(k.group(2)) - 1})+1)') + "</f>", reg)
+# 02 requirements: the guide page of every item comes from controls.json too
+def set_page(mm):
+    row = mm.group(0)
+    ids = id_rows(row)
+    r = controls.get(next(iter(ids))) if ids else None
+    if not r or not r.get("ref_page"):
+        return row
+    n = mm.group(1)
+    return re.sub(r'(<c r="G%s"[^>]*?)(?: t="[a-zA-Z]+")?(?:/>|>.*?</c>)' % n, lambda k: f'{k.group(1)}><v>{r["ref_page"]}</v></c>', row, count=1, flags=re.S)
+req = re.sub(ROW_RE, set_page, req, flags=re.S)
 put("xl/worksheets/sheet3.xml", req)
 MAIN_LAST = 300 + new_mains
 
