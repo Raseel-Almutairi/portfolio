@@ -92,10 +92,10 @@ def make(path, sample):
         fw.row_dimensions[r].height = 13 * lines(c_[2], 80) + 4; r += 1
     CR1 = r - 1
     sec("How to use this workbook (yellow cells = inputs)")
-    row("3. Assessment", "The self-assessment: for each subdomain answer the 14 criteria Yes / No and write the evidence for Yes or what was found for No. The level appears in the subdomain header automatically. The Result column tells you if evidence is missing or an action was created. The target level is in column H of each subdomain header: 3 by default (SAMA's minimum), and it can be raised to 4 or 5.")
+    row("3. Assessment", "The self-assessment: for each subdomain answer the 14 criteria Yes / No and write the evidence for Yes or what was found for No. The level appears in the subdomain header automatically. The Result column tells you if evidence is missing or an action was created. The target level is in column H of each subdomain header: 3 by default (SAMA's minimum), and it can be raised to 4 or 5. Any other value (for example 6, 2 or a number pasted as text) counts as 3 and is flagged in the summary.")
     row("2. Controls & Evidence", "Reference only: SAMA's principle, objective and control considerations for each subdomain (official text), with the required evidence. Use it to support your Yes / No answers in sheet 3.")
     row("4. Action Plan", "Escalation: you choose the stage (1st: To owner, CC GRC Manager and Line Manager; 2nd: To Line Manager, CC GRC Manager and Head of Department; 3rd: To Head of Department, CC GRC Manager and CISO). To, CC and the email text are filled automatically. Generated automatically: every No answer up to level 3 becomes an action with its corrective action, closure evidence, owner and priority. You add the target date, status and escalation in sheet 3 next to the criterion (columns I-M), so they stay with the right action when answers change. Fill the owner emails once (right side) to use the Send reminder links, which open an email on your own device. The full reminder email for each action is ready in column P to copy and paste.")
-    row("5. Summary", "Updates automatically, including lists of overdue actions and actions due in the next 30 days. A data quality line at the top warns about invalid answers or statuses and missing target dates.")
+    row("5. Summary", "Updates automatically, including lists of overdue actions and actions due in the next 30 days. A data quality line at the top warns about invalid answers, statuses or target levels, dates pasted as text, and missing target dates.")
     row("Rules", "Not assessed: a subdomain gets a level only when all 14 criteria are answered Yes or No; until then it is Not assessed and excluded from the average. Closing an action does not change the answer or the level: re-assess the criterion with evidence in sheet 3. Risk Accepted keeps the criterion unmet; its target date is the acceptance expiry date. All dates use one assessment date (as of) in sheet 4, cell AB29 (blank = today).")
     row("Privacy", "No data is collected. This workbook runs locally on your device; nothing is sent anywhere unless you send it.")
     row("Note", "Sample answers, owners and dates are fictional. Required evidence is derived by the author from the wording of each control consideration.")
@@ -151,6 +151,8 @@ def make(path, sample):
     la.conditional_formatting.add(f"E4:E{la_end}", CellIsRule(operator="equal", formula=['"No"'], fill=BAD))
     la.conditional_formatting.add(f"G4:G{la_end}", CellIsRule(operator="equal", formula=['"Add evidence"'], fill=WARN))
     la.conditional_formatting.add(f"G4:G{la_end}", CellIsRule(operator="equal", formula=['"Invalid answer: use Yes or No"'], fill=BAD))
+    for hr_ in HROW.values():  # target level that is not the number 3, 4 or 5 (counted as 3, flagged in the summary)
+        la.conditional_formatting.add(f"H{hr_}", FormulaRule(formula=[f'AND(H{hr_}<>"",NOT(OR(H{hr_}=3,H{hr_}=4,H{hr_}=5)))'], fill=BAD))
     la.conditional_formatting.add(f"G4:G{la_end}", CellIsRule(operator="equal", formula=['"Action closed: re-assess with evidence"'], fill=WARN))
     la.conditional_formatting.add(f"E4:E{la_end}", FormulaRule(formula=['AND(E4<>"",E4<>"Yes",E4<>"No")'], fill=fill("C00000"), font=Font(name=FN, bold=True, color="FFFFFF")))
     la.conditional_formatting.add(f"G4:G{la_end}", CellIsRule(operator="equal", formula=['"Action created in sheet 4"'], fill=fill("DCE6F5")))
@@ -164,7 +166,7 @@ def make(path, sample):
     ma = wb.create_sheet("Results"); ma.sheet_state = "hidden"; ids = [c[0] for c in CRIT]
     title(ma, "3. Assessment - cumulative criteria per subdomain (SAMA CSF section 2.4)",
           "Answer Yes / No for each criterion (columns E to R) and write the evidence for every answer (columns Y to AL): for Yes the evidence reference, for No what was found, because SAMA reviews and audits the self-assessment and asks for evidence. The level is the highest level whose criteria, and all lower-level criteria, are Yes. Row 4 shows the criterion text.", 39)
-    cols = ["Domain", "Subdomain ID", "Subdomain", "Owner"] + ids + ["Maturity Level", "Level Name", "Target", "Status", "Next level blocked by", "Notes"] + ["Evidence / justification " + c for c in ids] + ["Answers without evidence", "Invalid answers", "Valid answers (of 14)"]
+    cols = ["Domain", "Subdomain ID", "Subdomain", "Owner"] + ids + ["Maturity Level", "Level Name", "Target", "Status", "Next level blocked by", "Notes"] + ["Evidence / justification " + c for c in ids] + ["Answers without evidence", "Invalid answers", "Valid answers (of 14)", "Invalid target"]
     hdr(ma, 3, cols)
     for j, c in enumerate(CRIT, 5):
         x = ma.cell(4, j, c[2]); x.font = f(s=8, c="333333"); x.alignment = TOP; x.border = B; x.fill = LIGHT
@@ -184,7 +186,7 @@ def make(path, sample):
         # Not Assessed until all 14 criteria have a valid Yes / No answer (not counted as level 0)
         lvl = (f'=IF(COUNTIF({E}:{R},"Yes")+COUNTIF({E}:{R},"No")<14,"Not Assessed",IF({E}<>"Yes",0,IF({F_}<>"Yes",1,IF(COUNTIF({G}:{L},"Yes")<6,2,'
                f'IF(COUNTIF({M}:{O},"Yes")<3,3,IF(COUNTIF({P}:{R},"Yes")<3,4,5))))))')
-        ma.cell(r, 19, lvl); ma.cell(r, 20, f'=IF(ISNUMBER(S{r}),INDEX({LN},S{r}+1),"Not Assessed")'); ma.cell(r, 21, f"=MAX(3,'3. Assessment'!H{HROW[s['sid']]})")
+        ma.cell(r, 19, lvl); ma.cell(r, 20, f'=IF(ISNUMBER(S{r}),INDEX({LN},S{r}+1),"Not Assessed")'); TG = f"'3. Assessment'!H{HROW[s['sid']]}"; ma.cell(r, 21, f"=IF(OR({TG}=3,{TG}=4,{TG}=5),{TG},3)")
         ma.cell(r, 22, f'=IF(ISNUMBER(S{r}),IF(S{r}>=U{r},"At target","Below target"),"Not Assessed")')
         blocked = (f'=IF(NOT(ISNUMBER(S{r})),"Answer all 14 criteria",IF(S{r}=5,"",IF(S{r}=0,"L1a",IF(S{r}=1,"L2a",IF(S{r}=2,"L3 criteria: "&(6-COUNTIF({G}:{L},"Yes"))&" not met",'
                    f'IF(S{r}=3,"L4 criteria: "&(3-COUNTIF({M}:{O},"Yes"))&" not met","L5 criteria: "&(3-COUNTIF({P}:{R},"Yes"))&" not met"))))))')
@@ -197,6 +199,8 @@ def make(path, sample):
         x = ma.cell(r, 39, f'=SUMPRODUCT((E{r}:R{r}<>"")*(Y{r}:AL{r}=""))'); x.font = f(True); x.border = B; x.alignment = CTR
         x = ma.cell(r, 40, f'=SUMPRODUCT((E{r}:R{r}<>"")*(E{r}:R{r}<>"Yes")*(E{r}:R{r}<>"No"))'); x.font = f(True); x.border = B; x.alignment = CTR
         x = ma.cell(r, 41, f'=COUNTIF(E{r}:R{r},"Yes")+COUNTIF(E{r}:R{r},"No")'); x.font = f(); x.border = B; x.alignment = CTR
+        # invalid target level (not the number 3, 4 or 5, e.g. 6, 2 or "4" pasted as text): counted as 3 and flagged
+        x = ma.cell(r, 42, f'=IF(AND({TG}<>"",NOT(OR({TG}=3,{TG}=4,{TG}=5))),1,0)'); x.font = f(True); x.border = B; x.alignment = CTR
     rn = r0 + len(subs) - 1
     ma.conditional_formatting.add(f"E{r0}:R{rn}", CellIsRule(operator="equal", formula=['"Yes"'], fill=GOOD))
     ma.conditional_formatting.add(f"E{r0}:R{rn}", CellIsRule(operator="equal", formula=['"No"'], fill=BAD))
@@ -300,10 +304,10 @@ def make(path, sample):
                 f"={M_('H')}", f"={M_('I')}",
                 f'=IF(B{i}="","",INDEX({MA("D")},MATCH(B{i},{MA("B")},0))&"")', f"={M_('J')}",
                 TR("I"), TR("J"),
-                f'=IF(B{i}="","",IF(AND(L{i}="Risk Accepted",K{i}<>"",K{i}<$AC$29),"RA expired",IF({DONE(i)},"",IF(K{i}="","No target date",IF(K{i}<$AC$29,"Yes","")))))',
+                f'=IF(B{i}="","",IF(AND(K{i}<>"",NOT(ISNUMBER(K{i}))),"Invalid date",IF(AND(L{i}="Risk Accepted",K{i}<>"",K{i}<$AC$29),"RA expired",IF({DONE(i)},"",IF(K{i}="","No target date",IF(K{i}<$AC$29,"Yes",""))))))',
                 f'=IF(M{i}="Yes",$AC$29-K{i},"")',
                 TR("K"), TR("L"),
-                f'=IF(OR(B{i}="",{DONE(i)},P{i}="",O{i}=""),"",IF(O{i}="3rd Escalation","Report to Committee",P{i}+$AB$28))',
+                f'=IF(OR(B{i}="",{DONE(i)},P{i}="",O{i}=""),"",IF(O{i}="3rd Escalation","Report to Committee",IF(ISNUMBER(P{i}),P{i}+$AB$28,"Invalid date")))',
                 TR("M"),
                 f'=IF(OR(B{i}="",{DONE(i)}),"",IF(O{i}="2nd Escalation",{LK("AC", i)},IF(O{i}="3rd Escalation",{LK("AD", i)},{LK("AB", i)})))',
                 f'=IF(OR(B{i}="",{DONE(i)},O{i}=""),"",IF(O{i}="1st Escalation",$AB$25&";"&{LK("AC", i)},IF(O{i}="2nd Escalation",$AB$25&";"&{LK("AD", i)},$AB$25&";"&$AB$26)))']
@@ -326,7 +330,7 @@ def make(path, sample):
                 f'&"Thank you,"&{N_}&IF($AB$27="","[Your name]",$AB$27)&{N_}&"GRC")')
         me = rp.cell(i, 22, mail); me.font = f(s=8.5); me.border = B; me.alignment = Alignment(wrap_text=False, vertical="top")
         rp.cell(i, 23, f'=IF(M{i}="Yes",COUNTIF(M$4:M{i},"Yes"),"")')
-        rp.cell(i, 24, f'=IF(AND(B{i}<>"",K{i}<>"",NOT({DONE(i)}),K{i}>=$AC$29,K{i}<=$AC$29+30),1,0)')
+        rp.cell(i, 24, f'=IF(AND(B{i}<>"",ISNUMBER(K{i}),NOT({DONE(i)}),K{i}>=$AC$29,K{i}<=$AC$29+30),1,0)')
         rp.cell(i, 25, f'=IF(X{i}=1,SUM(X$4:X{i}),"")')
         for j in (23, 24, 25): rp.cell(i, j).font = f(s=8, c="999999")
     rpn = 3 + nrows
@@ -338,6 +342,8 @@ def make(path, sample):
     rp.conditional_formatting.add(f"L4:L{rpn}", CellIsRule(operator="equal", formula=['"Risk Accepted"'], fill=fill("E4DFEC")))
     rp.conditional_formatting.add(f"L4:L{rpn}", CellIsRule(operator="equal", formula=['"Closed"'], fill=WARN))
     rp.conditional_formatting.add(f"M4:M{rpn}", CellIsRule(operator="equal", formula=['"No target date"'], fill=WARN))
+    for c_ in ("M", "Q"):
+        rp.conditional_formatting.add(f"{c_}4:{c_}{rpn}", CellIsRule(operator="equal", formula=['"Invalid date"'], fill=BAD))
     rp.conditional_formatting.add(f"M4:M{rpn}", CellIsRule(operator="equal", formula=['"RA expired"'], fill=BAD))
     rp.conditional_formatting.add(f"L4:L{rpn}", FormulaRule(formula=['AND(L4<>"",L4<>"Open",L4<>"In Progress",L4<>"Closed",L4<>"Risk Accepted")'], fill=fill("C00000"), font=Font(name=FN, bold=True, color="FFFFFF")))
     for j, w in enumerate([9, 11, 26, 10, 9, 46, 40, 30, 14, 10, 12, 13, 9, 9, 15, 13, 16, 18, 30, 40, 12, 60, 6, 6, 6], 1): rp.column_dimensions[CL(j)].width = w
@@ -367,9 +373,10 @@ def make(path, sample):
     ds.cell(4, 3).value = "Subdomains at level 3+ (assessed)"
     # data quality banner (FIX-02): invalid answers, invalid statuses, missing target dates
     dq = (f'=SUM({MA("AN")})+SUMPRODUCT(({RP("L")}<>"")*({RP("L")}<>"Open")*({RP("L")}<>"In Progress")*({RP("L")}<>"Closed")*({RP("L")}<>"Risk Accepted"))'
-          f'+SUMPRODUCT(({RP("O")}<>"")*({RP("O")}<>"1st Escalation")*({RP("O")}<>"2nd Escalation")*({RP("O")}<>"3rd Escalation"))+COUNTIF({RP("M")},"No target date")')
+          f'+SUMPRODUCT(({RP("O")}<>"")*({RP("O")}<>"1st Escalation")*({RP("O")}<>"2nd Escalation")*({RP("O")}<>"3rd Escalation"))+COUNTIF({RP("M")},"No target date")'
+          f'+COUNTIF({RP("M")},"Invalid date")+COUNTIF({RP("Q")},"Invalid date")+SUM({MA("AP")})')
     ds.merge_cells("A6:L6")
-    w_ = ds.cell(6, 1, f'=IF(({dq[1:]})=0,"Data quality: OK. Assessment date (as of) "&TEXT({AS},"yyyy-mm-dd"),"WARNING: "&({dq[1:]})&" data quality issue(s) (invalid answers or statuses, or missing target dates). Fix them before using the figures. Assessment date (as of) "&TEXT({AS},"yyyy-mm-dd"))')
+    w_ = ds.cell(6, 1, f'=IF(({dq[1:]})=0,"Data quality: OK. Assessment date (as of) "&TEXT({AS},"yyyy-mm-dd"),"WARNING: "&({dq[1:]})&" data quality issue(s) (invalid answers, statuses, target levels or dates, or missing target dates). Fix them before using the figures. Assessment date (as of) "&TEXT({AS},"yyyy-mm-dd"))')
     w_.font = f(True, s=9.5); w_.alignment = Alignment(vertical="center", indent=1)
     ds.conditional_formatting.add("A6", FormulaRule(formula=['LEFT(A6,7)="WARNING"'], fill=fill("C00000"), font=Font(name=FN, bold=True, color="FFFFFF")))
     ds.conditional_formatting.add("A6", FormulaRule(formula=['LEFT(A6,4)="Data"'], fill=GOOD))

@@ -1,5 +1,13 @@
 # Changelog: SAMA CSF tool
 
+## v1.4 (2026-11-25): fixes after the third review
+
+- **Pasted values are flagged (Excel):** a drop-down list only stops typed values, so values pasted over it are now checked too:
+  - A target level that is not the number 3, 4 or 5 (for example 6, 2, or "4" pasted as text) counts as 3, its cell turns red, and the summary warns about it. Before, 6 was accepted and created actions, and "4" as text counted as 3 with no warning.
+  - A target date or escalation date pasted as text shows «Invalid date» in the action plan and is counted in the summary warning. Before, the action never showed as overdue.
+- **Web:** the page follows the device's light or dark mode until the visitor chooses one with the button (before, it always opened dark).
+- The sample figures do not change. One scenario test covers the three pasted values.
+
 ## v1.3 (2026-11-22)
 
 - **Target level per subdomain (Excel):** each subdomain header in sheet 3 has a target (column H). It is 3 by default, which is SAMA's minimum, and it can be raised to 4 or 5. A lower value counts as 3. With a raised target, the unmet level 4 or 5 criteria become actions too, with their own action texts, and action tracking is available for every criterion. Two scenario tests cover a raised target and a target below 3. The sample data keeps every target at 3, so the sample figures do not change.

@@ -106,6 +106,26 @@ if soffice:
     check("raising a target to 4 creates actions for its unmet level-4 criteria",
           new == {f"{sid}-{k_}" for k_, v in lvl3[0]["ans"].items() if k_.startswith("L4") and v == "No"} and all(after[k] == xa[k] for k in xa if k in after))
     check("a target below 3 is not allowed (counted as 3)", {k for k in after if k.startswith(other["sid"] + "-")} == {k for k in xa if k.startswith(other["sid"] + "-")})
+    # Values pasted past the drop-down lists are flagged, not hidden: target 6, target "4" as text, a target date as text
+    with tempfile.TemporaryDirectory() as tmp:
+        wb = load_workbook(SAMPLE)
+        la = wb["3. Assessment"]
+        heads = [r for r in range(4, la.max_row + 1) if isinstance(la.cell(r, 8).value, int)]
+        la.cell(heads[0], 8).value = 6
+        la.cell(heads[1], 8).value = "4"
+        r = next(r for r in range(4, la.max_row + 1) if la.cell(r, 10).value in ("Open", "In Progress") and la.cell(r, 9).value)
+        key = la.cell(r, 14).value.replace("|", "-")
+        la.cell(r, 9).value = "2026-01-01"
+        wb.save(os.path.join(tmp, "t.xlsx"))
+        subprocess.run([soffice, "--headless", "--convert-to", "xlsx", "--outdir", os.path.join(tmp, "out"), os.path.join(tmp, "t.xlsx")],
+                       capture_output=True, check=True, timeout=300)
+        after = actions(os.path.join(tmp, "out", "t.xlsx"))
+        out = load_workbook(os.path.join(tmp, "out", "t.xlsx"), data_only=True)
+        banner = out["5. Summary"]["A6"].value
+        h0 = out["3. Assessment"].cell(heads[0], 1).value.split(" ")[0]
+    check("target 6 or \"4\" as text counts as 3 (no extra actions) and a date pasted as text shows Invalid date",
+          {k for k in after if k.startswith(h0 + "-")} == {k for k in xa if k.startswith(h0 + "-")} and after[key][1] == "Invalid date")
+    check("the summary warns about the 3 pasted values", banner.startswith("WARNING: 3 "))
 else:
     print("SKIP re-assessment scenario (LibreOffice not installed)")
 print(f"\n{ok} tests passed")

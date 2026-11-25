@@ -143,11 +143,12 @@ td.esc{font-size:12px;font-weight:600} td.esc small{display:block;color:var(--mu
   <button type="button" class="themebtn" id="themebtn" aria-label="Switch light or dark mode">Light mode</button>
 </header>
 <script>
-(function(){ /* light / dark mode; the choice is remembered in this browser only */
+(function(){ /* light / dark mode: follows the device until the visitor chooses; the choice is remembered in this browser only */
  var b=document.getElementById("themebtn"), root=document.documentElement;
  function set(t){ root.dataset.theme=t; b.textContent=t==="light"?"Dark mode":"Light mode"; b.setAttribute("aria-pressed",t==="light"); }
  var saved=null; try{ saved=localStorage.getItem("sama-theme"); }catch(e){}
- set(saved==="light"?"light":"dark");
+ var sys="dark"; try{ if(window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches) sys="light"; }catch(e){}
+ set(saved==="light"||saved==="dark"?saved:sys); /* no saved choice: follow the device */
  b.addEventListener("click",function(){ var t=root.dataset.theme==="light"?"dark":"light"; set(t); try{ localStorage.setItem("sama-theme",t); }catch(e){} });
 })();
 </script>
