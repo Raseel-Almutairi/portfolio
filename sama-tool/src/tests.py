@@ -126,6 +126,25 @@ if soffice:
         h0 = out["3. Assessment"].cell(heads[0], 1).value.split(" ")[0]
     check("target 6 or \"4\" as text counts as 3 (no extra actions) and a date pasted as text shows Invalid date",
           {k for k in after if k.startswith(h0 + "-")} == {k for k in xa if k.startswith(h0 + "-")} and after[key][1] == "Invalid date")
+    # Bank: SAMA requires level 4 in 3.3.14-3.3.17, so level-4 actions appear there even with target 3; an answer without evidence blocks approval
+    with tempfile.TemporaryDirectory() as tmp:
+        wb = load_workbook(SAMPLE)
+        la = wb["3. Assessment"]
+        la["J1"].value = "Bank"
+        ev = next(r for r in range(4, la.max_row + 1) if la.cell(r, 5).value == "Yes" and la.cell(r, 6).value)
+        la.cell(ev, 6).value = None
+        wb.save(os.path.join(tmp, "t.xlsx"))
+        subprocess.run([soffice, "--headless", "--convert-to", "xlsx", "--outdir", os.path.join(tmp, "out"), os.path.join(tmp, "t.xlsx")],
+                       capture_output=True, check=True, timeout=300)
+        bank = actions(os.path.join(tmp, "out", "t.xlsx"))
+        out = load_workbook(os.path.join(tmp, "out", "t.xlsx"), data_only=True)
+        req = {out["Results"].cell(n, 2).value: out["Results"].cell(n, 43).value for n in range(5, 37)}
+        st_b = out["5. Summary"]["A7"].value
+    new_b = {k for k in bank if k not in xa}
+    check("Bank: required level 4 only in 3.3.14-3.3.17, and the new actions are level-4 actions there",
+          {k for k, v in req.items() if v == 4} == {"3.3.14", "3.3.15", "3.3.16", "3.3.17"} and new_b
+          and all(k.split("-")[0] in req and k.split("-")[0] in ("3.3.14", "3.3.15", "3.3.16", "3.3.17") and "-L4" in k for k in new_b))
+    check("an answer without evidence: report not ready for approval", "NOT READY FOR APPROVAL" in st_b)
     check("the summary warns about the 3 pasted values and the report is not ready for approval", banner.startswith("WARNING: 3 ") and status_.startswith("Report status: NOT READY FOR APPROVAL. Fix the data quality"))
 else:
     print("SKIP re-assessment scenario (LibreOffice not installed)")

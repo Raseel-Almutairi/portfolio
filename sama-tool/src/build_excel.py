@@ -32,6 +32,8 @@ def title(ws, t, sub, n):
 def lines(t, w): return sum(1 + len(x) // w for x in str(t).split("\n"))
 def dl():
     d = DataLabelList(); d.showVal = True; d.showSerName = False; d.showCatName = False; d.showLegendKey = False; return d
+ORG_BANK, ORG_OTHER = "Bank", "Other member organization"
+BANK_L4 = {"3.3.14", "3.3.15", "3.3.16", "3.3.17"}  # SAMA circular 298140000067 (17 Jan 2019): banks need level 4 here
 SRC = "Source: SAMA Cyber Security Framework v1.0 (May 2017). Principles, objectives, control considerations and Table 1 are taken verbatim from the official document."
 
 def make(path, sample):
@@ -92,7 +94,7 @@ def make(path, sample):
         fw.row_dimensions[r].height = 13 * lines(c_[2], 80) + 4; r += 1
     CR1 = r - 1
     sec("How to use this workbook (yellow cells = inputs)")
-    row("3. Assessment", "The self-assessment: for each subdomain answer the 14 criteria Yes / No and write the evidence for Yes or what was found for No. The level appears in the subdomain header automatically. The Result column tells you if evidence is missing or an action was created. The target level is in column H of each subdomain header: 3 by default (SAMA's minimum), and it can be raised to 4 or 5. Any other value (for example 6, 2 or a number pasted as text) counts as 3 and is flagged in the summary.")
+    row("3. Assessment", "The self-assessment: for each subdomain answer the 14 criteria Yes / No and write the evidence for Yes or what was found for No. The level appears in the subdomain header automatically. The Result column tells you if evidence is missing or an action was created. The target level is in column H of each subdomain header: 3 by default (SAMA's minimum), and it can be raised to 4 or 5. Any other value (for example 6, 2 or a number pasted as text) counts as 3 and is flagged in the summary. Choose the organization type at the top (cell J1): for a Bank, SAMA requires level 4 in 3.3.14, 3.3.15, 3.3.16 and 3.3.17 (circular 298140000067, 17 Jan 2019), so their target is at least 4.")
     row("2. Controls & Evidence", "Reference only: SAMA's principle, objective and control considerations for each subdomain (official text), with the required evidence. Use it to support your Yes / No answers in sheet 3.")
     row("4. Action Plan", "Escalation: you choose the stage (1st: To owner, CC GRC Manager and Line Manager; 2nd: To Line Manager, CC GRC Manager and Head of Department; 3rd: To Head of Department, CC GRC Manager and CISO). To, CC and the email text are filled automatically. Generated automatically: every No answer up to level 3 becomes an action with its corrective action, closure evidence, owner and priority. You add the target date, status and escalation in sheet 3 next to the criterion (columns I-M), so they stay with the right action when answers change. Fill the owner emails once (right side) to use the Send reminder links, which open an email on your own device. The full reminder email for each action is ready in column P to copy and paste.")
     row("5. Summary", "Updates automatically, including lists of overdue actions and actions due in the next 30 days. A data quality line at the top warns about invalid answers, statuses or target levels, dates pasted as text, and missing target dates. The report status line under it says NOT READY FOR APPROVAL until data quality is OK and all criteria are answered.")
@@ -104,6 +106,12 @@ def make(path, sample):
     la = wb.create_sheet("3. Assessment"); la.sheet_view.showGridLines = False
     title(la, "3. Assessment - the self-assessment questionnaire",
           "For each subdomain: answer every criterion Yes or No, and write the evidence (Yes) or what was found (No). Optionally paste a link to the evidence file in your own system. The level is calculated automatically: a level is reached only when all its criteria and all lower-level criteria are Yes. Yellow cells are inputs.", 8)
+    # organization type: for banks SAMA requires level 4 in 3.3.14-3.3.17 (circular 298140000067, 17 Jan 2019)
+    ot_l = la.cell(1, 9, "Organization type:"); ot_l.font = f(True, "FFFFFF", 10); ot_l.fill = NAVY; ot_l.alignment = Alignment(horizontal="right", vertical="center")
+    la.merge_cells("J1:L1"); ot = la.cell(1, 10, ORG_OTHER); ot.fill = YEL; ot.font = f(True); ot.border = B; ot.alignment = Alignment(vertical="center")
+    dot = DataValidation(type="list", formula1=f'"{ORG_BANK},{ORG_OTHER}"', allow_blank=False, promptTitle="Organization type",
+                         prompt="Bank: SAMA requires level 4 in 3.3.14, 3.3.15, 3.3.16 and 3.3.17. Other: level 3 everywhere.", showInputMessage=True)
+    la.add_data_validation(dot); dot.add("J1")
     hdr(la, 3, ["ID", "Level", "Criterion", "Question (from SAMA Table 1 and section 2.4)", "Answer", "Evidence (Yes) / What was found (No)", "Result", "Evidence link (optional)",
               "Action Target Date (RA: expiry)", "Action Status", "Escalation", "Escalation Date", "Risk Acceptance Ref.", "Key"])
     # Action tracking is entered here, next to its criterion, so it can never move to another action (stable key = subdomain|criterion)
@@ -166,7 +174,7 @@ def make(path, sample):
     ma = wb.create_sheet("Results"); ma.sheet_state = "hidden"; ids = [c[0] for c in CRIT]
     title(ma, "3. Assessment - cumulative criteria per subdomain (SAMA CSF section 2.4)",
           "Answer Yes / No for each criterion (columns E to R) and write the evidence for every answer (columns Y to AL): for Yes the evidence reference, for No what was found, because SAMA reviews and audits the self-assessment and asks for evidence. The level is the highest level whose criteria, and all lower-level criteria, are Yes. Row 4 shows the criterion text.", 39)
-    cols = ["Domain", "Subdomain ID", "Subdomain", "Owner"] + ids + ["Maturity Level", "Level Name", "Target", "Status", "Next level blocked by", "Notes"] + ["Evidence / justification " + c for c in ids] + ["Answers without evidence", "Invalid answers", "Valid answers (of 14)", "Invalid target"]
+    cols = ["Domain", "Subdomain ID", "Subdomain", "Owner"] + ids + ["Maturity Level", "Level Name", "Target", "Status", "Next level blocked by", "Notes"] + ["Evidence / justification " + c for c in ids] + ["Answers without evidence", "Invalid answers", "Valid answers (of 14)", "Invalid target", "Required level (SAMA)"]
     hdr(ma, 3, cols)
     for j, c in enumerate(CRIT, 5):
         x = ma.cell(4, j, c[2]); x.font = f(s=8, c="333333"); x.alignment = TOP; x.border = B; x.fill = LIGHT
@@ -186,7 +194,9 @@ def make(path, sample):
         # Not Assessed until all 14 criteria have a valid Yes / No answer (not counted as level 0)
         lvl = (f'=IF(COUNTIF({E}:{R},"Yes")+COUNTIF({E}:{R},"No")<14,"Not Assessed",IF({E}<>"Yes",0,IF({F_}<>"Yes",1,IF(COUNTIF({G}:{L},"Yes")<6,2,'
                f'IF(COUNTIF({M}:{O},"Yes")<3,3,IF(COUNTIF({P}:{R},"Yes")<3,4,5))))))')
-        ma.cell(r, 19, lvl); ma.cell(r, 20, f'=IF(ISNUMBER(S{r}),INDEX({LN},S{r}+1),"Not Assessed")'); TG = f"'3. Assessment'!H{HROW[s['sid']]}"; ma.cell(r, 21, f"=IF(OR({TG}=3,{TG}=4,{TG}=5),{TG},3)")
+        ma.cell(r, 19, lvl); ma.cell(r, 20, f'=IF(ISNUMBER(S{r}),INDEX({LN},S{r}+1),"Not Assessed")'); TG = f"'3. Assessment'!H{HROW[s['sid']]}"
+        REQ = f"IF('3. Assessment'!$J$1=\"{ORG_BANK}\",4,3)" if s["sid"] in BANK_L4 else "3"
+        ma.cell(r, 21, f"=MAX({REQ},IF(OR({TG}=3,{TG}=4,{TG}=5),{TG},3))")
         ma.cell(r, 22, f'=IF(ISNUMBER(S{r}),IF(S{r}>=U{r},"At target","Below target"),"Not Assessed")')
         blocked = (f'=IF(NOT(ISNUMBER(S{r})),"Answer all 14 criteria",IF(S{r}=5,"",IF(S{r}=0,"L1a",IF(S{r}=1,"L2a",IF(S{r}=2,"L3 criteria: "&(6-COUNTIF({G}:{L},"Yes"))&" not met",'
                    f'IF(S{r}=3,"L4 criteria: "&(3-COUNTIF({M}:{O},"Yes"))&" not met","L5 criteria: "&(3-COUNTIF({P}:{R},"Yes"))&" not met"))))))')
@@ -201,6 +211,7 @@ def make(path, sample):
         x = ma.cell(r, 41, f'=COUNTIF(E{r}:R{r},"Yes")+COUNTIF(E{r}:R{r},"No")'); x.font = f(); x.border = B; x.alignment = CTR
         # invalid target level (not the number 3, 4 or 5, e.g. 6, 2 or "4" pasted as text): counted as 3 and flagged
         x = ma.cell(r, 42, f'=IF(AND({TG}<>"",NOT(OR({TG}=3,{TG}=4,{TG}=5))),1,0)'); x.font = f(True); x.border = B; x.alignment = CTR
+        x = ma.cell(r, 43, f"={REQ}"); x.font = f(); x.border = B; x.alignment = CTR  # level SAMA requires for this organization type
     rn = r0 + len(subs) - 1
     ma.conditional_formatting.add(f"E{r0}:R{rn}", CellIsRule(operator="equal", formula=['"Yes"'], fill=GOOD))
     ma.conditional_formatting.add(f"E{r0}:R{rn}", CellIsRule(operator="equal", formula=['"No"'], fill=BAD))
@@ -372,7 +383,7 @@ def make(path, sample):
     ds.row_dimensions[5].height = 34
     ds.cell(4, 3).value = "Subdomains at level 3+ (assessed)"
     # data quality banner (FIX-02): invalid answers, invalid statuses, missing target dates
-    dq = (f'=SUM({MA("AN")})+SUMPRODUCT(({RP("L")}<>"")*({RP("L")}<>"Open")*({RP("L")}<>"In Progress")*({RP("L")}<>"Closed")*({RP("L")}<>"Risk Accepted"))'
+    dq = (f'=SUM({MA("AN")})+IF(OR(\'3. Assessment\'!$J$1="{ORG_BANK}",\'3. Assessment\'!$J$1="{ORG_OTHER}"),0,1)+SUMPRODUCT(({RP("L")}<>"")*({RP("L")}<>"Open")*({RP("L")}<>"In Progress")*({RP("L")}<>"Closed")*({RP("L")}<>"Risk Accepted"))'
           f'+SUMPRODUCT(({RP("O")}<>"")*({RP("O")}<>"1st Escalation")*({RP("O")}<>"2nd Escalation")*({RP("O")}<>"3rd Escalation"))+COUNTIF({RP("M")},"No target date")'
           f'+COUNTIF({RP("M")},"Invalid date")+COUNTIF({RP("Q")},"Invalid date")+SUM({MA("AP")})')
     ds.merge_cells("A6:L6")
@@ -385,7 +396,8 @@ def make(path, sample):
     ds.merge_cells("A7:L7")
     rs_ = ds.cell(7, 1, f'=IF(({dq[1:]})>0,"Report status: NOT READY FOR APPROVAL. Fix the data quality issues above first.",'
                         f'IF(I5<1,"Report status: NOT READY FOR APPROVAL. The assessment is not complete ("&TEXT(I5,"0%")&" of the criteria answered).",'
-                        f'"Report status: Ready for approval (data quality OK, all criteria answered)."))')
+                        f'IF(SUM({MA("AM")})>0,"Report status: NOT READY FOR APPROVAL. "&SUM({MA("AM")})&" answer(s) have no evidence or finding written.",'
+                        f'"Report status: Ready for approval (data quality OK, all criteria answered with evidence).")))')
     rs_.font = f(True, s=9.5); rs_.alignment = Alignment(vertical="center", indent=1)
     ds.conditional_formatting.add("A7", FormulaRule(formula=['ISNUMBER(SEARCH("NOT READY",A7))'], fill=fill("C00000"), font=Font(name=FN, bold=True, color="FFFFFF")))
     ds.conditional_formatting.add("A7", FormulaRule(formula=['ISNUMBER(SEARCH("Ready for approval",A7))'], fill=GOOD))

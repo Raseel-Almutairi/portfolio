@@ -23,7 +23,7 @@ A compliance tracker for 8 sets of NCA (National Cybersecurity Authority) contro
 
 - [Open the tool](https://raseel-almutairi.github.io/portfolio/nca-tool/) · [Details](nca-tool/)
 - **Excel:** [Sample](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Sample.xlsx) · [Blank](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Blank.xlsx)
-- **Power BI:** [Report (PDF, earlier version)](https://raseel-almutairi.github.io/portfolio/nca-powerbi/5_Sample_Report.pdf) · [Files](nca-powerbi/)
+- **Power BI:** [Report (PDF)](https://raseel-almutairi.github.io/portfolio/nca-powerbi/5_Sample_Report.pdf) · [Files](nca-powerbi/)
 
 > The web tools are for display only. For real use, download the blank Excel files. These are personal initiatives and do not replace the assessments of the NCA or SAMA.
 

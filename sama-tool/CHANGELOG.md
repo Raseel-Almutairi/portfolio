@@ -1,5 +1,10 @@
 # Changelog: SAMA CSF tool
 
+## v1.6 (2026-11-27)
+
+- **Organization type (Excel, sheet 3, cell J1):** «Bank» or «Other member organization». For a bank, SAMA requires maturity level 4 in 3.3.14 Cyber Security Event Management, 3.3.15 Cyber Security Incident Management, 3.3.16 Threat Management and 3.3.17 Vulnerability Management (SAMA circular 298140000067, 17 Jan 2019, [rulebook](https://rulebook.sama.gov.sa/en/node/5472)). Their target becomes at least 4, so level-4 actions appear there. The required level is shown in a new Results column «Required level (SAMA)». The sample and the blank file use «Other member organization», so the sample figures do not change.
+- **Report status:** an answer without evidence (Yes) or finding (No) now makes the report «NOT READY FOR APPROVAL», with the count. Before, the summary could say «Ready for approval» while evidence was missing.
+
 ## v1.5 (2026-11-27)
 
 - **Report status (Excel summary):** a new line under the data quality line says «NOT READY FOR APPROVAL» while there is any data quality issue (for example a target level counted as 3 because it was pasted as text) or while some criteria are not answered, and «Ready for approval» otherwise. The sample is ready; the blank file is not ready until it is filled in.
