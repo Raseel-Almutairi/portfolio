@@ -1,5 +1,10 @@
 # Changelog: NCA tool
 
+## v1.6 (2026-11-27): every text checked by eye
+
+- The 368 texts that were «مقارنة آلية» (ECC 150, CCC-CSP 104, TCC 47, OSMACC 38, CCC-CST 29) were checked by eye on the page images. All 690 texts are now **Verified**.
+- 9 texts were corrected (small differences in punctuation or one word, for example TCC-2-3-1-4 «(Session Timeout)» → «(Timeout)», and CCC-2-15-T-1/T-2 «لدى المشتركين» → «لدى المشترك»), and the guide page numbers of 17 ECC items were corrected. Details in TEXT_REVIEW.md. The figures do not change.
+
 ## v1.5 (2026-11-27)
 
 - **Main control awaiting approval:** when every sub-control of a main control is «لا ينطبق» but not all are approved yet, the web now shows «لا ينطبق - بانتظار الاعتماد» (it showed «لا ينطبق»), the same label the Excel register and the Power BI data already used. It stays in the compliance denominator, as before. In the sample this is 4 main controls (ECC-2-5-4, CCC-2-15-P-4, TCC-2-8-2, TCC-2-10-1); they now have their own bar in the chart and are no longer counted in the «لا ينطبق» card. Compliance and the other figures do not change.

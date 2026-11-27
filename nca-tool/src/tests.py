@@ -73,8 +73,8 @@ for n in range(5, ws.max_row + 1):
     diff += row != (x["owner"], x["status"], x["evidence"], x["due"], x["priority"], x["gap_status"], x["na_approved"])
 check("Excel register = web data, field by field (690 items)", diff == 0)
 check("Excel register text = source text (690 items)", all(ws.cell(n, 4).value == by_id[ws.cell(n, 2).value]["description"] for n in range(5, ws.max_row + 1) if ws.cell(n, 2).value in by_id))
-check("text review status: 322 Verified (all CSCC, OTCC, DCC + corrected or re-checked), 368 automated comparison",
-      Counter(x["text_review"] for x in controls) == Counter({"Verified": 322, "مقارنة آلية": 368})
+check("text review status: all 690 texts checked by eye (Verified)",
+      Counter(x["text_review"] for x in controls) == Counter({"Verified": 690})
       and all(x["text_review"] == "Verified" for x in controls if x["id"].startswith(("CSCC-", "OTCC-", "DCC-"))))
 check("approved not-applicable items have no finding text, action or target date", all(not (x["gap"] or x["action"] or x["due"]) for x in controls if x["status"] == "لا ينطبق" and x["na_approved"] is True))
 check("no sample item that every entity must apply is marked not applicable", all(by_id[i]["status"] != "لا ينطبق" for i in ("ECC-2-2-2", "ECC-2-13-3-3")))
