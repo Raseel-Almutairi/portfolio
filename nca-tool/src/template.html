@@ -475,7 +475,7 @@ if(observer)observer.takeRecords();}
 window.dash={calc(n,o){calcs[n]=o},draw(n,f){draws[n]=f},onData(f){onDatas.push(f)},
 data(n){if(datasets[n])return{status:'ok',data:datasets[n]};const c=calcs[n];if(c){if(!(n in memo))memo[n]=c.fn(...c.inputs.map(i=>dash.data(i).data));return{status:'ok',data:memo[n]}}return{status:'error',data:[]}},
 params(){return params},setParams(p){for(const k in p)params[k]=p[k]==null?'':String(p[k]);schedule()},
-setLink(h){try{history.replaceState(null,'','#'+h)}catch(e){}},colors:['#5B8DEF','#E3A53B','#D9534F','#4CAF7A','#9B8AF0','#3FB8AF'],
+setLink(h){this._tab=h;this.syncLink()},syncLink(){const tab=this._tab||'overview',f=window.gxFw?window.gxFw():'',ab=f&&window.gxAbbr&&f!==ALL?window.gxAbbr(f):'';try{history.replaceState(null,'','#'+tab+(ab?'&fw='+encodeURIComponent(ab):''))}catch(e){}},colors:['#5B8DEF','#E3A53B','#D9534F','#4CAF7A','#9B8AF0','#3FB8AF'],
 __start(){observer=new MutationObserver(ms=>{if(ms.length)schedule()});observer.observe(document.getElementById('dash-root'),{attributes:true,subtree:true,attributeFilter:['hidden']});window.addEventListener('resize',schedule);render()}};
 })();</script>
 <script>
@@ -622,8 +622,11 @@ const showTab = (name) => {
 document.querySelector('.gx-tabs')?.addEventListener('keydown', (e) => { if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(e.key)) return; const tabs = [...document.querySelectorAll('.gx-tab')]; const i = tabs.indexOf(document.activeElement); if (i < 0) return; e.preventDefault(); const step = e.key === 'ArrowLeft' ? 1 : -1; /* RTL */ const n = e.key === 'Home' ? 0 : e.key === 'End' ? tabs.length - 1 : (i + step + tabs.length) % tabs.length; tabs[n].focus(); tabs[n].click(); });
 document.querySelectorAll('.gx-tab').forEach((b) => b.addEventListener('click', () => { showTab(b.dataset.tab); dash.setLink(b.dataset.tab); }));
 document.querySelectorAll('.gx-go-method').forEach((a) => a.addEventListener('click', (e) => { e.preventDefault(); showTab('method'); dash.setLink('method'); }));
-const fromHash = location.hash.slice(1);
-if (['overview', 'register', 'gaps', 'docs', 'refs', 'method'].includes(fromHash)) showTab(fromHash);
+/* the link keeps the tab and the chosen control set, e.g. #register&fw=ECC */
+const [fromHash, ...hashParts] = location.hash.slice(1).split('&');
+if (['overview', 'register', 'gaps', 'docs', 'refs', 'method'].includes(fromHash)) { showTab(fromHash); dash._tab = fromHash; }
+const hashFw = hashParts.map((x) => x.split('=')).find(([k]) => k === 'fw');
+if (hashFw && hashFw[1]) dash.setParams({ fw: 'NCA ' + decodeURIComponent(hashFw[1]) });
 
 /* filters that are not data */
 document.querySelectorAll('.gx-st').forEach((s) => s.addEventListener('change', () => dash.setParams({ st: s.value || null })));
@@ -636,6 +639,7 @@ document.querySelectorAll('.gx-show-ecc').forEach((b) => b.addEventListener('cli
 document.querySelectorAll('.gx-show-children').forEach((b) => b.addEventListener('click', () => { const r = selRow(); if (r && r.ecc_sub) dash.setParams({ fw: null, st: null, doc: null, q: null, base: r.ecc_sub }); }));
 dash.onData(() => {
   const p = dash.params();
+  if (dash._tab || p.fw || location.hash.includes('fw=')) dash.syncLink();
   document.querySelectorAll('.gx-st').forEach((s) => { s.value = p.st || ''; });
   document.querySelectorAll('.gx-gs').forEach((s) => { s.value = p.gs || ''; });
   document.querySelectorAll('.gx-q').forEach((q) => { if (q !== document.activeElement) q.value = p.q || ''; });

@@ -7,6 +7,7 @@
 - **ECC-2-15-4** now follows the ECC-2:2024 controls document (page 21): it ends with «دورياً» (the guide box on page 119 had a different ending). ECC-2-9-4 matches the controls document (no «دورياً» there either), so it did not change. A new test checks that every review control states its period, with the 3 documented exceptions.
 - Sample data: the 87 target dates on a Friday or Saturday moved to the nearest working day (Friday → Thursday, Saturday → Sunday), and the owner of ECC-1-3-1 (cybersecurity policies) is now «فريق الأمن السيبراني». The figures do not change.
 - The Excel data quality line uses the right Arabic plural («6 قيم غير صالحة»), and searching «بانتظار» in the web finds the items awaiting approval.
+- The web link now keeps the chosen control set as well as the tab (for example `#register&fw=TCC`), so a copied link opens the same view.
 
 ## v1.5 (2026-11-27)
 
