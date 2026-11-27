@@ -72,6 +72,7 @@ ds = load_workbook(SAMPLE, data_only=True)["5. Summary"]
 check("Excel summary: 2.5 average, 17 / 32, 56 open", (ds["A5"].value, ds["C5"].value, ds["E5"].value) == (2.5, "17 / 32", 56))
 blank = load_workbook(os.path.join("..", "SAMA_CSF_Assessment_Blank.xlsx"), data_only=True)["5. Summary"]
 check("blank Excel: not assessed, 0% complete", (blank["A5"].value, blank["I5"].value) == ("Not assessed", 0))
+check("report status: sample ready for approval, blank not ready", ds["A7"].value.startswith("Report status: Ready for approval") and blank["A7"].value.startswith("Report status: NOT READY FOR APPROVAL. The assessment is not complete"))
 
 soffice = shutil.which("soffice") or shutil.which("libreoffice")
 if soffice:
@@ -121,11 +122,11 @@ if soffice:
                        capture_output=True, check=True, timeout=300)
         after = actions(os.path.join(tmp, "out", "t.xlsx"))
         out = load_workbook(os.path.join(tmp, "out", "t.xlsx"), data_only=True)
-        banner = out["5. Summary"]["A6"].value
+        banner, status_ = out["5. Summary"]["A6"].value, out["5. Summary"]["A7"].value
         h0 = out["3. Assessment"].cell(heads[0], 1).value.split(" ")[0]
     check("target 6 or \"4\" as text counts as 3 (no extra actions) and a date pasted as text shows Invalid date",
           {k for k in after if k.startswith(h0 + "-")} == {k for k in xa if k.startswith(h0 + "-")} and after[key][1] == "Invalid date")
-    check("the summary warns about the 3 pasted values", banner.startswith("WARNING: 3 "))
+    check("the summary warns about the 3 pasted values and the report is not ready for approval", banner.startswith("WARNING: 3 ") and status_.startswith("Report status: NOT READY FOR APPROVAL. Fix the data quality"))
 else:
     print("SKIP re-assessment scenario (LibreOffice not installed)")
 print(f"\n{ok} tests passed")

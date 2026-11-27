@@ -1,5 +1,10 @@
 # Changelog: NCA tool
 
+## v1.5 (2026-11-27)
+
+- **Main control awaiting approval:** when every sub-control of a main control is «لا ينطبق» but not all are approved yet, the web now shows «لا ينطبق - بانتظار الاعتماد» (it showed «لا ينطبق»), the same label the Excel register and the Power BI data already used. It stays in the compliance denominator, as before. In the sample this is 4 main controls (ECC-2-5-4, CCC-2-15-P-4, TCC-2-8-2, TCC-2-10-1); they now have their own bar in the chart and are no longer counted in the «لا ينطبق» card. Compliance and the other figures do not change.
+- The test now requires the Excel main-control status to equal the web status label for label.
+
 ## v1.4 (2026-11-25): review notes
 
 - **CSCC-2:2026 source:** the link to the NCA file (linked from the NCA CSCC page, last modified 29 Oct 2026) and its date are now in the README references and in TEXT_REVIEW.md, because the page text still says CSCC-1:2019. The CSCC texts did not change.

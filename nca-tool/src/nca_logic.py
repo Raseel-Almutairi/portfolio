@@ -32,8 +32,10 @@ def main_status(rows):
     if len(done) < len(st):
         return "تقييم غير مكتمل"
     a = [r for r in rows if not na_ok(r)]
-    if not a or all(na_pending(r) for r in a):
+    if not a:
         return "لا ينطبق"
+    if all(na_pending(r) for r in a):  # all not applicable, but not all approved yet: stays in the denominator
+        return "لا ينطبق - بانتظار الاعتماد"
     b = [r for r in a if not na_pending(r)]
     if all(r["status"] == "مطبق" for r in b):
         return "مطبق جزئيًا" if any(na_pending(r) for r in a) else "مطبق"
@@ -48,7 +50,7 @@ def summary(controls, as_of):
         groups.setdefault(main_key(r["id"]), []).append(r)
     mains = [(main_status(rs), any(na_pending(r) for r in rs)) for rs in groups.values()]
     implemented = sum(s == "مطبق" for s, _ in mains)
-    excluded = sum(s == "لا ينطبق" and not p for s, p in mains)
+    excluded = sum(s == "لا ينطبق" for s, _ in mains)
     gaps = [r for r in controls if r["status"] in ("مطبق جزئيًا", "غير مطبق")]
     open_ = [r for r in gaps if r["gap_status"] != "مغلقة"]
     return {

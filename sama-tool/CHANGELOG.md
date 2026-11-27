@@ -1,5 +1,9 @@
 # Changelog: SAMA CSF tool
 
+## v1.5 (2026-11-27)
+
+- **Report status (Excel summary):** a new line under the data quality line says «NOT READY FOR APPROVAL» while there is any data quality issue (for example a target level counted as 3 because it was pasted as text) or while some criteria are not answered, and «Ready for approval» otherwise. The sample is ready; the blank file is not ready until it is filled in.
+
 ## v1.4 (2026-11-25): fixes after the third review
 
 - **Pasted values are flagged (Excel):** a drop-down list only stops typed values, so values pasted over it are now checked too:

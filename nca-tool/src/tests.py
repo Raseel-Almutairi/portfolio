@@ -86,7 +86,7 @@ for x in controls:
     mains.setdefault(main_key(x["id"]), []).append(x)
 m = reg["07 الضوابط الرئيسية - Main"]
 xl_main = {m.cell(n, 1).value: m.cell(n, 8).value for n in range(4, 302) if m.cell(n, 1).value}
-check("Excel main-control status = web rule (298 main controls)", all(xl_main[k] in (main_status(v), "لا ينطبق - بانتظار الاعتماد") for k, v in mains.items()))
+check("Excel main-control status = web rule, label for label (298 main controls)", all(xl_main[k] == main_status(v) for k, v in mains.items()))
 d = reg["06 لوحة المؤشرات - Dashboard"]
 check("Excel dashboard: 35.05%, 272 open, 99 overdue", (round(d["B6"].value, 4), d["D6"].value, d["F6"].value) == (0.3505, 272, 99))
 check("Excel dashboard: no data quality issues", d["B25"].value.startswith("جودة البيانات"))
@@ -122,6 +122,7 @@ check("new control CSCC-2-3-4 sits right after CSCC-2-3-1-8 in the register, the
       and all(ws.cell(n, 2).hyperlink.location.endswith(f"!B{n}") for n in (267, 268, 269, 694)))
 check("no compliance rate (not an error) when every main control is excluded",
       summary([{"id": "X-1-1", "status": "لا ينطبق", "na_approved": True, "gap_status": "", "due": ""}], "2026-11-21")["compliance"] is None)
+check("all not applicable, one still awaiting approval: labelled pending, not plain not applicable", main_status([r("لا ينطبق", True), r("لا ينطبق", False)]) == main_status([r("لا ينطبق", False)]) == "لا ينطبق - بانتظار الاعتماد")
 check("missing approval counts as pending", main_status([r("مطبق"), {"id": "X-1-1-2", "status": "لا ينطبق"}]) == "مطبق جزئيًا")
 
 # One source: a change in controls.json reaches the Excel register (patch run in a temporary folder)

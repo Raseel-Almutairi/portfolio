@@ -95,7 +95,7 @@ def make(path, sample):
     row("3. Assessment", "The self-assessment: for each subdomain answer the 14 criteria Yes / No and write the evidence for Yes or what was found for No. The level appears in the subdomain header automatically. The Result column tells you if evidence is missing or an action was created. The target level is in column H of each subdomain header: 3 by default (SAMA's minimum), and it can be raised to 4 or 5. Any other value (for example 6, 2 or a number pasted as text) counts as 3 and is flagged in the summary.")
     row("2. Controls & Evidence", "Reference only: SAMA's principle, objective and control considerations for each subdomain (official text), with the required evidence. Use it to support your Yes / No answers in sheet 3.")
     row("4. Action Plan", "Escalation: you choose the stage (1st: To owner, CC GRC Manager and Line Manager; 2nd: To Line Manager, CC GRC Manager and Head of Department; 3rd: To Head of Department, CC GRC Manager and CISO). To, CC and the email text are filled automatically. Generated automatically: every No answer up to level 3 becomes an action with its corrective action, closure evidence, owner and priority. You add the target date, status and escalation in sheet 3 next to the criterion (columns I-M), so they stay with the right action when answers change. Fill the owner emails once (right side) to use the Send reminder links, which open an email on your own device. The full reminder email for each action is ready in column P to copy and paste.")
-    row("5. Summary", "Updates automatically, including lists of overdue actions and actions due in the next 30 days. A data quality line at the top warns about invalid answers, statuses or target levels, dates pasted as text, and missing target dates.")
+    row("5. Summary", "Updates automatically, including lists of overdue actions and actions due in the next 30 days. A data quality line at the top warns about invalid answers, statuses or target levels, dates pasted as text, and missing target dates. The report status line under it says NOT READY FOR APPROVAL until data quality is OK and all criteria are answered.")
     row("Rules", "Not assessed: a subdomain gets a level only when all 14 criteria are answered Yes or No; until then it is Not assessed and excluded from the average. Closing an action does not change the answer or the level: re-assess the criterion with evidence in sheet 3. Risk Accepted keeps the criterion unmet; its target date is the acceptance expiry date. All dates use one assessment date (as of) in sheet 4, cell AB29 (blank = today).")
     row("Privacy", "No data is collected. This workbook runs locally on your device; nothing is sent anywhere unless you send it.")
     row("Note", "Sample answers, owners and dates are fictional. Required evidence is derived by the author from the wording of each control consideration.")
@@ -381,6 +381,15 @@ def make(path, sample):
     ds.conditional_formatting.add("A6", FormulaRule(formula=['LEFT(A6,7)="WARNING"'], fill=fill("C00000"), font=Font(name=FN, bold=True, color="FFFFFF")))
     ds.conditional_formatting.add("A6", FormulaRule(formula=['LEFT(A6,4)="Data"'], fill=GOOD))
     ds.row_dimensions[6].height = 22
+    # report status: the figures are not ready for approval while data quality fails or the assessment is incomplete
+    ds.merge_cells("A7:L7")
+    rs_ = ds.cell(7, 1, f'=IF(({dq[1:]})>0,"Report status: NOT READY FOR APPROVAL. Fix the data quality issues above first.",'
+                        f'IF(I5<1,"Report status: NOT READY FOR APPROVAL. The assessment is not complete ("&TEXT(I5,"0%")&" of the criteria answered).",'
+                        f'"Report status: Ready for approval (data quality OK, all criteria answered)."))')
+    rs_.font = f(True, s=9.5); rs_.alignment = Alignment(vertical="center", indent=1)
+    ds.conditional_formatting.add("A7", FormulaRule(formula=['ISNUMBER(SEARCH("NOT READY",A7))'], fill=fill("C00000"), font=Font(name=FN, bold=True, color="FFFFFF")))
+    ds.conditional_formatting.add("A7", FormulaRule(formula=['ISNUMBER(SEARCH("Ready for approval",A7))'], fill=GOOD))
+    ds.row_dimensions[7].height = 22
     r = 8; hdr(ds, r, ["Domain", "Subdomains", "Average maturity", "At level 3+", "Open actions"])
     for i, (d, nm) in enumerate(SH.items(), r + 1):
         vals = [nm, f'=COUNTIF({MA("A")},A{i})', f'=IFERROR(ROUND(AVERAGEIF({MA("A")},A{i},{MA("S")}),1),"-")',
