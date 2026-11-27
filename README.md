@@ -50,6 +50,6 @@ A compliance tracker for 8 sets of NCA (National Cybersecurity Authority) contro
 
 - [عرض الأداة](https://raseel-almutairi.github.io/portfolio/nca-tool/) · [التفاصيل](nca-tool/)
 - **Excel:** [نموذجي](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Sample.xlsx) · [فارغ](https://raseel-almutairi.github.io/portfolio/nca-tool/NCA_Compliance_Register_Blank.xlsx)
-- **Power BI:** [التقرير (PDF، نسخة سابقة)](https://raseel-almutairi.github.io/portfolio/nca-powerbi/5_Sample_Report.pdf) · [الملفات](nca-powerbi/)
+- **Power BI:** [التقرير (PDF)](https://raseel-almutairi.github.io/portfolio/nca-powerbi/5_Sample_Report.pdf) · [الملفات](nca-powerbi/)
 
 > أدوات الويب للعرض فقط، وللاستخدام الفعلي حمّل نسخ Excel الفارغة. هذه الأعمال اجتهاد شخصي ولا تغني عن تقييم الهيئة الوطنية للأمن السيبراني أو ساما.

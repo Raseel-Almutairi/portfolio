@@ -4,6 +4,7 @@
 
 - **Main control awaiting approval:** when every sub-control of a main control is «لا ينطبق» but not all are approved yet, the web now shows «لا ينطبق - بانتظار الاعتماد» (it showed «لا ينطبق»), the same label the Excel register and the Power BI data already used. It stays in the compliance denominator, as before. In the sample this is 4 main controls (ECC-2-5-4, CCC-2-15-P-4, TCC-2-8-2, TCC-2-10-1); they now have their own bar in the chart and are no longer counted in the «لا ينطبق» card. Compliance and the other figures do not change.
 - The test now requires the Excel main-control status to equal the web status label for label.
+- **Power BI report refreshed:** `1_Sample_Report.pbix` and `5_Sample_Report.pdf` were refreshed from the current data file and now match the web and Excel (35.1%, 272 open, 99 overdue, 112 critical or high, 71 due in 30 days). The «Overdue» and «Due in 30 days» measures now use the fixed assessment date (21 Nov 2026) instead of `TODAY()`. The blank template (`.pbit`) still uses today's date.
 
 ## v1.4 (2026-11-25): review notes
 
