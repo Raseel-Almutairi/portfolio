@@ -4,6 +4,9 @@
 
 - The 368 texts that were «مقارنة آلية» (ECC 150, CCC-CSP 104, TCC 47, OSMACC 38, CCC-CST 29) were checked by eye on the page images. All 690 texts are now **Verified**.
 - 9 texts were corrected (small differences in punctuation or one word, for example TCC-2-3-1-4 «(Session Timeout)» → «(Timeout)», and CCC-2-15-T-1/T-2 «لدى المشتركين» → «لدى المشترك»), and the guide page numbers of 17 ECC items were corrected. Details in TEXT_REVIEW.md. The figures do not change.
+- **ECC-2-15-4** now follows the ECC-2:2024 controls document (page 21): it ends with «دورياً» (the guide box on page 119 had a different ending). ECC-2-9-4 matches the controls document (no «دورياً» there either), so it did not change. A new test checks that every review control states its period, with the 3 documented exceptions.
+- Sample data: the 87 target dates on a Friday or Saturday moved to the nearest working day (Friday → Thursday, Saturday → Sunday), and the owner of ECC-1-3-1 (cybersecurity policies) is now «فريق الأمن السيبراني». The figures do not change.
+- The Excel data quality line uses the right Arabic plural («6 قيم غير صالحة»), and searching «بانتظار» in the web finds the items awaiting approval.
 
 ## v1.5 (2026-11-27)
 

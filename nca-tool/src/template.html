@@ -767,7 +767,7 @@ const regRows = () => {
   const p = dash.params(), fw = window.gxFw(), q = normAr(p.q);
   const order = ['الضوابط الأساسية للأمن السيبراني (ECC)', 'ضوابط الأمن السيبراني للأنظمة الحساسة (CSCC)', 'ضوابط الأمن السيبراني للحوسبة السحابية لمقدمي الخدمات (CCC-CSP)', 'ضوابط الأمن السيبراني للحوسبة السحابية للمشتركين (CCC-CST)', 'ضوابط الأمن السيبراني للبيانات (DCC)', 'ضوابط الأمن السيبراني للأنظمة التشغيلية (OTCC)', 'ضوابط الأمن السيبراني للعمل عن بعد (TCC)', 'ضوابط الأمن السيبراني لحسابات التواصل الاجتماعي للجهات (OSMACC)'];
   const rank = (n) => (order.indexOf(n) + 1 || 99);
-  return g.data.map((r, i) => [r, i]).sort((a, b) => rank(a[0].framework) - rank(b[0].framework) || a[1] - b[1]).map((x) => x[0]).filter((r) => (fw === ALL || r.framework === fw) && (!p.st || r.status === p.st) && (!p.base || (r.framework !== ECCN && r.ecc_sub === p.base)) && (!p.doc || [r.req_policy, r.req_standard, r.req_procedure, r.req_plan].some((v) => (v || '').split('، ').includes(p.doc))) && (!q || [r.id, r.description, r.gap, r.status, r.owner, r.action].some((v) => normAr(v).includes(q))));
+  return g.data.map((r, i) => [r, i]).sort((a, b) => rank(a[0].framework) - rank(b[0].framework) || a[1] - b[1]).map((x) => x[0]).filter((r) => (fw === ALL || r.framework === fw) && (!p.st || r.status === p.st) && (!p.base || (r.framework !== ECCN && r.ecc_sub === p.base)) && (!p.doc || [r.req_policy, r.req_standard, r.req_procedure, r.req_plan].some((v) => (v || '').split('، ').includes(p.doc))) && (!q || [r.id, r.description, r.gap, r.status, r.owner, r.action, naPend(r) ? 'لا ينطبق - بانتظار الاعتماد' : ''].some((v) => normAr(v).includes(q))));
 };
 
 dash.draw('regcount', (el) => { const rows = regRows(); el.textContent = rows ? num(rows.length) : '—'; });

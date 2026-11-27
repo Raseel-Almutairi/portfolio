@@ -77,6 +77,11 @@ check("text review status: all 690 texts checked by eye (Verified)",
       Counter(x["text_review"] for x in controls) == Counter({"Verified": 690})
       and all(x["text_review"] == "Verified" for x in controls if x["id"].startswith(("CSCC-", "OTCC-", "DCC-"))))
 check("approved not-applicable items have no finding text, action or target date", all(not (x["gap"] or x["action"] or x["due"]) for x in controls if x["status"] == "لا ينطبق" and x["na_approved"] is True))
+# a review control ("يجب مراجعة ...") says how often: دورياً, at intervals, or by the period set for each level.
+# The exceptions are checked against ECC-2:2024: their official text has no period.
+NO_PERIOD = {"ECC-1-8-2", "ECC-1-9-5", "ECC-2-9-4"}
+check("every review control states its period (except the 3 whose official text has none)",
+      [x["id"] for x in controls if x["description"].startswith("يجب مراجعة") and not any(k in x["description"] for k in ("دوري", "فترات", "المدة المحددة")) and x["id"] not in NO_PERIOD] == [])
 check("no sample item that every entity must apply is marked not applicable", all(by_id[i]["status"] != "لا ينطبق" for i in ("ECC-2-2-2", "ECC-2-13-3-3")))
 reg_ids = [ws.cell(n, 2).value for n in range(5, ws.max_row + 1) if ws.cell(n, 2).value]
 check("same IDs in the source and the Excel register: none missing, extra or repeated",
@@ -149,7 +154,7 @@ if soffice:
         subprocess.run([soffice, "--headless", "--convert-to", "xlsx", "--outdir", os.path.join(tmp, "o"), os.path.join(tmp, "t.xlsx")], check=True, capture_output=True, timeout=300)
         out = load_workbook(os.path.join(tmp, "o", "t.xlsx"), data_only=True)
         k_ = [c.value for c in out["05 متابعة الملاحظات - Findings"]["K"]]
-        check("date written as text is flagged, not hidden", "تاريخ غير صالح" in k_ and out["06 لوحة المؤشرات - Dashboard"]["B25"].value.startswith("تنبيه: 1 "))
+        check("date written as text is flagged, not hidden", "تاريخ غير صالح" in k_ and out["06 لوحة المؤشرات - Dashboard"]["B25"].value.startswith("تنبيه: قيمة واحدة غير صالحة"))
 else:
     print("SKIP text-date scenario (LibreOffice not installed)")
 print(f"\n{ok} tests passed")
