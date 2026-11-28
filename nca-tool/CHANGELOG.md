@@ -8,7 +8,7 @@
 - Sample data: the 87 target dates on a Friday or Saturday moved to the nearest working day (Friday → Thursday, Saturday → Sunday), and the owner of ECC-1-3-1 (cybersecurity policies) is now «فريق الأمن السيبراني». The figures do not change.
 - The Excel data quality line uses the right Arabic plural («6 قيم غير صالحة»), and searching «بانتظار» in the web finds the items awaiting approval.
 - The web link now keeps the chosen control set as well as the tab (for example `#register&fw=TCC`), so a copied link opens the same view.
-- Fix: when the link names a control set, the control-set list now shows it (it was empty). ECC-2-15-4 has a note in its details that its text comes from the ECC-2:2024 controls document.
+- Fix: when the link names a control set, the control-set list now shows it (it was empty). **ECC-2-15-4** went back to the guide text (GECC-2:2026, page 119), the same source as every other ECC item; its details note the different wording in the ECC-2:2024 controls document.
 
 ## v1.5 (2026-11-27)
 

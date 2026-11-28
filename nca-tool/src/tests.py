@@ -79,8 +79,8 @@ check("text review status: all 690 texts checked by eye (Verified)",
 check("approved not-applicable items have no finding text, action or target date", all(not (x["gap"] or x["action"] or x["due"]) for x in controls if x["status"] == "لا ينطبق" and x["na_approved"] is True))
 # a review control ("يجب مراجعة ...") says how often: دورياً, at intervals, or by the period set for each level.
 # The exceptions are checked against ECC-2:2024: their official text has no period.
-NO_PERIOD = {"ECC-1-8-2", "ECC-1-9-5", "ECC-2-9-4"}
-check("every review control states its period (except the 3 whose official text has none)",
+NO_PERIOD = {"ECC-1-8-2", "ECC-1-9-5", "ECC-2-9-4", "ECC-2-15-4"}  # ECC-2-15-4: the guide text (used here) has no period; ECC-2:2024 has دورياً
+check("every review control states its period (except the 4 whose source text has none)",
       [x["id"] for x in controls if x["description"].startswith("يجب مراجعة") and not any(k in x["description"] for k in ("دوري", "فترات", "المدة المحددة")) and x["id"] not in NO_PERIOD] == [])
 check("no sample item that every entity must apply is marked not applicable", all(by_id[i]["status"] != "لا ينطبق" for i in ("ECC-2-2-2", "ECC-2-13-3-3")))
 reg_ids = [ws.cell(n, 2).value for n in range(5, ws.max_row + 1) if ws.cell(n, 2).value]
