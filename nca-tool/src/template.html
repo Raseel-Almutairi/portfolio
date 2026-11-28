@@ -666,7 +666,8 @@ dash.draw('fwsel', (sel) => {
   const g = dash.data('by_fw');
   const rows = g.status === 'ok' ? g.data : [];
   sel.replaceChildren(...rows.map((r) => new Option(r.framework, r.framework === ALL ? '' : r.framework)));
-  sel.value = dash.params().fw || '';
+  const current = window.gxFw();  /* the link holds a short name (NCA TCC): show the full name in the list */
+  sel.value = current === ALL ? '' : current;
   sel.onchange = () => dash.setParams({ fw: sel.value || null, sel: null });
 });
 
