@@ -397,7 +397,7 @@ def make(path, sample):
     rs_ = ds.cell(7, 1, f'=IF(({dq[1:]})>0,"Report status: NOT READY FOR APPROVAL. Fix the data quality issues above first.",'
                         f'IF(I5<1,"Report status: NOT READY FOR APPROVAL. The assessment is not complete ("&TEXT(I5,"0%")&" of the criteria answered).",'
                         f'IF(SUM({MA("AM")})>0,"Report status: NOT READY FOR APPROVAL. "&SUM({MA("AM")})&" answer(s) have no evidence or finding written.",'
-                        f'"Report status: Ready for approval (data quality OK, all criteria answered with evidence).")))')
+                        f'"Report status: Ready for approval. Data quality OK and every criterion answered with evidence. This is about the assessment data, not the maturity result: open and overdue actions are listed above.")))')
     rs_.font = f(True, s=9.5); rs_.alignment = Alignment(vertical="center", indent=1)
     ds.conditional_formatting.add("A7", FormulaRule(formula=['ISNUMBER(SEARCH("NOT READY",A7))'], fill=fill("C00000"), font=Font(name=FN, bold=True, color="FFFFFF")))
     ds.conditional_formatting.add("A7", FormulaRule(formula=['ISNUMBER(SEARCH("Ready for approval",A7))'], fill=GOOD))
